@@ -17,3 +17,13 @@ BedRoomKids::~BedRoomKids() {
 	delete kidsRadiatorTwo;
 }
 
+void BedRoomKids::setOutputControllers() {
+	if (getDecisionHeating()) {
+		kidsRadiatorOne->setPinStatus(OFF);
+		kidsRadiatorTwo->setPinStatus(OFF);
+	} else {
+		kidsRadiatorOne->setPinStatus(ON);
+		kidsRadiatorTwo->setPinStatus(ON);
+	}
+}
+

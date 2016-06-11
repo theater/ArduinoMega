@@ -2,19 +2,31 @@
 
 #include "HouseHeating.h"
 
-#include "Model/OutputControl.h"
+#include <Timer.h>
 
-OutputControl oc(50,0);
+#include "Config/Config.h"
+#include "Model/BedRoomKids.h"
+
+short tempSensorReal = 22;
+short humSensorReal = 80;
+
+BedRoomKids bedRoomKids;
+Timer trigger;
+
+
+void triggerFunc(){
+	bedRoomKids.updateSensors(tempSensorReal,humSensorReal);
+	bedRoomKids.setOutputControllers();
+}
 
 //The setup function is called once at startup of the sketch
 void setup()
 {
-	pinMode(50,OUTPUT);
+	trigger.every(REOCCURRENCE,&triggerFunc);
 }
 
 // The loop function is called in an endless loop
 void loop()
 {
-	oc.setPinStatus(!oc.getPinStatus());
-	delay(5000);
+	trigger.update();
 }

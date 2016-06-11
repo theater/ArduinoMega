@@ -15,6 +15,9 @@ Room::Room() {
 	decisionFan = false;
 }
 
+Room::~Room() {
+}
+
 bool Room::humDecisionMaker() {
 	float sensorValue = this->humSensor.getValue();
 	if (desiredHumidity >= sensorValue) {
@@ -36,7 +39,11 @@ bool Room::tempDecisionMaker() {
 
 }
 
-Room::~Room() {
+void  Room::updateSensors(short tempSensorValue,short humSensorValue){
+	tempSensor.setValue(tempSensorValue);
+	humSensor.setValue(humSensorValue);
+	tempDecisionMaker();
+	humDecisionMaker();
 }
 
 short Room::getDesiredHumidity() const {
@@ -45,6 +52,7 @@ short Room::getDesiredHumidity() const {
 
 void Room::setDesiredHumidity(short desiredHumidity) {
 	this->desiredHumidity = desiredHumidity;
+	humDecisionMaker();
 }
 
 short Room::getDesiredTemperature() const {
@@ -53,4 +61,21 @@ short Room::getDesiredTemperature() const {
 
 void Room::setDesiredTemperature(short desiredTemperature) {
 	this->desiredTemperature = desiredTemperature;
+	tempDecisionMaker();
+}
+
+bool Room::getDecisionFan() const {
+	return decisionFan;
+}
+
+void Room::setDecisionFan(bool decisionFan) {
+	this->decisionFan = decisionFan;
+}
+
+bool Room::getDecisionHeating() const {
+	return decisionHeating;
+}
+
+void Room::setDecisionHeating(bool decisionHeating) {
+	this->decisionHeating = decisionHeating;
 }

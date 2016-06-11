@@ -20,6 +20,7 @@ class BedRoomKids: public Room {
 	public:
 		BedRoomKids();
 		virtual ~BedRoomKids();
+		void setOutputControllers();
 };
 
 #endif /* MODEL_BEDROOMKIDS_H_ */
