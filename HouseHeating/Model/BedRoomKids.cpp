@@ -8,8 +8,8 @@
 #include "BedRoomKids.h"
 
 BedRoomKids::BedRoomKids(short outputPinId) {
-	kidsRadiatorOne = new OutputControl(KIDS_RAD_ONE, 0);
-	kidsRadiatorTwo = new OutputControl(KIDS_RAD_TWO, 0);
+	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, 0);
+	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, 0);
 }
 
 BedRoomKids::~BedRoomKids() {
