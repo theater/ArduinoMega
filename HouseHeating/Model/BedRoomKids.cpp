@@ -19,11 +19,11 @@ BedRoomKids::~BedRoomKids() {
 
 void BedRoomKids::setOutputControllers() {
 	if (getDecisionHeating()) {
-		kidsRadiatorOne->setPinStatus(OFF);
-		kidsRadiatorTwo->setPinStatus(OFF);
+		kidsRadiatorOne->setPin(OFF);
+		kidsRadiatorTwo->setPin(OFF);
 	} else {
-		kidsRadiatorOne->setPinStatus(ON);
-		kidsRadiatorTwo->setPinStatus(ON);
+		kidsRadiatorOne->setPin(ON);
+		kidsRadiatorTwo->setPin(ON);
 	}
 }
 

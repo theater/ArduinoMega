@@ -34,7 +34,7 @@ class OutputControl {
 			return pinStatus;
 		}
 
-		void setPinStatus(bool pinStatus) {
+		void setPin(bool pinStatus) {
 			this->pinStatus = pinStatus;
 			if (digitalRead(pinId) != pinStatus) {
 				digitalWrite(pinId, pinStatus);
