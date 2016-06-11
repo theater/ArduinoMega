@@ -8,6 +8,9 @@
 #ifndef MODEL_OUTPUTCONTROL_H_
 #define MODEL_OUTPUTCONTROL_H_
 
+#include <Arduino.h>
+#include <stdbool.h>
+
 class OutputControl {
 	private:
 		short pinId;
@@ -33,6 +36,9 @@ class OutputControl {
 
 		void setPinStatus(bool pinStatus) {
 			this->pinStatus = pinStatus;
+			if (digitalRead(pinId) != pinStatus) {
+				digitalWrite(pinId, pinStatus);
+			}
 		}
 };
 

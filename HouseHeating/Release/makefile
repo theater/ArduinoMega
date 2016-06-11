@@ -11,6 +11,7 @@ RM := rm -f
 -include subdir.mk
 -include arduino/core/subdir.mk
 -include Model/subdir.mk
+-include Libraries/Timer/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)

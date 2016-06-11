@@ -8,11 +8,12 @@
 #include "BedRoomKids.h"
 
 BedRoomKids::BedRoomKids(short outputPinId) {
-	kidsRadiatorOne =  new OutputControl(KIDS_RAD_ONE,0);
-//	tempSensor =
+	kidsRadiatorOne = new OutputControl(KIDS_RAD_ONE, 0);
+	kidsRadiatorTwo = new OutputControl(KIDS_RAD_TWO, 0);
 }
 
 BedRoomKids::~BedRoomKids() {
-	// TODO Auto-generated destructor stub
+	delete kidsRadiatorOne;
+	delete kidsRadiatorTwo;
 }
 

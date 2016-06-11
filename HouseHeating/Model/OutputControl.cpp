@@ -10,6 +10,7 @@
 OutputControl::OutputControl(short pinId, bool pinStatus) {
 	this->pinId = pinId;
 	this->pinStatus = pinStatus;
+	pinMode(pinId,OUTPUT);
 }
 
 //TODO: check if 1 is on and 0 is off, otherwise return !pinstatus

@@ -15,8 +15,8 @@
 
 class BedRoomKids: public Room {
 	private:
-		TemperatureSensor tempSensor;
 		OutputControl* kidsRadiatorOne;
+		OutputControl* kidsRadiatorTwo;
 	public:
 		BedRoomKids();
 		BedRoomKids(short outputPinId);

@@ -27,6 +27,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Libraries/Timer</name>
+			<type>2</type>
+			<locationURI>ArduinoPrivateLibPath/Timer</locationURI>
+		</link>
+		<link>
 			<name>arduino/core</name>
 			<type>2</type>
 			<locationURI>ArduinoPlatformPath/arduino</locationURI>

@@ -6,13 +6,18 @@
  */
 
 #include "Room.h"
+#include "../Config/Config.h"
 
 Room::Room() {
-	// TODO Auto-generated constructor stub
+	desiredTemperature = DEFAULT_DESIRED_TEMP;
+	desiredHumidity = DEFAULT_DESIRED_HUMIDITY;
+//	decisionTimer.every(REOCCURRENCE,Room::decisionMaker);
+}
+
+void Room::decisionMaker() {
 
 }
 
 Room::~Room() {
-	// TODO Auto-generated destructor stub
 }
 
