@@ -19,7 +19,6 @@ class BedRoomKids: public Room {
 		OutputControl* kidsRadiatorTwo;
 	public:
 		BedRoomKids();
-		BedRoomKids(short outputPinId);
 		virtual ~BedRoomKids();
 };
 
