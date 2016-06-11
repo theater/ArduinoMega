@@ -9,7 +9,9 @@
 #define UTIL_H_
 
 enum SensorType {
-	HUMIDITY, TEMPERATURE, MOTION
+	HUMIDITY,
+	TEMPERATURE,
+	MOTION
 };
 
 namespace Util {
