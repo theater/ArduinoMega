@@ -27,9 +27,29 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Libraries/DHTlib</name>
+			<type>2</type>
+			<locationURI>ArduinoPrivateLibPath/DHTlib</locationURI>
+		</link>
+		<link>
+			<name>Libraries/MQTT</name>
+			<type>2</type>
+			<locationURI>ArduinoPrivateLibPath/MQTT</locationURI>
+		</link>
+		<link>
+			<name>Libraries/OneWire</name>
+			<type>2</type>
+			<locationURI>ArduinoPrivateLibPath/OneWire</locationURI>
+		</link>
+		<link>
 			<name>Libraries/Timer</name>
 			<type>2</type>
 			<locationURI>ArduinoPrivateLibPath/Timer</locationURI>
+		</link>
+		<link>
+			<name>Libraries/UIPEthernet</name>
+			<type>2</type>
+			<locationURI>ArduinoPrivateLibPath/UIPEthernet</locationURI>
 		</link>
 		<link>
 			<name>arduino/core</name>

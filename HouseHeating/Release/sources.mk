@@ -34,7 +34,12 @@ CPP_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
+Libraries/DHTlib \
+Libraries/MQTT \
+Libraries/OneWire \
 Libraries/Timer \
+Libraries/UIPEthernet \
+Libraries/UIPEthernet/utility \
 Model \
 arduino/core \
 

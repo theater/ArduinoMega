@@ -8,8 +8,7 @@
 #ifndef MODEL_ROOM_H_
 #define MODEL_ROOM_H_
 
-#include <Timer.h>
-
+#include "HumiditySensor.h"
 #include "TemperatureSensor.h"
 
 #define REOCCURRENCE 150000  // Decision maker triggered every 2.5min
@@ -18,29 +17,19 @@ class Room {
 	private:
 		short desiredTemperature;
 		short desiredHumidity;
-		Timer decisionTimer;
 		TemperatureSensor tempSensor;
+		HumiditySensor humSensor;
+		bool decisionHeating;
+		bool decisionFan;
 	public:
 		Room();
 		virtual ~Room();
-
-		void decisionMaker();
-
-		short getDesiredHumidity() const {
-			return desiredHumidity;
-		}
-
-		void setDesiredHumidity(short desiredHumidity) {
-			this->desiredHumidity = desiredHumidity;
-		}
-
-		short getDesiredTemperature() const {
-			return desiredTemperature;
-		}
-
-		void setDesiredTemperature(short desiredTemperature) {
-			this->desiredTemperature = desiredTemperature;
-		}
+		bool humDecisionMaker();
+		bool tempDecisionMaker();
+		short getDesiredHumidity() const;
+		void setDesiredHumidity(short desiredHumidity);
+		short getDesiredTemperature() const;
+		void setDesiredTemperature(short desiredTemperature);
 };
 
 #endif /* MODEL_ROOM_H_ */

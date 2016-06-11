@@ -22,6 +22,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/arduino/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/arduino/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/DHTlib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/MQTT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/OneWire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/UIPEthernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/UIPEthernet/utility}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.990391494" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
@@ -30,6 +35,11 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/arduino/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/arduino/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/DHTlib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/MQTT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/OneWire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/UIPEthernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeating/Libraries/UIPEthernet/utility}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1985781670" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>

@@ -11,7 +11,12 @@ RM := rm -f
 -include subdir.mk
 -include arduino/core/subdir.mk
 -include Model/subdir.mk
+-include Libraries/UIPEthernet/utility/subdir.mk
+-include Libraries/UIPEthernet/subdir.mk
 -include Libraries/Timer/subdir.mk
+-include Libraries/OneWire/subdir.mk
+-include Libraries/MQTT/subdir.mk
+-include Libraries/DHTlib/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
