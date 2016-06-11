@@ -8,7 +8,8 @@
 #include "BedRoomKids.h"
 
 BedRoomKids::BedRoomKids(short outputPinId) {
-	kidsOne = new OutputControl(outputPinId,0);
+	kidsRadiatorOne =  new OutputControl(KIDS_RAD_ONE,0);
+//	tempSensor =
 }
 
 BedRoomKids::~BedRoomKids() {

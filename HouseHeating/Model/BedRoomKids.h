@@ -8,15 +8,15 @@
 #ifndef MODEL_BEDROOMKIDS_H_
 #define MODEL_BEDROOMKIDS_H_
 
+#include "../Config/Config.h"
+#include "OutputControl.h"
 #include "Room.h"
 #include "TemperatureSensor.h"
-#include "OutputControl.h"
-
 
 class BedRoomKids: public Room {
 	private:
 		TemperatureSensor tempSensor;
-		OutputControl* kidsOne;
+		OutputControl* kidsRadiatorOne;
 	public:
 		BedRoomKids();
 		BedRoomKids(short outputPinId);
