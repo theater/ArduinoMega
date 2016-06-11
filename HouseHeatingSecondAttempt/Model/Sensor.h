@@ -8,7 +8,7 @@
 #ifndef SENSOR_H_
 #define SENSOR_H_
 
-#include "util.h"
+#include "../Model/Util.h"
 
 class Sensor {
 	private:

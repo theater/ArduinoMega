@@ -5,7 +5,7 @@
  *      Author: theater
  */
 
-#include "Sensor.h"
+#include "../Model/Sensor.h"
 
 Sensor::Sensor() {
 }
