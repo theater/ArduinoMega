@@ -7,19 +7,25 @@
 
 #include "BedRoomKids.h"
 
-BedRoomKids::BedRoomKids() {
+#include <PubSubClient.h>
+#include <stdbool.h>
+#include <WString.h>
+
+BedRoomKids::BedRoomKids(PubSubClient* mqttClient) : Room(mqttClient){
+	// initialize Output controllers
 	setHasTemperatureControl(true);
 	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, 0);
 	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, 0);
+	// Set MQTT topics to listen to
 
-	setHasHumidityControl(true);
-	kidsRoomFan = new OutputControl(BIG_BATH_RAD_ONE, 0);
+	// subscribe to these topics
+//	mqttSubscribe(&mqttTopics,2);
 }
 
 BedRoomKids::~BedRoomKids() {
 	delete kidsRadiatorOne;
 	delete kidsRadiatorTwo;
-	delete kidsRoomFan;
+	delete mqttTopics;
 }
 
 void BedRoomKids::updateOutputControllers() {
@@ -31,11 +37,18 @@ void BedRoomKids::updateOutputControllers() {
 		kidsRadiatorOne->setPin(OFF);
 		kidsRadiatorTwo->setPin(OFF);
 	}
-	//Humidity
-	if (getHasHumidityControl() && getDecisionFan()) {
-		kidsRoomFan->setPin(ON);
-	} else {
-		kidsRoomFan->setPin(OFF);
+	Serial.println(mqttTopics[0]);
+	Serial.println(mqttTopics[1]);
+}
+
+void BedRoomKids::mqttSubscribe(String* topics, int len) {
+	PubSubClient* mqttClient = getMqttClient();
+	for (int i = 0; i < len; i++) {
+//		void toCharArray = topics[i].toCharArray();
+//		mqttClient->subscribe(toCharArray);
 	}
 }
 
+void mqttParse(String strTopic, String strPayload) {
+
+}

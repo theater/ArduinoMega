@@ -4,17 +4,23 @@
 
 #include <Arduino.h>
 #include <HardwareSerial.h>
+#include <IPAddress.h>
+#include <PubSubClient.h>
 #include <Timer.h>
+#include <UIPEthernet.h>
 
 #include "Config/Config.h"
 #include "Model/BedRoomKids.h"
+#include "Util/mqtt.h"
 
 // Initialization of different objects
 byte mqttServerAddress[] = MQTT_SERVER;
 uint8_t macAddress[6] = MAC_ADDRESS;
 IPAddress ipAddress(IP_ADDRESS);
+EthernetClient ethClient;
+PubSubClient mqttClient(MQTT_SERVER, 1883, mqttCallback, ethClient);
 
-BedRoomKids bedRoomKids;
+BedRoomKids bedRoomKids(&mqttClient);
 
 Timer trigger;
 void triggerFunc(){

@@ -8,7 +8,8 @@
 #include "Room.h"
 #include "../Config/Config.h"
 
-Room::Room() {
+Room::Room(PubSubClient* mqttClient) {
+	this->mqttClient = mqttClient;
 	desiredTemperature = DEFAULT_DESIRED_TEMP;
 	decisionHeating = false;
 
@@ -29,12 +30,12 @@ bool Room::humDecisionMaker() {
 	float sensorValue = this->humSensor.getValue();
 	if (hasHumidityControl) {
 		if (desiredHumidity >= sensorValue) {
-			return this->decisionFan = false;
+			this->decisionFan = false;
 		} else if (desiredHumidity <= sensorValue - 1) {
-			return this->decisionFan = true;
+			this->decisionFan = true;
 		}
 	}
-	return false;
+	return this->decisionFan;
 }
 
 // 	Decision maker for temperature control - if there is humidity control do logic, else decision is always false
@@ -42,12 +43,12 @@ bool Room::tempDecisionMaker() {
 	float sensorValue = tempSensor.getValue();
 	if (hasTemperatureControl) {
 		if (desiredTemperature >= sensorValue) {
-			return this->decisionHeating = true;
+			this->decisionHeating = true;
 		} else if (desiredTemperature <= sensorValue - 1) {
-			return this->decisionHeating = false;
+			this->decisionHeating = false;
 		}
 	}
-	return false;
+	return this->decisionHeating;
 }
 
 void  Room::updateSensors(short tempSensorValue,short humSensorValue){
@@ -131,3 +132,12 @@ bool Room::getHasTemperatureControl() const {
 void Room::setHasTemperatureControl(bool hasTemperatureControl) {
 	this->hasTemperatureControl = hasTemperatureControl;
 }
+
+PubSubClient* Room::getMqttClient() const {
+	return mqttClient;
+}
+
+void Room::setMqttClient(PubSubClient* mqttClient) {
+	this->mqttClient = mqttClient;
+}
+

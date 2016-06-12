@@ -11,6 +11,7 @@
 #include <WString.h>
 #include "../Config/Config.h"
 #include "mqtt.h"
+#include <String.h>
 
 bool mqttConnect (PubSubClient* mqttClient) {
  if (!mqttClient->connected()) {
@@ -43,28 +44,16 @@ void mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value)
 }
 
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
-// ##### this function is the main part that triggers event based on the MQTT received messages. All the important input stuff is here...
-
-// ####### byte* to String transformation of payload starts here
   char cPayload[10];
   for (int i=0; i<=length; i++) {
     cPayload[i]=(char)payload[i];
   }
   cPayload[length]='\0';
   String strPayload = String(cPayload);
-// ####### byte* to String transformation ends here
+  String strTopic = String(topic);
+  mqttUpdated(strTopic, strPayload);
+}
 
-// #### Real work/Logics start here. Using IFs to destinguish for the different MQTT subscriptions/relays (unfortunalte string not allowed in switch operator) :(
-  if (String (topic) == "AQ_Light1" ) {
-//       Serial.println("Message arrived topic: " + String(topic));
-       if (strPayload=="ON") {  }
-  }
-  if (String (topic) == "AQ_Heater1" ) {
-//       Serial.println("Message arrived topic: " + String(topic));
-       if (strPayload=="ON") {  }
-  }
-  if (String (topic) == "AQ_Cooler1" ) {
-//       Serial.println("Message arrived topic: " + String(topic));
-       if (strPayload=="ON") {  }
-  }/**/
+void mqttUpdated(String strTopic, String strPayload) {
+	// Broadcast topic and payload to every room
 }

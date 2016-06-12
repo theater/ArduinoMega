@@ -8,12 +8,19 @@
 #ifndef MODEL_ROOM_H_
 #define MODEL_ROOM_H_
 
+#include <stdbool.h>
+
 #include "HumiditySensor.h"
 #include "TemperatureSensor.h"
+
+class String;
+
+class PubSubClient;
 
 // Abstract base class for all rooms
 class Room {
 	private:
+		PubSubClient* mqttClient;
 		short desiredTemperature;
 		TemperatureSensor tempSensor;
 		bool decisionHeating;
@@ -28,7 +35,7 @@ class Room {
 		bool hasLightControl;
 
 	public:
-		Room();
+		Room(PubSubClient * mqttClient);
 		virtual ~Room();
 		virtual void updateOutputControllers() = 0;
 		void updateSensors(short tempSensorValue,short humSensorValue);
@@ -50,6 +57,9 @@ class Room {
 		void setHasMotionControl(bool hasMotionControl);
 		bool getHasTemperatureControl() const;
 		void setHasTemperatureControl(bool hasTemperatureControl);
+		PubSubClient* getMqttClient() const;
+		void setMqttClient(PubSubClient* mqttClient);
+
 	private:
 		bool decisionMaker();
 		bool humDecisionMaker();

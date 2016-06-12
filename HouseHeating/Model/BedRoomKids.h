@@ -19,10 +19,16 @@ class BedRoomKids: public Room {
 		OutputControl* kidsRadiatorOne;
 		OutputControl* kidsRadiatorTwo;
 		OutputControl* kidsRoomFan;
+
+		//TODO: ugly - fix it somehow later
+		const String mqttTopics[2] = {RAD_KIDS_01, RAD_KIDS_02};
+
 	public:
-		BedRoomKids();
+		BedRoomKids(PubSubClient* mqttClient);
 		virtual ~BedRoomKids();
 		void updateOutputControllers();
+		void mqttSubscribe(String topics[],int len);
+		void mqttReceive(String* strTopic, String strPayload);
 };
 
 #endif /* MODEL_BEDROOMKIDS_H_ */
