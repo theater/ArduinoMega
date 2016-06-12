@@ -2,10 +2,17 @@
 
 #include "HouseHeating.h"
 
+#include <Arduino.h>
+#include <HardwareSerial.h>
 #include <Timer.h>
 
 #include "Config/Config.h"
 #include "Model/BedRoomKids.h"
+
+// Initialization of different objects
+byte mqttServerAddress[] = MQTT_SERVER;
+uint8_t macAddress[6] = MAC_ADDRESS;
+IPAddress ipAddress(IP_ADDRESS);
 
 BedRoomKids bedRoomKids;
 

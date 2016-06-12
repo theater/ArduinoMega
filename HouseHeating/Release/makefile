@@ -10,6 +10,7 @@ RM := rm -f
 -include sources.mk
 -include subdir.mk
 -include arduino/core/subdir.mk
+-include Util/subdir.mk
 -include Model/subdir.mk
 -include Libraries/UIPEthernet/utility/subdir.mk
 -include Libraries/UIPEthernet/subdir.mk

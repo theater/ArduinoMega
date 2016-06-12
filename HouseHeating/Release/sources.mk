@@ -41,5 +41,6 @@ Libraries/Timer \
 Libraries/UIPEthernet \
 Libraries/UIPEthernet/utility \
 Model \
+Util \
 arduino/core \
 
