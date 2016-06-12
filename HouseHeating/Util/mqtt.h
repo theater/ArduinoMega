@@ -12,6 +12,6 @@ bool mqttConnect (PubSubClient* mqttClient);
 void mqttSubscribe(PubSubClient* mqttClient);
 void mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value);
 void mqttCallback(char* topic, byte* payload, unsigned int length);
-void mqttUpdated(String strTopic, String strPayload);
+void mqttUpdated(char* topic, char* payload);
 
 #endif /* UTIL_MQTT_H_ */

@@ -51,9 +51,9 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
   cPayload[length]='\0';
   String strPayload = String(cPayload);
   String strTopic = String(topic);
-  mqttUpdated(strTopic, strPayload);
+  mqttUpdated(topic, cPayload);
 }
 
-void mqttUpdated(String strTopic, String strPayload) {
-	// Broadcast topic and payload to every room
+void mqttUpdated(char* topic, char* strPayload) {
+//	bedRoomKids.mqttParse(topic, strPayload);
 }

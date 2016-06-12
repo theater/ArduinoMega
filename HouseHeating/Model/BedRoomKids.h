@@ -27,8 +27,9 @@ class BedRoomKids: public Room {
 		BedRoomKids(PubSubClient* mqttClient);
 		virtual ~BedRoomKids();
 		void updateOutputControllers();
-		void mqttSubscribe(String topics[],int len);
+		void mqttSubscribe(const String* topics,int len);
 		void mqttReceive(String* strTopic, String strPayload);
+		void mqttParse( char* strTopic,  char* strPayload);
 };
 
 #endif /* MODEL_BEDROOMKIDS_H_ */

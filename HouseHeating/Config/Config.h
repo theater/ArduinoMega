@@ -48,7 +48,7 @@
 #define RAD_WARDROBE				"home/floor2/wardrobe/radiator/1"
 #define RAD_BEDROOM_BATH			"home/floor2/bedroombath/radiator/1"
 // Temperature sensors
-#define SENSOR_TEMP_01				"home/floor2/kids/temperature/1"
+#define SENSOR_KIDS_01				"home/floor2/kids/temperature/1"
 #define SENSOR_CORRIDOR_01			"home/floor2/corridor/temperature/1"
 #define SENSOR_BIGBATH_01			"home/floor2/bigbath/temperature/1"
 #define SENSOR_BEDROOM_01			"home/floor2/bedroom/temperature/1"

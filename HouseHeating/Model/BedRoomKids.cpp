@@ -19,13 +19,12 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient) : Room(mqttClient){
 	// Set MQTT topics to listen to
 
 	// subscribe to these topics
-//	mqttSubscribe(&mqttTopics,2);
+	mqttSubscribe(mqttTopics,2);
 }
 
 BedRoomKids::~BedRoomKids() {
 	delete kidsRadiatorOne;
 	delete kidsRadiatorTwo;
-	delete mqttTopics;
 }
 
 void BedRoomKids::updateOutputControllers() {
@@ -37,18 +36,27 @@ void BedRoomKids::updateOutputControllers() {
 		kidsRadiatorOne->setPin(OFF);
 		kidsRadiatorTwo->setPin(OFF);
 	}
-	Serial.println(mqttTopics[0]);
-	Serial.println(mqttTopics[1]);
+//	Serial.println(mqttTopics[0]);
+//	Serial.println(mqttTopics[1]);
 }
 
-void BedRoomKids::mqttSubscribe(String* topics, int len) {
+void BedRoomKids::mqttSubscribe(const String* topics, int len) {
 	PubSubClient* mqttClient = getMqttClient();
 	for (int i = 0; i < len; i++) {
-//		void toCharArray = topics[i].toCharArray();
+//		char toCharArray[]; = topics[i].toCharArray();
 //		mqttClient->subscribe(toCharArray);
 	}
 }
 
-void mqttParse(String strTopic, String strPayload) {
-
+void BedRoomKids::mqttParse(char* topic, char* payload) {
+	String strTopic = String(topic);
+	String strPayload = String(payload);
+	if (strTopic == SENSOR_KIDS_01) {
+		setDesiredTemperature(atoi(payload));
+		return;
+	}
+	if (strTopic == SENSOR_BEDROOM_BATH_02) {
+		setDesiredHumidity(atoi(payload));
+		return;
+	}
 }
