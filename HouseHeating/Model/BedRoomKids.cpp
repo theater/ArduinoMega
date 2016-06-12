@@ -8,8 +8,11 @@
 #include "BedRoomKids.h"
 
 BedRoomKids::BedRoomKids() {
+	setHasTemperatureControl(true);
 	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, 0);
 	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, 0);
+
+	setHasHumidityControl(true);
 	kidsRoomFan = new OutputControl(BIG_BATH_RAD_ONE, 0);
 }
 
@@ -21,7 +24,7 @@ BedRoomKids::~BedRoomKids() {
 
 void BedRoomKids::updateOutputControllers() {
 	//Heating
-	if (getDecisionHeating()) {
+	if (getHasTemperatureControl() && getDecisionHeating()) {
 		kidsRadiatorOne->setPin(ON);
 		kidsRadiatorTwo->setPin(ON);
 	} else {
@@ -29,7 +32,7 @@ void BedRoomKids::updateOutputControllers() {
 		kidsRadiatorTwo->setPin(OFF);
 	}
 	//Humidity
-	if(getDecisionFan()) {
+	if (getHasHumidityControl() && getDecisionFan()) {
 		kidsRoomFan->setPin(ON);
 	} else {
 		kidsRoomFan->setPin(OFF);

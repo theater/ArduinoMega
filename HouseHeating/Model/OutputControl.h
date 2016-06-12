@@ -13,35 +13,15 @@
 
 class OutputControl {
 	private:
-		short pinId;
-		bool pinStatus;
+		short pinId;bool pinStatus;
 	public:
 		OutputControl();
-		OutputControl(short pinId, bool pinStatus);
-		bool outputIsOn();
+		OutputControl(short pinId, bool pinStatus);bool outputIsOn();
 		const char * getPinStatusToStr();
 		virtual ~OutputControl();
-
-		short getPinId() const {
-			return pinId;
-		}
-
-		void setPinId(short pinId) {
-			this->pinId = pinId;
-		}
-
-		bool getPinStatus() const {
-			return pinStatus;
-		}
-
-		void setPin(bool pinStatus) {
-			this->pinStatus = pinStatus;
-			if (digitalRead(pinId) != pinStatus) {
-				digitalWrite(pinId, pinStatus);
-				//TODO take out serial prints
-				Serial.print("Setting pin "); Serial.print(pinId);Serial.print(" to "); Serial.println(pinStatus);
-			}
-		}
+		short getPinId() const;
+		void setPinId(short pinId);bool getPinStatus() const;
+		void setPin(bool pinStatus);
 };
 
 #endif /* MODEL_OUTPUTCONTROL_H_ */

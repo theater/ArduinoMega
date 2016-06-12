@@ -10,7 +10,7 @@
 OutputControl::OutputControl(short pinId, bool pinStatus) {
 	this->pinId = pinId;
 	this->pinStatus = pinStatus;
-	pinMode(pinId,OUTPUT);
+	pinMode(pinId, OUTPUT);
 }
 
 //TODO: check if 1 is on and 0 is off, otherwise return !pinstatus
@@ -23,6 +23,27 @@ const char * OutputControl::getPinStatusToStr() {
 		return "ON";
 	} else {
 		return "OFF";
+	}
+}
+
+short OutputControl::getPinId() const {
+	return pinId;
+}
+
+void OutputControl::setPinId(short pinId) {
+	this->pinId = pinId;
+}
+
+bool OutputControl::getPinStatus() const {
+	return pinStatus;
+}
+
+void OutputControl::setPin(bool pinStatus) {
+	this->pinStatus = pinStatus;
+	if (digitalRead(pinId) != pinStatus) {
+		digitalWrite(pinId, pinStatus);
+		//TODO take out serial prints
+		Serial.print("Setting pin ");Serial.print(pinId);Serial.print(" to ");Serial.println(pinStatus);
 	}
 }
 

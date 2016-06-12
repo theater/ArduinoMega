@@ -15,18 +15,25 @@
 class Room {
 	private:
 		short desiredTemperature;
-		short desiredHumidity;
 		TemperatureSensor tempSensor;
-		HumiditySensor humSensor;
 		bool decisionHeating;
+
+		short desiredHumidity;
+		HumiditySensor humSensor;
 		bool decisionFan;
+
+		bool hasTemperatureControl;
+		bool hasHumidityControl;
+		bool hasMotionControl;
+		bool hasLightControl;
+
 	public:
 		Room();
 		virtual ~Room();
 		virtual void updateOutputControllers() = 0;
 		void updateSensors(short tempSensorValue,short humSensorValue);
+		void updateDesiredValues(short desiredTemperature,short desiredHumidity);
 
-		bool decisionMaker();
 		short getDesiredHumidity() const;
 		void setDesiredHumidity(short desiredHumidity);
 		short getDesiredTemperature() const;
@@ -35,10 +42,19 @@ class Room {
 		void setDecisionFan(bool decisionFan);
 		bool getDecisionHeating() const;
 		void setDecisionHeating(bool decisionHeating);
-
+		bool getHasHumidityControl() const;
+		void setHasHumidityControl(bool hasHumidityControl);
+		bool getHasLightControl() const;
+		void setHasLightControl(bool hasLightControl);
+		bool getHasMotionControl() const;
+		void setHasMotionControl(bool hasMotionControl);
+		bool getHasTemperatureControl() const;
+		void setHasTemperatureControl(bool hasTemperatureControl);
 	private:
+		bool decisionMaker();
 		bool humDecisionMaker();
 		bool tempDecisionMaker();
+
 };
 
 #endif /* MODEL_ROOM_H_ */

@@ -7,19 +7,23 @@
 #include "Config/Config.h"
 #include "Model/BedRoomKids.h"
 
-short tempSensorReal = 22; //simulation values
-short humSensorReal = 80; //simulation values
-
 BedRoomKids bedRoomKids;
 
 Timer trigger;
 void triggerFunc(){
-	tempSensorReal = random(15,35);  //simulation values
-	humSensorReal = random(40,100); //simulation values
 	//TODO take out serial prints
-	Serial.print("Temperature sensor value:"); Serial.println(tempSensorReal);
-	Serial.print("Humidity sensor value:"); Serial.println(humSensorReal);
+	short desTemperature = random(20,25);	 	//simulation values
+	Serial.print("Temperature desired value:\t"); Serial.println(desTemperature);
+	short desHumidity = random(60,70); 	 		//simulation values
+	Serial.print("Humidity desired value:\t"); Serial.println(desHumidity);
+	bedRoomKids.updateDesiredValues(desTemperature,desHumidity);
+
+	short tempSensorReal = random(15,35);  		//simulation values
+	Serial.print("Temperature sensor value:\t"); Serial.println(tempSensorReal);
+	short humSensorReal = random(40,100); 		//simulation values
+	Serial.print("Humidity sensor value:\t"); Serial.println(humSensorReal);
 	bedRoomKids.updateSensors(tempSensorReal,humSensorReal);
+
 	bedRoomKids.updateOutputControllers();
 }
 
