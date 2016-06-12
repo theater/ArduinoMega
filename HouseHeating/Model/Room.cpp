@@ -31,9 +31,9 @@ bool Room::humDecisionMaker() {
 bool Room::tempDecisionMaker() {
 	float sensorValue = tempSensor.getValue();
 	if (desiredTemperature >= sensorValue) {
-		return this->decisionHeating = false;
-	} else if (desiredTemperature <= sensorValue - 1) {
 		return this->decisionHeating = true;
+	} else if (desiredTemperature <= sensorValue - 1) {
+		return this->decisionHeating = false;
 	}
 	return this->decisionHeating;
 
@@ -41,8 +41,9 @@ bool Room::tempDecisionMaker() {
 
 void  Room::updateSensors(short tempSensorValue,short humSensorValue){
 	tempSensor.setValue(tempSensorValue);
-	humSensor.setValue(humSensorValue);
 	tempDecisionMaker();
+
+	humSensor.setValue(humSensorValue);
 	humDecisionMaker();
 }
 

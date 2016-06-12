@@ -38,6 +38,8 @@ class OutputControl {
 			this->pinStatus = pinStatus;
 			if (digitalRead(pinId) != pinStatus) {
 				digitalWrite(pinId, pinStatus);
+				//TODO take out serial prints
+				Serial.print("Setting pin "); Serial.print(pinId);Serial.print(" to "); Serial.println(pinStatus);
 			}
 		}
 };

@@ -11,7 +11,7 @@
 // DEFAULT VALUES
 #define DEFAULT_DESIRED_TEMP 25
 #define DEFAULT_DESIRED_HUMIDITY 65
-#define REOCCURRENCE 150000  // Decision maker triggered every 2.5min
+#define REOCCURRENCE 30000  // Decision maker triggered every 2.5min
 
 // PIN assignments
 #define KIDS_BEDROOM_RAD_ONE 30   // KIDS RADIATOR ONE IS ON PIN 1

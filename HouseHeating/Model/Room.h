@@ -11,6 +11,7 @@
 #include "HumiditySensor.h"
 #include "TemperatureSensor.h"
 
+// Abstract base class for all rooms
 class Room {
 	private:
 		short desiredTemperature;
@@ -22,18 +23,22 @@ class Room {
 	public:
 		Room();
 		virtual ~Room();
+		virtual void updateOutputControllers() = 0;
+		void updateSensors(short tempSensorValue,short humSensorValue);
+
 		bool decisionMaker();
-		bool humDecisionMaker();
-		bool tempDecisionMaker();
 		short getDesiredHumidity() const;
 		void setDesiredHumidity(short desiredHumidity);
 		short getDesiredTemperature() const;
 		void setDesiredTemperature(short desiredTemperature);
-		void updateSensors(short tempSensorValue,short humSensorValue);
 		bool getDecisionFan() const;
 		void setDecisionFan(bool decisionFan);
 		bool getDecisionHeating() const;
 		void setDecisionHeating(bool decisionHeating);
+
+	private:
+		bool humDecisionMaker();
+		bool tempDecisionMaker();
 };
 
 #endif /* MODEL_ROOM_H_ */

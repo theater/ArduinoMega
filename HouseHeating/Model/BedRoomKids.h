@@ -13,14 +13,16 @@
 #include "Room.h"
 #include "TemperatureSensor.h"
 
+// specific implementation for Kids bedroom
 class BedRoomKids: public Room {
 	private:
 		OutputControl* kidsRadiatorOne;
 		OutputControl* kidsRadiatorTwo;
+		OutputControl* kidsRoomFan;
 	public:
 		BedRoomKids();
 		virtual ~BedRoomKids();
-		void setOutputControllers();
+		void updateOutputControllers();
 };
 
 #endif /* MODEL_BEDROOMKIDS_H_ */
