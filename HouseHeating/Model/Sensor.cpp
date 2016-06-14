@@ -10,11 +10,11 @@
 Sensor::Sensor() {
 }
 
-Sensor::Sensor(SensorType type) {
+Sensor::Sensor(ControlType type) {
 	this->type = type;
 }
 
-Sensor::Sensor(SensorType type, float value) {
+Sensor::Sensor(ControlType type, float value) {
 	this->type = type;
 	this->value = value;
 }

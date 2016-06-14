@@ -8,7 +8,7 @@
 #ifndef UTIL_H_
 #define UTIL_H_
 
-enum SensorType {
+enum ControlType {
 	HUMIDITY,
 	TEMPERATURE,
 	MOTION
@@ -16,7 +16,7 @@ enum SensorType {
 
 namespace Util {
 
-	static const char* getSensorTypeToStr(SensorType type) {
+	static const char* getSensorTypeToStr(ControlType type) {
 		switch (type) {
 		case HUMIDITY:
 			return "Humidity";

@@ -6,7 +6,11 @@
  */
 
 #include "Room.h"
+
+#include <HardwareSerial.h>
+
 #include "../Config/Config.h"
+#include "Sensor.h"
 
 Room::Room(PubSubClient* mqttClient) {
 	this->mqttClient = mqttClient;
@@ -35,6 +39,7 @@ bool Room::humDecisionMaker() {
 			this->decisionFan = true;
 		}
 	}
+	if(DEBUG) { Serial.println("Decision fan:"+decisionFan); }
 	return this->decisionFan;
 }
 
@@ -48,22 +53,41 @@ bool Room::tempDecisionMaker() {
 			this->decisionHeating = false;
 		}
 	}
+	if(DEBUG) { Serial.println("Decision heating:"+decisionHeating); }
 	return this->decisionHeating;
 }
 
 void  Room::updateSensors(short tempSensorValue,short humSensorValue){
-	tempSensor.setValue(tempSensorValue);
-	tempDecisionMaker();
+	updateTempSensor(tempSensorValue);
+	updateHumSensor(humSensorValue);
+}
 
+void Room::updateTempSensor(short tempSensorValue) {
+	tempSensor.setValue(tempSensorValue);
+	if(DEBUG) { Serial.println("Temperature sensor:"+(int)tempSensor.getValue()); }
+	tempDecisionMaker();
+}
+
+void Room::updateHumSensor(short humSensorValue) {
 	humSensor.setValue(humSensorValue);
+	if(DEBUG) { Serial.println("Humidity sensor:"+(int)humSensor.getValue()); }
 	humDecisionMaker();
 }
 
 void Room::updateDesiredValues(short desiredTemperature,short desiredHumidity) {
-	this->desiredTemperature = desiredTemperature;
-	tempDecisionMaker();
+	updateDesiredTemperature(desiredTemperature);
+	updateDesiredHumidity(desiredHumidity);
+}
 
+void Room::updateDesiredTemperature(short desiredTemperature) {
+	this->desiredTemperature = desiredTemperature;
+	if(DEBUG) { Serial.println("Desired temperature."); }
+	tempDecisionMaker();
+}
+
+void Room::updateDesiredHumidity(short desiredHumidity) {
 	this->desiredHumidity = desiredHumidity;
+	if(DEBUG) { Serial.println("Desired humidity."); }
 	humDecisionMaker();
 }
 
@@ -73,7 +97,6 @@ short Room::getDesiredHumidity() const {
 
 void Room::setDesiredHumidity(short desiredHumidity) {
 	this->desiredHumidity = desiredHumidity;
-	humDecisionMaker();
 }
 
 short Room::getDesiredTemperature() const {
@@ -82,7 +105,6 @@ short Room::getDesiredTemperature() const {
 
 void Room::setDesiredTemperature(short desiredTemperature) {
 	this->desiredTemperature = desiredTemperature;
-	tempDecisionMaker();
 }
 
 bool Room::getDecisionFan() const {

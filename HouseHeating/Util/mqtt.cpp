@@ -5,26 +5,33 @@
  *      Author: theater
  */
 
+#include "mqtt.h"
+
 #include <Arduino.h>
 #include <PubSubClient.h>
 #include <stdbool.h>
 #include <WString.h>
-#include "../Config/Config.h"
-#include "mqtt.h"
-#include <String.h>
 
-bool mqttConnect (PubSubClient* mqttClient) {
- if (!mqttClient->connected()) {
-    if (mqttClient->connect("ArduinoNANO-AQ", "mqttuser", "MqTtUser")) {
-      mqttClient->publish("Arduino","Arduino-AQ is UP");
+#include "../Config/Config.h"
+#include "../Model/HeatingAdapter.h"
+
+HeatingAdapter* adapter;
+bool mqttConnect(PubSubClient* mqttClient, HeatingAdapter* inputAdapter) {
+	if(adapter != inputAdapter) {
+		adapter = inputAdapter;
+	}
+	if (!mqttClient->connected()) {
+		if (mqttClient->connect("ArduinoNANO-AQ", "mqttuser", "MqTtUser")) {
+			mqttClient->publish("Arduino", "Arduino-AQ is UP");
 			mqttSubscribe(mqttClient);
 //      Serial.write("Connected to MQTT\n");
-      return true;
-    } else {
+			return true;
+		} else {
 //       Serial.write("Error connecting to MQTT\n");
-       return false;
-     }
-  } else return true;
+			return false;
+		}
+	} else
+		return true;
 }
 
 void mqttSubscribe(PubSubClient* mqttClient) {
@@ -51,9 +58,9 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
   cPayload[length]='\0';
   String strPayload = String(cPayload);
   String strTopic = String(topic);
-  mqttUpdated(topic, cPayload);
+  mqttSendUpdated(topic, cPayload);
 }
 
-void mqttUpdated(char* topic, char* strPayload) {
-//	bedRoomKids.mqttParse(topic, strPayload);
+void mqttSendUpdated(char* topic, char* payload) {
+	adapter->mqttReceive(topic, payload);
 }

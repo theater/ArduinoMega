@@ -8,8 +8,6 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#include <Arduino.h>
-#include <IPAddress.h>
 
 
 // NETWORK SETTINGS
@@ -24,6 +22,15 @@
 #define DEFAULT_DESIRED_TEMP 	25
 #define DEFAULT_DESIRED_HUMIDITY 65
 #define REOCCURRENCE 			30000  		// Decision maker triggered on every xxxxx ms
+
+// ROOMS
+#define KIDS_BEDROOM "Kids bedroom"
+#define OUR_BEDROOM "Our bedroom"
+#define OUR_BATHROOM "Our bathroom"
+#define CORRIDOR "Corridor"
+#define WARDROBE "Wardrobe"
+#define BIG_BATHROOM "Big bathroom"
+
 
 // PIN assignments
 #define KIDS_BEDROOM_RAD_ONE 	30   			// KIDS RADIATOR ONE IS ON PIN 30

@@ -34,10 +34,14 @@ class Room {
 		bool hasMotionControl;
 		bool hasLightControl;
 
+		const bool DEBUG = true;
+
 	public:
 		Room(PubSubClient * mqttClient);
 		virtual ~Room();
 		virtual void updateOutputControllers() = 0;
+		void updateTempSensor(short tempSensorValue);
+		void updateHumSensor(short tempSensorValue);
 		void updateSensors(short tempSensorValue,short humSensorValue);
 		void updateDesiredValues(short desiredTemperature,short desiredHumidity);
 
@@ -59,12 +63,13 @@ class Room {
 		void setHasTemperatureControl(bool hasTemperatureControl);
 		PubSubClient* getMqttClient() const;
 		void setMqttClient(PubSubClient* mqttClient);
+		void updateDesiredTemperature(short desiredTemperature);
+		void updateDesiredHumidity(short desiredHumidity);
 
 	private:
 		bool decisionMaker();
 		bool humDecisionMaker();
 		bool tempDecisionMaker();
-
 };
 
 #endif /* MODEL_ROOM_H_ */

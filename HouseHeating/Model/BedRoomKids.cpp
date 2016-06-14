@@ -36,15 +36,12 @@ void BedRoomKids::updateOutputControllers() {
 		kidsRadiatorOne->setPin(OFF);
 		kidsRadiatorTwo->setPin(OFF);
 	}
-//	Serial.println(mqttTopics[0]);
-//	Serial.println(mqttTopics[1]);
 }
 
-void BedRoomKids::mqttSubscribe(const String* topics, int len) {
+void BedRoomKids::mqttSubscribe(const char* const* topics, int len) {
 	PubSubClient* mqttClient = getMqttClient();
 	for (int i = 0; i < len; i++) {
-//		char toCharArray[]; = topics[i].toCharArray();
-//		mqttClient->subscribe(toCharArray);
+		mqttClient->subscribe(topics[i]);
 	}
 }
 

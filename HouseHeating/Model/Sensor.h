@@ -13,18 +13,18 @@
 class Sensor {
 	private:
 		float value;
-		SensorType type;
+		ControlType type;
 	public:
 		Sensor();
-		Sensor(SensorType type);
-		Sensor(SensorType type,float value );
+		Sensor(ControlType type);
+		Sensor(ControlType type,float value );
 		virtual ~Sensor();
 
-		SensorType getType() const {
+		ControlType getType() const {
 			return type;
 		}
 
-		void setType(SensorType type) {
+		void setType(ControlType type) {
 			this->type = type;
 		}
 

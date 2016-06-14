@@ -8,10 +8,11 @@
 #ifndef MODEL_BEDROOMKIDS_H_
 #define MODEL_BEDROOMKIDS_H_
 
+#include <WString.h>
+
 #include "../Config/Config.h"
 #include "OutputControl.h"
 #include "Room.h"
-#include "TemperatureSensor.h"
 
 // specific implementation for Kids bedroom
 class BedRoomKids: public Room {
@@ -21,13 +22,13 @@ class BedRoomKids: public Room {
 		OutputControl* kidsRoomFan;
 
 		//TODO: ugly - fix it somehow later
-		const String mqttTopics[2] = {RAD_KIDS_01, RAD_KIDS_02};
+		const char * mqttTopics[2] = {RAD_KIDS_01, RAD_KIDS_02};
 
 	public:
 		BedRoomKids(PubSubClient* mqttClient);
 		virtual ~BedRoomKids();
 		void updateOutputControllers();
-		void mqttSubscribe(const String* topics,int len);
+		void mqttSubscribe(const char* const* topics,int len);
 		void mqttReceive(String* strTopic, String strPayload);
 		void mqttParse( char* strTopic,  char* strPayload);
 };
