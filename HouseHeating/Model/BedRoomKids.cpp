@@ -11,7 +11,7 @@
 #include <stdbool.h>
 #include <WString.h>
 
-BedRoomKids::BedRoomKids(PubSubClient* mqttClient) : Room(mqttClient){
+BedRoomKids::BedRoomKids(PubSubClient* const mqttClient) : Room(mqttClient){
 	// initialize Output controllers
 	setHasTemperatureControl(true);
 	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, 0);

@@ -32,6 +32,16 @@
 			<locationURI>ArduinoPrivateLibPath/DHTlib</locationURI>
 		</link>
 		<link>
+			<name>Libraries/DalasTemperature</name>
+			<type>2</type>
+			<locationURI>ArduinoPrivateLibPath/DalasTemperature</locationURI>
+		</link>
+		<link>
+			<name>Libraries/EmonLib</name>
+			<type>2</type>
+			<locationURI>ArduinoPrivateLibPath/EmonLib</locationURI>
+		</link>
+		<link>
 			<name>Libraries/MQTT</name>
 			<type>2</type>
 			<locationURI>ArduinoPrivateLibPath/MQTT</locationURI>

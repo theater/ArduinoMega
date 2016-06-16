@@ -9,12 +9,16 @@
 #define UTIL_MQTT_H_
 
 #include <Arduino.h>
+#include <stdbool.h>
 #include <PubSubClient.h>
 
-bool mqttConnect (PubSubClient* mqttClient);
+#include "../Model/HeatingAdapter.h"
+
+
+bool mqttConnect(PubSubClient* const mqttClient, HeatingAdapter* const inputAdapter);
 void mqttSubscribe(PubSubClient* mqttClient);
 void mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value);
 void mqttCallback(char* topic, byte* payload, unsigned int length);
-void mqttSendUpdated(char* topic, char* payload);
+void mqttSendUpdatedData(char* topic, char* payload);
 
 #endif /* UTIL_MQTT_H_ */

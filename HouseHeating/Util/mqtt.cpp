@@ -16,18 +16,17 @@
 #include "../Model/HeatingAdapter.h"
 
 HeatingAdapter* adapter;
-bool mqttConnect(PubSubClient* mqttClient, HeatingAdapter* inputAdapter) {
-	if(adapter != inputAdapter) {
+bool mqttConnect(PubSubClient* const mqttClient, HeatingAdapter* const inputAdapter) {
+	if (adapter != inputAdapter) {
 		adapter = inputAdapter;
 	}
 	if (!mqttClient->connected()) {
-		if (mqttClient->connect("ArduinoNANO-AQ", "mqttuser", "MqTtUser")) {
-			mqttClient->publish("Arduino", "Arduino-AQ is UP");
+		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD)) {
+			String str = MQTT_CLIENT_NAME;
+			mqttClient->publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
 			mqttSubscribe(mqttClient);
-//      Serial.write("Connected to MQTT\n");
 			return true;
 		} else {
-//       Serial.write("Error connecting to MQTT\n");
 			return false;
 		}
 	} else
@@ -51,16 +50,16 @@ void mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value)
 }
 
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
-  char cPayload[10];
-  for (int i=0; i<=length; i++) {
-    cPayload[i]=(char)payload[i];
-  }
-  cPayload[length]='\0';
-  String strPayload = String(cPayload);
-  String strTopic = String(topic);
-  mqttSendUpdated(topic, cPayload);
+	char cPayload[10];
+	for (int i = 0; i <= length; i++) {
+		cPayload[i] = (char) payload[i];
+	}
+	cPayload[length] = '\0';
+	String strPayload = String(cPayload);
+	String strTopic = String(topic);
+	mqttSendUpdatedData(topic, cPayload);
 }
 
-void mqttSendUpdated(char* topic, char* payload) {
+void mqttSendUpdatedData(char* topic, char* payload) {
 	adapter->mqttReceive(topic, payload);
 }

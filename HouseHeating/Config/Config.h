@@ -7,12 +7,13 @@
 
 #ifndef CONFIG_H_
 #define CONFIG_H_
-
+#include "Restricted.h"
 
 
 // NETWORK SETTINGS
 // MQTT stuff
 #define MQTT_SERVER {192,168,254,30}
+#define MQTT_CLIENT_NAME "HeatingControl-FL2"
 
 // Ethernet settings
 #define MAC_ADDRESS {0x00,0x01,0x02,0x03,0x04,0x37}
@@ -33,6 +34,8 @@
 
 
 // PIN assignments
+#define DHT_PIN					8
+#define ONE_WIRE_PIN_01 			9
 #define KIDS_BEDROOM_RAD_ONE 	30   			// KIDS RADIATOR ONE IS ON PIN 30
 #define KIDS_BEDROOM_RAD_TWO 	31  			// KIDS RADIATOR TWO IS ON PIN 31
 #define CORRIDOR_RAD_ONE 		32				// CORRIDOR RADIATOR ONE IS ON PIN 32
@@ -42,6 +45,7 @@
 #define OUR_BEDROOM_RAD 		36				// Our bedroom radiator - pin 36
 #define WARDROBE_RAD 			37				// Wardrobe room radiator - pin 37
 #define SMALL_BATH_RAD 			40				// Small bathroom next to our bedroom - pin 40
+
 
 // 	MQTT topics
 //	Radiators (outputs)

@@ -25,7 +25,7 @@ class BedRoomKids: public Room {
 		const char * mqttTopics[2] = {RAD_KIDS_01, RAD_KIDS_02};
 
 	public:
-		BedRoomKids(PubSubClient* mqttClient);
+		BedRoomKids(PubSubClient* const mqttClient);
 		virtual ~BedRoomKids();
 		void updateOutputControllers();
 		void mqttSubscribe(const char* const* topics,int len);

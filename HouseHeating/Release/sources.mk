@@ -35,6 +35,8 @@ CPP_DEPS :=
 SUBDIRS := \
 . \
 Libraries/DHTlib \
+Libraries/DalasTemperature \
+Libraries/EmonLib \
 Libraries/MQTT \
 Libraries/OneWire \
 Libraries/Timer \

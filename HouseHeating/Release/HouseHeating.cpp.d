@@ -10,7 +10,11 @@ HouseHeating.cpp.o: ../HouseHeating.cpp ../HouseHeating.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h \
+ D:\HomeAutomation\Arduino\libraries\DHTlib/dht.h \
+ D:\HomeAutomation\Arduino\libraries\DalasTemperature/DallasTemperature.h \
+ D:\HomeAutomation\Arduino\libraries\OneWire/OneWire.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h \
+ D:\HomeAutomation\Arduino\libraries\EmonLib/EmonLib.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/HardwareSerial.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/IPAddress.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
@@ -30,11 +34,13 @@ HouseHeating.cpp.o: ../HouseHeating.cpp ../HouseHeating.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip-conf.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/enc28j60.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip.h \
- ../Config/Config.h ../Model/HeatingAdapter.h ../Model/BedRoomKids.h \
+ ../Config/Config.h ../Config/Restricted.h ../Model/HeatingAdapter.h \
+ ../Model/BedRoomKids.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
  ../Model/../Config/Config.h ../Model/OutputControl.h ../Model/Room.h \
  ../Model/HumiditySensor.h ../Model/Sensor.h ../Model/../Model/Util.h \
- ../Model/TemperatureSensor.h ../Util/mqtt.h
+ ../Model/TemperatureSensor.h ../Model/Util.h ../Util/mqtt.h \
+ ../Util/../Model/HeatingAdapter.h
 
 ../HouseHeating.h:
 
@@ -60,7 +66,15 @@ D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h:
 
 D:\HomeAutomation\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h:
 
+D:\HomeAutomation\Arduino\libraries\DHTlib/dht.h:
+
+D:\HomeAutomation\Arduino\libraries\DalasTemperature/DallasTemperature.h:
+
+D:\HomeAutomation\Arduino\libraries\OneWire/OneWire.h:
+
 D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h:
+
+D:\HomeAutomation\Arduino\libraries\EmonLib/EmonLib.h:
 
 D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/HardwareSerial.h:
 
@@ -102,6 +116,8 @@ D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip.h:
 
 ../Config/Config.h:
 
+../Config/Restricted.h:
+
 ../Model/HeatingAdapter.h:
 
 ../Model/BedRoomKids.h:
@@ -122,4 +138,8 @@ D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/WString.h:
 
 ../Model/TemperatureSensor.h:
 
+../Model/Util.h:
+
 ../Util/mqtt.h:
+
+../Util/../Model/HeatingAdapter.h:

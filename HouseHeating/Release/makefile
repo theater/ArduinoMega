@@ -17,6 +17,8 @@ RM := rm -f
 -include Libraries/Timer/subdir.mk
 -include Libraries/OneWire/subdir.mk
 -include Libraries/MQTT/subdir.mk
+-include Libraries/EmonLib/subdir.mk
+-include Libraries/DalasTemperature/subdir.mk
 -include Libraries/DHTlib/subdir.mk
 -include objects.mk
 

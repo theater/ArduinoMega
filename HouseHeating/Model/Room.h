@@ -37,7 +37,7 @@ class Room {
 		const bool DEBUG = true;
 
 	public:
-		Room(PubSubClient * mqttClient);
+		Room(PubSubClient * const mqttClient);
 		virtual ~Room();
 		virtual void updateOutputControllers() = 0;
 		void updateTempSensor(short tempSensorValue);

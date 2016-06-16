@@ -3,25 +3,41 @@
 #include "HouseHeating.h"
 
 #include <Arduino.h>
+#include <dht.h>
+#include <DallasTemperature.h>
 #include <ethernet_comp.h>
+#include <EmonLib.h>
 #include <HardwareSerial.h>
 #include <IPAddress.h>
+#include <OneWire.h>
 #include <PubSubClient.h>
 #include <Timer.h>
 #include <UIPClient.h>
 
 #include "Config/Config.h"
 #include "Model/HeatingAdapter.h"
+#include "Model/Util.h"
 #include "Util/mqtt.h"
 
+//MQTT
 byte mqttServerAddress[] = MQTT_SERVER;
 uint8_t macAddress[6] = MAC_ADDRESS;
 IPAddress ipAddress(IP_ADDRESS);
 EthernetClient ethClient;
 PubSubClient mqttClient(mqttServerAddress, 1883, mqttCallback, ethClient);
 
+//	HeatingAdapter -> all logic and model is inside this
 HeatingAdapter heatingAdapter(&mqttClient);
-//BedRoomKids bedRoomKids(&mqttClient);
+
+//EMON
+EnergyMonitor energyMon;
+
+//DS18B20
+OneWire oneWire(ONE_WIRE_PIN_01);
+DallasTemperature sensors(&oneWire);
+
+dht DHT22;
+
 
 
 Timer trigger;
@@ -38,6 +54,8 @@ void triggerFunc(){
 void setup()
 {
 	Serial.begin(115200);
+	mqttConnect(&mqttClient, &heatingAdapter);
+
 	trigger.every(REOCCURRENCE,&triggerFunc);
 	triggerFunc();
 }
@@ -45,5 +63,6 @@ void setup()
 // The loop function is called in an endless loop
 void loop()
 {
+	mqttClient.loop();
 	trigger.update();
 }

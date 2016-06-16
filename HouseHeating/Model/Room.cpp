@@ -12,7 +12,7 @@
 #include "../Config/Config.h"
 #include "Sensor.h"
 
-Room::Room(PubSubClient* mqttClient) {
+Room::Room(PubSubClient* const mqttClient) {
 	this->mqttClient = mqttClient;
 	desiredTemperature = DEFAULT_DESIRED_TEMP;
 	decisionHeating = false;
