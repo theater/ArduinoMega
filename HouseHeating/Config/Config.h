@@ -9,6 +9,8 @@
 #define CONFIG_H_
 #include "Restricted.h"
 
+// DEBUG
+const bool DEBUG = true;
 
 // NETWORK SETTINGS
 // MQTT stuff

@@ -16,8 +16,6 @@ class HeatingAdapter {
 		PubSubClient* mqttClient;
 		BedRoomKids* bedRoomKids;
 	public:
-		const bool DEBUG = true;
-
 		HeatingAdapter(PubSubClient* mqttClient);
 		virtual ~HeatingAdapter();
 		//MQTT
