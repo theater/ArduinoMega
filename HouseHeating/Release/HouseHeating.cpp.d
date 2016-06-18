@@ -34,6 +34,17 @@ HouseHeating.cpp.o: ../HouseHeating.cpp ../HouseHeating.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip-conf.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/enc28j60.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPEthernet.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/Dhcp.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPUdp.h \
+ D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/Udp.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/Enc28J60Network.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPClient.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPServer.h \
+ D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/Server.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_timer.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_clock.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/clock-arch.h \
  ../Config/Config.h ../Config/Restricted.h ../Model/HeatingAdapter.h \
  ../Model/BedRoomKids.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
@@ -113,6 +124,28 @@ D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip-conf.h:
 D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/enc28j60.h:
 
 D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPEthernet.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/Dhcp.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPUdp.h:
+
+D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/Udp.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/Enc28J60Network.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPClient.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPServer.h:
+
+D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/Server.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_timer.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_clock.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/clock-arch.h:
 
 ../Config/Config.h:
 

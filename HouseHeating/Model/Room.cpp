@@ -11,9 +11,11 @@
 
 #include "../Config/Config.h"
 #include "Sensor.h"
+#include "PubSubClient.h"
 
-Room::Room(PubSubClient* const mqttClient) {
+Room::Room(PubSubClient* mqttClient, bool DEBUG) {
 	this->mqttClient = mqttClient;
+	this->DEBUG = DEBUG;
 	desiredTemperature = DEFAULT_DESIRED_TEMP;
 	decisionHeating = false;
 
@@ -39,7 +41,10 @@ bool Room::humDecisionMaker() {
 			this->decisionFan = true;
 		}
 	}
-	if(DEBUG) { Serial.println("Decision fan:"+decisionFan); }
+	if(DEBUG) {
+//		Serial.println("Decision fan:"+decisionFan);
+		mqttClient->publish("DEBUG","Room::tempDecisionMaker()");
+	}
 	return this->decisionFan;
 }
 
@@ -53,7 +58,10 @@ bool Room::tempDecisionMaker() {
 			this->decisionHeating = false;
 		}
 	}
-	if(DEBUG) { Serial.println("Decision heating:"+decisionHeating); }
+	if(DEBUG) {
+//		Serial.println("Decision heating:");
+		mqttClient->publish("DEBUG","Room::tempDecisionMaker()");
+	}
 	return this->decisionHeating;
 }
 
@@ -64,13 +72,19 @@ void  Room::updateSensors(short tempSensorValue,short humSensorValue){
 
 void Room::updateTempSensor(short tempSensorValue) {
 	tempSensor.setValue(tempSensorValue);
-	if(DEBUG) { Serial.println("Temperature sensor:"+(int)tempSensor.getValue()); }
+	if(DEBUG) {
+//		Serial.println("Temperature sensor:"+(int)tempSensor.getValue());
+		mqttClient->publish("DEBUG","void Room::updateTempSensor");
+	}
 	tempDecisionMaker();
 }
 
 void Room::updateHumSensor(short humSensorValue) {
 	humSensor.setValue(humSensorValue);
-	if(DEBUG) { Serial.println("Humidity sensor:"+(int)humSensor.getValue()); }
+	if(DEBUG) {
+//		Serial.println("Humidity sensor:"+(int)humSensor.getValue());
+		mqttClient->publish("DEBUG","void Room::updateHumSensor");
+	}
 	humDecisionMaker();
 }
 
@@ -81,13 +95,19 @@ void Room::updateDesiredValues(short desiredTemperature,short desiredHumidity) {
 
 void Room::updateDesiredTemperature(short desiredTemperature) {
 	this->desiredTemperature = desiredTemperature;
-	if(DEBUG) { Serial.println("Desired temperature."); }
+	if(DEBUG) {
+//		Serial.println("Desired temperature.");
+		mqttClient->publish("DEBUG","void Room::updateDesiredTemperature");
+	}
 	tempDecisionMaker();
 }
 
 void Room::updateDesiredHumidity(short desiredHumidity) {
 	this->desiredHumidity = desiredHumidity;
-	if(DEBUG) { Serial.println("Desired humidity."); }
+	if(DEBUG) {
+//		Serial.println("Desired humidity.");
+		mqttClient->publish("DEBUG","void Room::updateDesiredHumidity");
+	}
 	humDecisionMaker();
 }
 
@@ -163,3 +183,10 @@ void Room::setMqttClient(PubSubClient* mqttClient) {
 	this->mqttClient = mqttClient;
 }
 
+bool Room::Debug() {
+	return DEBUG;
+}
+
+void Room::setDebug(bool debug) {
+	DEBUG = debug;
+}

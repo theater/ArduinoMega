@@ -11,15 +11,20 @@
 #include <stdbool.h>
 #include <WString.h>
 
-BedRoomKids::BedRoomKids(PubSubClient* const mqttClient) : Room(mqttClient){
+BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(mqttClient){
 	// initialize Output controllers
+	setDebug(DEBUG);
+	if(Debug()) {
+//		Serial.println("Calling BedRoomKids constructor");
+		mqttClient->publish("DEBUG","BedRoomKids::BedRoomKids");
+	}
 	setHasTemperatureControl(true);
 	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, 0);
 	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, 0);
 	// Set MQTT topics to listen to
 
 	// subscribe to these topics
-	mqttSubscribe(mqttTopics,2);
+	mqttSubscribe(mqttTopics, 2, mqttClient);
 }
 
 BedRoomKids::~BedRoomKids() {
@@ -38,8 +43,7 @@ void BedRoomKids::updateOutputControllers() {
 	}
 }
 
-void BedRoomKids::mqttSubscribe(const char* const* topics, int len) {
-	PubSubClient* mqttClient = getMqttClient();
+void BedRoomKids::mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient) {
 	for (int i = 0; i < len; i++) {
 		mqttClient->subscribe(topics[i]);
 	}

@@ -34,10 +34,10 @@ class Room {
 		bool hasMotionControl;
 		bool hasLightControl;
 
-		const bool DEBUG = true;
+		bool DEBUG;
 
 	public:
-		Room(PubSubClient * const mqttClient);
+		Room(PubSubClient * mqttClient, bool DEBUG = false);
 		virtual ~Room();
 		virtual void updateOutputControllers() = 0;
 		void updateTempSensor(short tempSensorValue);
@@ -65,6 +65,8 @@ class Room {
 		void setMqttClient(PubSubClient* mqttClient);
 		void updateDesiredTemperature(short desiredTemperature);
 		void updateDesiredHumidity(short desiredHumidity);
+		bool Debug();
+		void setDebug(bool debug);
 
 	private:
 		bool decisionMaker();

@@ -13,9 +13,16 @@
 #include <UIPClient.h>
 #include "../Config/Config.h"
 
-HeatingAdapter::HeatingAdapter(PubSubClient* mqttClient) {
+HeatingAdapter::HeatingAdapter(PubSubClient* mqttClient, bool DEBUG) {
+	this->DEBUG = DEBUG;
 	setMqttClient(mqttClient);
-	bedRoomKids = new BedRoomKids(this->mqttClient);
+	bedRoomKids = new BedRoomKids(mqttClient, this->DEBUG);
+	if(DEBUG) {
+//		Serial.println("Calling HeatingAdapter constructor");
+		mqttClient->publish("DEBUG","HeatingAdapter::HeatingAdapter");
+	}
+	mqttClient->subscribe("HeatingAdapter topic");
+	mqttClient->publish("HeatingAdapter topic", "Somethng");
 }
 
 HeatingAdapter::~HeatingAdapter() {
@@ -49,33 +56,29 @@ void HeatingAdapter::sensorUpdate(const char* sensor, short value) {
 void HeatingAdapter::updateRoomDesiredValue(const char* room, ControlType type, short value) {
 	switch (type) {
 		case TEMPERATURE:
-			if (DEBUG) Serial.println("Updating temperature");
 			updateDesiredTemperature(room, value);
 			break;
 		case HUMIDITY:
-			if (DEBUG) Serial.println("Updating humidity");
 			updateDesiredHumidity(room, value);
 			break;
 		default:
-			if (DEBUG) Serial.println("DEFAULT returning");
 			break;
 	}
 }
 
 void HeatingAdapter::updateDesiredTemperature(const char* room, short value) {
 	if (!strcmp(room, KIDS_BEDROOM)) {
-		if (DEBUG) Serial.println("Update desired temperature");
+		if (DEBUG) mqttClient->publish("DEBUG","HeatingAdapter::updateDesiredTemperature");
 		bedRoomKids->updateDesiredTemperature(value);
+		mqttClient->publish("DEBUG","Updated desired temperatures");
 	}
-	if (DEBUG) Serial.println("No matching rule.(HeatingAdapter::updateDesiredTemperature)");
+	if (DEBUG) mqttClient->publish("DEBUG","No matching rule.(HeatingAdapter::updateDesiredTemperature)");
 }
 
 void HeatingAdapter::updateDesiredHumidity(const char* room, short value) {
 	if (!strcmp(room, KIDS_BEDROOM)) {
-		if (DEBUG) Serial.println("Update desired temperature");
 		bedRoomKids->updateDesiredHumidity(value);
 	}
-	if (DEBUG) Serial.println("No matching rule.(HeatingAdapter::updateDesiredTemperature)");
 }
 
 

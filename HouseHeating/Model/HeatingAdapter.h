@@ -11,12 +11,14 @@
 #include <PubSubClient.h>
 #include <UIPClient.h>
 #include "BedRoomKids.h"
+
 class HeatingAdapter {
 	private:
 		PubSubClient* mqttClient;
 		BedRoomKids* bedRoomKids;
+		bool DEBUG;
 	public:
-		HeatingAdapter(PubSubClient* mqttClient);
+		HeatingAdapter(PubSubClient* mqttClient, bool DEBUG = false);
 		virtual ~HeatingAdapter();
 		//MQTT
 		void mqttCallback(char* topic, byte* payload, unsigned int length);

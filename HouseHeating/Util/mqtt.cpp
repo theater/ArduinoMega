@@ -24,7 +24,7 @@ bool mqttConnect(PubSubClient* const mqttClient, HeatingAdapter* const inputAdap
 		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD)) {
 			String str = MQTT_CLIENT_NAME;
 			mqttClient->publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
-			mqttSubscribe(mqttClient);
+//			mqttSubscribe(mqttClient);
 			return true;
 		} else {
 			return false;
