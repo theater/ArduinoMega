@@ -21,8 +21,6 @@ HeatingAdapter::HeatingAdapter(PubSubClient* mqttClient, bool DEBUG) {
 //		Serial.println("Calling HeatingAdapter constructor");
 		mqttClient->publish("DEBUG","HeatingAdapter::HeatingAdapter");
 	}
-	mqttClient->subscribe("HeatingAdapter topic");
-	mqttClient->publish("HeatingAdapter topic", "Somethng");
 }
 
 HeatingAdapter::~HeatingAdapter() {
@@ -67,12 +65,14 @@ void HeatingAdapter::updateRoomDesiredValue(const char* room, ControlType type, 
 }
 
 void HeatingAdapter::updateDesiredTemperature(const char* room, short value) {
+	if (DEBUG) mqttClient->publish("DEBUG", "HeatingAdapter::updateDesiredTemperature");
+
 	if (!strcmp(room, KIDS_BEDROOM)) {
-		if (DEBUG) mqttClient->publish("DEBUG","HeatingAdapter::updateDesiredTemperature");
 		bedRoomKids->updateDesiredTemperature(value);
-		mqttClient->publish("DEBUG","Updated desired temperatures");
+		if (DEBUG) mqttClient->publish("DEBUG", "Updated desired temperatures");
 	}
-	if (DEBUG) mqttClient->publish("DEBUG","No matching rule.(HeatingAdapter::updateDesiredTemperature)");
+
+	if (DEBUG) mqttClient->publish("DEBUG", "No matching rule.(HeatingAdapter::updateDesiredTemperature)");
 }
 
 void HeatingAdapter::updateDesiredHumidity(const char* room, short value) {

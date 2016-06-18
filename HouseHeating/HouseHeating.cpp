@@ -58,8 +58,8 @@ void setup()
 {
 	Serial.begin(115200);
 	Ethernet.begin(macAddress, ipAddress);
-	heatingAdapter = new HeatingAdapter(mqttClient, true);
 	mqttConnect(mqttClient, heatingAdapter);
+	heatingAdapter = new HeatingAdapter(mqttClient, false);
 
 	trigger.every(REOCCURRENCE,&triggerFunc);
 	triggerFunc();
