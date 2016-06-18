@@ -81,8 +81,6 @@ void HeatingAdapter::updateDesiredHumidity(const char* room, short value) {
 	}
 }
 
-
-
 // Getters/setters
 
 BedRoomKids* HeatingAdapter::getBedRoomKids() const {
