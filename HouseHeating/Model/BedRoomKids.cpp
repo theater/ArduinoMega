@@ -19,11 +19,11 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(mqttClient
 	}
 
 	// initialize and create Output controllers
+	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, OFF, RAD_KIDS_01_CB, mqttClient);
+	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, OFF, RAD_KIDS_02_CB, mqttClient);
 	setHasHeatingControl(true);
+	chiller = new OutputControl(CHILLER_PIN, OFF, CHILLER_CB, mqttClient);
 	setHasCoolingControl(true);
-	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, 0, RAD_KIDS_01_CB, mqttClient);
-	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, 0, RAD_KIDS_02_CB, mqttClient);
-	chiller = new OutputControl(CHILLER_PIN, 0, CHILLER_CB, mqttClient);
 	// initialize and create sensors
 	Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_KIDS_01);
 	setTempSensor((TemperatureSensor*)tempSensor);
@@ -47,10 +47,11 @@ void BedRoomKids::updateOutputControllers() {
 		kidsRadiatorOne->setPin(OFF);
 		kidsRadiatorTwo->setPin(OFF);
 	}
-	if(getHasCoolingControl() && getDecisionCool()) {
+	if(getHasCoolingControl() && getDecisionCool()) { //
 		chiller->setPin(ON);
 	} else {
 		chiller->setPin(OFF);
+		return;
 	}
 }
 
@@ -62,11 +63,11 @@ void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 		updateDesiredTemperature(atof(payload));
 		return;
 	} else if (strTopic.equals(RAD_KIDS_01)) {
-		handleOutputControl(kidsRadiatorOne, payload);
+		handleMqttCommandOC(kidsRadiatorOne, payload);
 	} else if (strTopic.equals(RAD_KIDS_02)) {
-		handleOutputControl(kidsRadiatorTwo, payload);
+		handleMqttCommandOC(kidsRadiatorTwo, payload);
 	} else if (strTopic.equals(CHILLER)) {
-		handleOutputControl(chiller, payload);
+		handleMqttCommandOC(chiller, payload);
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}
@@ -97,7 +98,7 @@ void BedRoomKids::mqttSubscribe(const char* const* topics, int len, PubSubClient
 	}
 }
 
-void BedRoomKids::handleOutputControl(OutputControl* outputControl, const char* payload) {
+void BedRoomKids::handleMqttCommandOC(OutputControl* outputControl, const char* payload) {
 	if (!strcmp(payload, "ON")) {
 		outputControl->setPin(ON);
 	} else {

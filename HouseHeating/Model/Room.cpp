@@ -54,9 +54,9 @@ bool Room::ventDecisionMaker() {
 		float sensorValue = this->humSensor->getValue();
 		if (hasVentControl) {
 			if (desiredHumidity >= sensorValue) {
-				this->decisionVent = false;
+				setDecisionVent(true);
 			} else if (desiredHumidity <= sensorValue - 1) {
-				this->decisionVent = true;
+				setDecisionVent(false);
 			}
 		}
 		if (DEBUG) {
@@ -74,16 +74,16 @@ bool Room::heatingDecisionMaker() {
 		float sensorValue = tempSensor->getValue();
 		if (hasHeatingControl) {
 			if (desiredTemperature >= sensorValue+1) {
-				this->decisionHeat = true;
+				setDecisionHeat(true);
 			} else if (desiredTemperature <= sensorValue - 1) {
-				this->decisionHeat = false;
+				setDecisionHeat(false);
 			}
 		}
 		if (DEBUG) {
 //		Serial.println("Decision heating:");
 			mqttClient->publish("DEBUG", "Room::tempDecisionMaker()");
 		}
-		return this->decisionHeat;
+		return decisionHeat;
 	}
 	return false;
 }
@@ -91,18 +91,18 @@ bool Room::heatingDecisionMaker() {
 bool Room::coolingDecisionMaker() {
 	if (tempSensor != NULL) {
 		float sensorValue = tempSensor->getValue();
-		if (hasHeatingControl) {
-			if (desiredTemperature <= sensorValue-0.5) {
-				this->decisionCool = true;
-			} else if (desiredTemperature >= sensorValue + 0.5) {
-				this->decisionCool = false;
+		if (hasCoolingControl) {
+			if (desiredTemperature < sensorValue-0.5) {
+				setDecisionCool(true);
+			} else if (desiredTemperature > sensorValue+0.5) {
+				setDecisionCool(false);
 			}
 		}
 		if (DEBUG) {
 //		Serial.println("Decision heating:");
 			mqttClient->publish("DEBUG", "Room::tempDecisionMaker()");
 		}
-		return this->decisionHeat;
+		return decisionCool;
 	}
 	return false;
 }
@@ -116,6 +116,7 @@ void Room::updateTempSensor(float tempSensorValue) {
 	if (tempSensor != NULL) {
 		tempSensor->setValue(tempSensorValue);
 		heatingDecisionMaker();
+		coolingDecisionMaker();
 
 		char sensorCharValue[10];
 		dtostrf(tempSensor->getValue(), 5, 2, sensorCharValue);
@@ -156,6 +157,7 @@ void Room::updateDesiredTemperature(float desiredTemperature) {
 		mqttClient->publish("DEBUG","void Room::updateDesiredTemperature");
 	}
 	heatingDecisionMaker();
+	coolingDecisionMaker();
 	updateOutputControllers();
 }
 

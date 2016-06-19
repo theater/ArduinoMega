@@ -24,7 +24,7 @@ const bool DEBUG = true;
 // DEFAULT VALUES
 #define DEFAULT_DESIRED_TEMP 	25
 #define DEFAULT_DESIRED_HUMIDITY 65
-#define REOCCURRENCE 			150000  		// Decision maker triggered on every xxxxx ms
+#define REOCCURRENCE 			30000  		// Decision maker triggered on every xxxxx ms
 
 // ROOMS
 #define KIDS_BEDROOM "Kids bedroom"

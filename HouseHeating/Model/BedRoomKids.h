@@ -25,7 +25,7 @@ class BedRoomKids: public Room {
 		const static int len = 4;
 		const char * mqttTopics[len] = {RAD_KIDS_01, RAD_KIDS_02, DESIRED_KIDS_01, CHILLER};
 
-		void handleOutputControl(OutputControl* outputControl, const char* payload);
+		void handleMqttCommandOC(OutputControl* outputControl, const char* payload);
 		void mqttSubscribe(const char* const* topics,int len, PubSubClient* const mqttClient);
 
 	public:
