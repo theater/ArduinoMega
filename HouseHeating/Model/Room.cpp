@@ -126,7 +126,7 @@ void Room::updateDesiredValues(short desiredTemperature,short desiredHumidity) {
 	updateDesiredHumidity(desiredHumidity);
 }
 
-void Room::updateDesiredTemperature(short desiredTemperature) {
+void Room::updateDesiredTemperature(float desiredTemperature) {
 	this->desiredTemperature = desiredTemperature;
 	if(DEBUG) {
 //		Serial.println("Desired temperature.");
@@ -154,11 +154,11 @@ void Room::setDesiredHumidity(short desiredHumidity) {
 	this->desiredHumidity = desiredHumidity;
 }
 
-short Room::getDesiredTemperature() const {
+float Room::getDesiredTemperature() const {
 	return desiredTemperature;
 }
 
-void Room::setDesiredTemperature(short desiredTemperature) {
+void Room::setDesiredTemperature(float desiredTemperature) {
 	this->desiredTemperature = desiredTemperature;
 }
 

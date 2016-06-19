@@ -23,7 +23,7 @@ class Room {
 		PubSubClient* mqttClient;
 
 		TemperatureSensor* tempSensor;
-		short desiredTemperature;
+		float desiredTemperature;
 		bool decisionHeating;
 
 		HumiditySensor* humSensor;
@@ -51,8 +51,8 @@ class Room {
 
 		short getDesiredHumidity() const;
 		void setDesiredHumidity(short desiredHumidity);
-		short getDesiredTemperature() const;
-		void setDesiredTemperature(short desiredTemperature);
+		float getDesiredTemperature() const;
+		void setDesiredTemperature(float desiredTemperature);
 		bool getDecisionFan() const;
 		void setDecisionFan(bool decisionFan);
 		bool getDecisionHeating() const;
@@ -67,7 +67,7 @@ class Room {
 		void setHasTemperatureControl(bool hasTemperatureControl);
 		PubSubClient* getMqttClient() const;
 		void setMqttClient(PubSubClient* mqttClient);
-		void updateDesiredTemperature(short desiredTemperature);
+		void updateDesiredTemperature(float desiredTemperature);
 		void updateDesiredHumidity(short desiredHumidity);
 		void setDebug(bool debug);
 		HumiditySensor* getHumSensor();

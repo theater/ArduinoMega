@@ -26,7 +26,7 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(mqttClient
 
 	// Set MQTT topics to listen to
 	// subscribe to these topics
-	mqttSubscribe(mqttTopics, 2, mqttClient);
+	mqttSubscribe(mqttTopics, len, mqttClient);
 }
 
 BedRoomKids::~BedRoomKids() {
@@ -48,17 +48,16 @@ void BedRoomKids::updateOutputControllers() {
 void BedRoomKids::mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient) {
 	for (int i = 0; i < len; i++) {
 		mqttClient->subscribe(topics[i]);
+		mqttClient->publish("DEBUG",topics[i]);
 	}
 }
 
 void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	String strTopic = String(topic);
 	String strPayload = String(payload);
-	if (strTopic == SENSOR_KIDS_01) {
-		setDesiredTemperature(atoi(payload));
-		return;
-	} else if (strTopic == SENSOR_BEDROOM_BATH_02) {
-		setDesiredHumidity(atoi(payload));
+	if (strTopic.equals(DESIRED_KIDS_01)) {
+		updateDesiredTemperature(atof(payload));
+		updateOutputControllers();
 		return;
 	} else if (strTopic.equals(RAD_KIDS_01)) {
 		if (!strcmp(payload, "ON")) {
@@ -75,4 +74,17 @@ void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}
+}
+
+bool BedRoomKids::containsTopic(const char * topic) {
+	for(int i=0;i<len;i++) {
+		if(!strcmp(mqttTopics[i], topic)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+const char** BedRoomKids::getMqttTopics() {
+	return mqttTopics;
 }

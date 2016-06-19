@@ -46,8 +46,8 @@ HeatingAdapter* heatingAdapter;
 
 Timer trigger;
 void triggerFunc(){
-	short desTemperature = random(20,25);	 	//simulation values
-	heatingAdapter->updateRoomDesiredValue(KIDS_BEDROOM, TEMPERATURE, desTemperature);
+//	short desTemperature = random(20,25);	 	//simulation values
+//	heatingAdapter->updateRoomDesiredValue(KIDS_BEDROOM, TEMPERATURE, desTemperature);
 
 	short tempSensorReal = random(15,35);  		//simulation values
 	heatingAdapter->sensorUpdate(SENSOR_KIDS_01,tempSensorReal);

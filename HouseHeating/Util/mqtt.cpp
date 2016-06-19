@@ -34,15 +34,15 @@ bool mqttConnect(PubSubClient* const mqttClient, HeatingAdapter* const inputAdap
 }
 
 void mqttSubscribe(PubSubClient* mqttClient) {
-	mqttClient->subscribe(RAD_KIDS_01);
-	mqttClient->subscribe(RAD_KIDS_02);
-	mqttClient->subscribe(RAD_CORRIDOR_01);
-	mqttClient->subscribe(RAD_CORRIDOR_02);
-	mqttClient->subscribe(RAD_BIGBATH_01);
-	mqttClient->subscribe(RAD_BIGBATH_02);
-	mqttClient->subscribe(RAD_BEDROOM);
-	mqttClient->subscribe(RAD_WARDROBE);
-	mqttClient->subscribe(RAD_BEDROOM_BATH);
+//	mqttClient->subscribe(RAD_KIDS_01);
+//	mqttClient->subscribe(RAD_KIDS_02);
+//	mqttClient->subscribe(RAD_CORRIDOR_01);
+//	mqttClient->subscribe(RAD_CORRIDOR_02);
+//	mqttClient->subscribe(RAD_BIGBATH_01);
+//	mqttClient->subscribe(RAD_BIGBATH_02);
+//	mqttClient->subscribe(RAD_BEDROOM);
+//	mqttClient->subscribe(RAD_WARDROBE);
+//	mqttClient->subscribe(RAD_BEDROOM_BATH);
 }
 
 void mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value) {
