@@ -22,8 +22,8 @@ class BedRoomKids: public Room {
 		OutputControl* chiller;
 
 		//TODO: ugly - fix it somehow later
-		const static int length = 4;
-		const char * topics[length] = {RAD_KIDS_01, RAD_KIDS_02, DESIRED_KIDS_01, CHILLER};
+		const static int length = 5;
+		const char * topics[length] = {RAD_KIDS_01, RAD_KIDS_02, DESIRED_TEMP_KIDS_01, CHILLER, MODE_KIDS};
 
 	public:
 		BedRoomKids(PubSubClient* mqttClient, bool DEBUG=false);

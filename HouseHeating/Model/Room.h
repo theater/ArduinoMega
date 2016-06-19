@@ -22,6 +22,7 @@ class PubSubClient;
 class Room {
 	private:
 		PubSubClient* mqttClient;
+		Mode mode;
 
 		TemperatureSensor* tempSensor;
 		float desiredTemperature;
@@ -40,8 +41,8 @@ class Room {
 		bool hasLightControl;
 		bool hasCoolingControl;
 
-		int len;
 		const char ** mqttTopics;
+		int len;
 
 		bool DEBUG;
 
@@ -54,11 +55,13 @@ class Room {
 		void updateHumSensor(short humSensorValue);
 		void updateSensors(short tempSensorValue,short humSensorValue);
 		void updateDesiredValues(short desiredTemperature,short desiredHumidity);
+		void updateMode(const char* mode);
 		Sensor* createSensor(ControlType type, PubSubClient* mqttClient, char* topic);
 		bool containsTopic(const char * topic);
 		void subscribeMqttTopics(PubSubClient* mqttClient);
 		void mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient);
 		void handleMqttCommandOC(OutputControl* outputControl, const char* payload);
+		void updateDecisionMakers();
 
 		short getDesiredHumidity() const;
 		void setDesiredHumidity(short desiredHumidity);
@@ -96,6 +99,8 @@ class Room {
 		void setMqttTopics(const char** mqttTopics);
 		int getLen() const;
 		void setLen(int len);
+		Mode getMode() const;
+		void setMode(Mode mode);
 
 		private:
 		bool decisionMaker();

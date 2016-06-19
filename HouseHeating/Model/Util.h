@@ -14,6 +14,12 @@ enum ControlType {
 	MOTION
 };
 
+enum Mode {
+	ALL_OFF,
+	MANUAL,
+	AUTO
+};
+
 namespace Util {
 
 	static const char* getSensorTypeToStr(ControlType type) {
