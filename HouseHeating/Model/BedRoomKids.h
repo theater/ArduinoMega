@@ -22,23 +22,14 @@ class BedRoomKids: public Room {
 		OutputControl* chiller;
 
 		//TODO: ugly - fix it somehow later
-		const static int len = 4;
-		const char * mqttTopics[len] = {RAD_KIDS_01, RAD_KIDS_02, DESIRED_KIDS_01, CHILLER};
-
-		void handleMqttCommandOC(OutputControl* outputControl, const char* payload);
-		void mqttSubscribe(const char* const* topics,int len, PubSubClient* const mqttClient);
+		const static int length = 4;
+		const char * topics[length] = {RAD_KIDS_01, RAD_KIDS_02, DESIRED_KIDS_01, CHILLER};
 
 	public:
 		BedRoomKids(PubSubClient* mqttClient, bool DEBUG=false);
 		virtual ~BedRoomKids();
-		void subscribeMqttTopics(PubSubClient* mqttClient);
 		void updateOutputControllers();
 		void mqttReceive(const char* strTopic, const char* strPayload);
-		void mqttParse( char* strTopic,  char* strPayload);
-		const char** getMqttTopics();
-		bool containsTopic(const char* topic);
-
-		static const int getLen();
 };
 
 #endif /* MODEL_BEDROOMKIDS_H_ */

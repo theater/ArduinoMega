@@ -171,6 +171,34 @@ void Room::updateDesiredHumidity(short desiredHumidity) {
 	updateOutputControllers();
 }
 
+bool Room::containsTopic(const char * topic) {
+	for(int i=0;i<len;i++) {
+		if(!strcmp(mqttTopics[i], topic)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void Room::subscribeMqttTopics(PubSubClient* mqttClient) {
+	mqttSubscribe(getMqttTopics(), getLen(), mqttClient);
+}
+
+void Room::mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient) {
+	for (int i = 0; i < len; i++) {
+		mqttClient->subscribe(topics[i]);
+		mqttClient->publish("DEBUG",topics[i]);
+	}
+}
+
+void Room::handleMqttCommandOC(OutputControl* outputControl, const char* payload) {
+	if (!strcmp(payload, "ON")) {
+		outputControl->setPin(ON);
+	} else {
+		outputControl->setPin(OFF);
+	}
+}
+
 
 // GETTERS / SETTERS
 short Room::getDesiredHumidity() const {
@@ -299,4 +327,12 @@ const char** Room::getMqttTopics() const {
 
 void Room::setMqttTopics(const char** mqttTopics) {
 	this->mqttTopics = mqttTopics;
+}
+
+int Room::getLen() const {
+	return len;
+}
+
+void Room::setLen(int len) {
+	this->len = len;
 }

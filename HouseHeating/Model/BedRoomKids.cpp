@@ -14,7 +14,6 @@
 BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(mqttClient){
 	setDebug(DEBUG);
 	if(Debug()) {
-//		Serial.println("Calling BedRoomKids constructor");
 		mqttClient->publish("DEBUG","BedRoomKids::BedRoomKids");
 	}
 
@@ -24,11 +23,15 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(mqttClient
 	setHasHeatingControl(true);
 	chiller = new OutputControl(CHILLER_PIN, OFF, CHILLER_CB, mqttClient);
 	setHasCoolingControl(true);
+
 	// initialize and create sensors
 	Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_KIDS_01);
 	setTempSensor((TemperatureSensor*)tempSensor);
 
 	// Set MQTT topics to listen to...
+	setMqttTopics(topics);
+	setLen(length);
+
 	subscribeMqttTopics(mqttClient);
 }
 
@@ -71,37 +74,6 @@ void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}
-//	updateOutputControllers();
+	updateOutputControllers();
 }
 
-bool BedRoomKids::containsTopic(const char * topic) {
-	for(int i=0;i<len;i++) {
-		if(!strcmp(mqttTopics[i], topic)) {
-			return true;
-		}
-	}
-	return false;
-}
-
-const char** BedRoomKids::getMqttTopics() {
-	return mqttTopics;
-}
-
-void BedRoomKids::subscribeMqttTopics(PubSubClient* mqttClient) {
-	mqttSubscribe(mqttTopics, len, mqttClient);
-}
-
-void BedRoomKids::mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient) {
-	for (int i = 0; i < len; i++) {
-		mqttClient->subscribe(topics[i]);
-		mqttClient->publish("DEBUG",topics[i]);
-	}
-}
-
-void BedRoomKids::handleMqttCommandOC(OutputControl* outputControl, const char* payload) {
-	if (!strcmp(payload, "ON")) {
-		outputControl->setPin(ON);
-	} else {
-		outputControl->setPin(OFF);
-	}
-}

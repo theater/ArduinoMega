@@ -13,6 +13,7 @@
 #include "HumiditySensor.h"
 #include "TemperatureSensor.h"
 #include "MotionSensor.h"
+#include "OutputControl.h"
 class String;
 
 class PubSubClient;
@@ -48,11 +49,16 @@ class Room {
 		Room(PubSubClient *  mqttClient, bool DEBUG = false);
 		virtual ~Room();
 		virtual void updateOutputControllers() = 0;
+		virtual void mqttReceive(const char* topic, const char* payload) = 0;
 		void updateTempSensor(float tempSensorValue);
 		void updateHumSensor(short humSensorValue);
 		void updateSensors(short tempSensorValue,short humSensorValue);
 		void updateDesiredValues(short desiredTemperature,short desiredHumidity);
 		Sensor* createSensor(ControlType type, PubSubClient* mqttClient, char* topic);
+		bool containsTopic(const char * topic);
+		void subscribeMqttTopics(PubSubClient* mqttClient);
+		void mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient);
+		void handleMqttCommandOC(OutputControl* outputControl, const char* payload);
 
 		short getDesiredHumidity() const;
 		void setDesiredHumidity(short desiredHumidity);
@@ -88,8 +94,10 @@ class Room {
 		void setHasVentControl(bool hasVentControl);
 		const char** getMqttTopics() const;
 		void setMqttTopics(const char** mqttTopics);
+		int getLen() const;
+		void setLen(int len);
 
-			private:
+		private:
 		bool decisionMaker();
 		bool ventDecisionMaker();
 		bool heatingDecisionMaker();
