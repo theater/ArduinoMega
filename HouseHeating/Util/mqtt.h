@@ -16,7 +16,7 @@
 
 
 bool mqttConnect(PubSubClient* const mqttClient, HeatingAdapter* const inputAdapter);
-void mqttSubscribe(PubSubClient* mqttClient);
+void mqttSubscribe(PubSubClient* mqttClient, HeatingAdapter* const inputAdapter);
 void mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value);
 void mqttCallback(char* topic, byte* payload, unsigned int length);
 void mqttSendUpdatedData(char* topic, char* payload);

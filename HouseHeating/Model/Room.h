@@ -24,18 +24,23 @@ class Room {
 
 		TemperatureSensor* tempSensor;
 		float desiredTemperature;
-		bool decisionHeating;
+		bool decisionHeat;
+		bool decisionCool;
 
 		HumiditySensor* humSensor;
 		short desiredHumidity;
-		bool decisionFan;
+		bool decisionVent;
 
 		MotionSensor* motionSensor;
 
-		bool hasTemperatureControl;
-		bool hasHumidityControl;
+		bool hasHeatingControl;
+		bool hasVentControl;
 		bool hasMotionControl;
 		bool hasLightControl;
+		bool hasCoolingControl;
+
+		int len;
+		const char ** mqttTopics;
 
 		bool DEBUG;
 
@@ -53,18 +58,10 @@ class Room {
 		void setDesiredHumidity(short desiredHumidity);
 		float getDesiredTemperature() const;
 		void setDesiredTemperature(float desiredTemperature);
-		bool getDecisionFan() const;
-		void setDecisionFan(bool decisionFan);
-		bool getDecisionHeating() const;
-		void setDecisionHeating(bool decisionHeating);
-		bool getHasHumidityControl() const;
-		void setHasHumidityControl(bool hasHumidityControl);
 		bool getHasLightControl() const;
 		void setHasLightControl(bool hasLightControl);
 		bool getHasMotionControl() const;
 		void setHasMotionControl(bool hasMotionControl);
-		bool getHasTemperatureControl() const;
-		void setHasTemperatureControl(bool hasTemperatureControl);
 		PubSubClient* getMqttClient() const;
 		void setMqttClient(PubSubClient* mqttClient);
 		void updateDesiredTemperature(float desiredTemperature);
@@ -77,11 +74,26 @@ class Room {
 		TemperatureSensor* getTempSensor();
 		void setTempSensor(TemperatureSensor* tempSensor);
 		bool Debug();
+		bool getDecisionCool() const;
+		void setDecisionCool(bool decisionCool);
+		bool getDecisionHeat() const;
+		void setDecisionHeat(bool decisionHeat);
+		bool getDecisionVent() const;
+		void setDecisionVent(bool decisionVent);
+		bool getHasCoolingControl() const;
+		void setHasCoolingControl(bool hasCoolingControl);
+		bool getHasHeatingControl() const;
+		void setHasHeatingControl(bool hasHeatingControl);
+		bool getHasVentControl() const;
+		void setHasVentControl(bool hasVentControl);
+		const char** getMqttTopics() const;
+		void setMqttTopics(const char** mqttTopics);
 
-	private:
+			private:
 		bool decisionMaker();
-		bool humDecisionMaker();
-		bool tempDecisionMaker();
+		bool ventDecisionMaker();
+		bool heatingDecisionMaker();
+		bool coolingDecisionMaker();
 };
 
 #endif /* MODEL_ROOM_H_ */

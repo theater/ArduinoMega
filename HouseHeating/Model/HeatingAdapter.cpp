@@ -38,6 +38,10 @@ void HeatingAdapter::mqttCallback(char* topic, byte* payload, unsigned int lengt
 	mqttReceive(topic, cPayload);
 }
 
+void HeatingAdapter::mqttSubscribe(PubSubClient* mqttClient) {
+	bedRoomKids->subscribeMqttTopics(mqttClient);
+}
+
 void HeatingAdapter::mqttReceive(const char* topic, const char* payload) {
 	if (bedRoomKids->containsTopic(topic)) {
 		bedRoomKids->mqttReceive(topic, payload);

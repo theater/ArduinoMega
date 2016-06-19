@@ -24,7 +24,7 @@ const bool DEBUG = true;
 // DEFAULT VALUES
 #define DEFAULT_DESIRED_TEMP 	25
 #define DEFAULT_DESIRED_HUMIDITY 65
-#define REOCCURRENCE 			30000  		// Decision maker triggered on every xxxxx ms
+#define REOCCURRENCE 			150000  		// Decision maker triggered on every xxxxx ms
 
 // ROOMS
 #define KIDS_BEDROOM "Kids bedroom"
@@ -47,7 +47,7 @@ const bool DEBUG = true;
 #define OUR_BEDROOM_RAD 		36				// Our bedroom radiator - pin 36
 #define WARDROBE_RAD 			37				// Wardrobe room radiator - pin 37
 #define SMALL_BATH_RAD 			40				// Small bathroom next to our bedroom - pin 40
-
+#define CHILLER_PIN					41				// Just to test chilling logic
 
 // 	MQTT topics
 //	Radiators (outputs)
@@ -62,6 +62,8 @@ const bool DEBUG = true;
 #define RAD_BEDROOM					"home/floor2/bedroom/radiator/1"
 #define RAD_WARDROBE				"home/floor2/wardrobe/radiator/1"
 #define RAD_BEDROOM_BATH			"home/floor2/bedroombath/radiator/1"
+#define CHILLER 					"home/floor1/aquarium/chiller/1"
+#define CHILLER_CB 					"home/floor1/aquarium/chiller/1cb"
 // Temperature sensors
 #define SENSOR_KIDS_01				"home/floor2/kids/temperature/1"
 #define SENSOR_CORRIDOR_01			"home/floor2/corridor/temperature/1"

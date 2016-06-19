@@ -23,6 +23,7 @@ class HeatingAdapter {
 		//MQTT
 		void mqttCallback(char* topic, byte* payload, unsigned int length);
 		void mqttReceive(const char* topic, const char* strPayload);
+		void mqttSubscribe(PubSubClient* mqttClient);
 
 		// Connectors to rooms
 		void sensorUpdate(const char* sensor, short value);

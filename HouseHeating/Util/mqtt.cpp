@@ -24,7 +24,7 @@ bool mqttConnect(PubSubClient* const mqttClient, HeatingAdapter* const inputAdap
 		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD)) {
 			String str = MQTT_CLIENT_NAME;
 			mqttClient->publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
-//			mqttSubscribe(mqttClient);
+			mqttSubscribe(mqttClient, inputAdapter);
 			return true;
 		} else {
 			return false;
@@ -33,16 +33,8 @@ bool mqttConnect(PubSubClient* const mqttClient, HeatingAdapter* const inputAdap
 		return true;
 }
 
-void mqttSubscribe(PubSubClient* mqttClient) {
-//	mqttClient->subscribe(RAD_KIDS_01);
-//	mqttClient->subscribe(RAD_KIDS_02);
-//	mqttClient->subscribe(RAD_CORRIDOR_01);
-//	mqttClient->subscribe(RAD_CORRIDOR_02);
-//	mqttClient->subscribe(RAD_BIGBATH_01);
-//	mqttClient->subscribe(RAD_BIGBATH_02);
-//	mqttClient->subscribe(RAD_BEDROOM);
-//	mqttClient->subscribe(RAD_WARDROBE);
-//	mqttClient->subscribe(RAD_BEDROOM_BATH);
+void mqttSubscribe(PubSubClient* const mqttClient, HeatingAdapter* const inputAdapter) {
+	inputAdapter->mqttSubscribe(mqttClient);
 }
 
 void mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value) {
