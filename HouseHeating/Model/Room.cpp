@@ -107,6 +107,7 @@ void Room::updateTempSensor(float tempSensorValue) {
 	} else {
 		mqttClient->publish("DEBUG", "TempSensor = NULL");
 	}
+	updateOutputControllers();
 }
 
 void Room::updateHumSensor(short humSensorValue) {
@@ -119,6 +120,7 @@ void Room::updateHumSensor(short humSensorValue) {
 	} else {
 		mqttClient->publish("DEBUG", "HumSensor = NULL");
 	}
+	updateOutputControllers();
 }
 
 void Room::updateDesiredValues(short desiredTemperature,short desiredHumidity) {
@@ -133,6 +135,7 @@ void Room::updateDesiredTemperature(float desiredTemperature) {
 		mqttClient->publish("DEBUG","void Room::updateDesiredTemperature");
 	}
 	tempDecisionMaker();
+	updateOutputControllers();
 }
 
 void Room::updateDesiredHumidity(short desiredHumidity) {
@@ -142,6 +145,7 @@ void Room::updateDesiredHumidity(short desiredHumidity) {
 		mqttClient->publish("DEBUG","void Room::updateDesiredHumidity");
 	}
 	humDecisionMaker();
+	updateOutputControllers();
 }
 
 

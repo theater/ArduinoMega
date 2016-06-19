@@ -57,7 +57,6 @@ void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	String strPayload = String(payload);
 	if (strTopic.equals(DESIRED_KIDS_01)) {
 		updateDesiredTemperature(atof(payload));
-		updateOutputControllers();
 		return;
 	} else if (strTopic.equals(RAD_KIDS_01)) {
 		if (!strcmp(payload, "ON")) {
@@ -74,6 +73,7 @@ void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}
+//	updateOutputControllers();
 }
 
 bool BedRoomKids::containsTopic(const char * topic) {
