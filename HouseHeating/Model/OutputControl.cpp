@@ -7,10 +7,15 @@
 
 #include "OutputControl.h"
 
-OutputControl::OutputControl(short pinId, bool pinStatus) {
+OutputControl::OutputControl(short pinId, bool pinStatus, char * ocTopicCB, PubSubClient* mqttClient,
+		bool DEBUG) {
+	this->mqttClient = mqttClient;
 	this->pinId = pinId;
 	this->pinStatus = pinStatus;
-	pinMode(pinId, OUTPUT);
+	this->ocTopicCB = ocTopicCB;
+	this->DEBUG = DEBUG;
+	pinMode(pinId, OUTPUT); // sets pin as output
+	setPin(OFF);
 }
 
 //TODO: check if 1 is on and 0 is off, otherwise return !pinstatus
@@ -42,9 +47,8 @@ void OutputControl::setPin(bool pinStatus) {
 	this->pinStatus = pinStatus;
 	if (digitalRead(pinId) != pinStatus) {
 		digitalWrite(pinId, pinStatus);
-		//TODO take out serial prints
-		Serial.print("Setting pin ");Serial.print(pinId);Serial.print(" to ");Serial.println(pinStatus);
 	}
+	mqttClient->publish(ocTopicCB, getPinStatusToStr());
 }
 
 OutputControl::~OutputControl() {

@@ -7,13 +7,8 @@
 
 #include "MotionSensor.h"
 
-MotionSensor::MotionSensor() : Sensor(MOTION){
+MotionSensor::MotionSensor(ControlType type, PubSubClient* mqttClient, char* topic) : Sensor(MOTION, mqttClient, topic) {
 
-}
-
-MotionSensor::MotionSensor(bool value) {
-	Sensor(MOTION);
-	this->value = value;
 }
 
 MotionSensor::~MotionSensor() {

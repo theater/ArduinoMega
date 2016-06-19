@@ -7,11 +7,11 @@
 
 #include "Room.h"
 
-#include <HardwareSerial.h>
+#include <PubSubClient.h>
+#include <stdio.h>
 
 #include "../Config/Config.h"
-#include "Sensor.h"
-#include "PubSubClient.h"
+#include "Util.h"
 
 Room::Room(PubSubClient* mqttClient, bool DEBUG) {
 	this->mqttClient = mqttClient;
@@ -31,38 +31,59 @@ Room::Room(PubSubClient* mqttClient, bool DEBUG) {
 Room::~Room() {
 }
 
-// 	Decision maker for humidity control - if there is humidity control do logic, else decision is always false
-bool Room::humDecisionMaker() {
-	float sensorValue = this->humSensor.getValue();
-	if (hasHumidityControl) {
-		if (desiredHumidity >= sensorValue) {
-			this->decisionFan = false;
-		} else if (desiredHumidity <= sensorValue - 1) {
-			this->decisionFan = true;
+Sensor* Room::createSensor(ControlType type, PubSubClient* mqttClient, char* topic) {
+	switch (type) {
+		case TEMPERATURE: {
+			return new TemperatureSensor(type, mqttClient, topic);
+		}
+		case HUMIDITY: {
+			return new HumiditySensor(type, mqttClient, topic);
+		}
+		case MOTION: {
+			return new MotionSensor(type, mqttClient, topic);
 		}
 	}
-	if(DEBUG) {
+	return NULL;
+}
+
+// 	Decision maker for humidity control - if there is humidity control do logic, else decision is always false
+bool Room::humDecisionMaker() {
+	if (humSensor != NULL) {
+		float sensorValue = this->humSensor->getValue();
+		if (hasHumidityControl) {
+			if (desiredHumidity >= sensorValue) {
+				this->decisionFan = false;
+			} else if (desiredHumidity <= sensorValue - 1) {
+				this->decisionFan = true;
+			}
+		}
+		if (DEBUG) {
 //		Serial.println("Decision fan:"+decisionFan);
-		mqttClient->publish("DEBUG","Room::tempDecisionMaker()");
+			mqttClient->publish("DEBUG", "Room::humDecisionMaker()");
+		}
+		return this->decisionFan;
 	}
-	return this->decisionFan;
+	return false;
 }
 
 // 	Decision maker for temperature control - if there is humidity control do logic, else decision is always false
 bool Room::tempDecisionMaker() {
-	float sensorValue = tempSensor.getValue();
-	if (hasTemperatureControl) {
-		if (desiredTemperature >= sensorValue) {
-			this->decisionHeating = true;
-		} else if (desiredTemperature <= sensorValue - 1) {
-			this->decisionHeating = false;
+	if (tempSensor != NULL) {
+		float sensorValue = tempSensor->getValue();
+		if (hasTemperatureControl) {
+			if (desiredTemperature >= sensorValue+1) {
+				this->decisionHeating = true;
+			} else if (desiredTemperature <= sensorValue - 1) {
+				this->decisionHeating = false;
+			}
 		}
-	}
-	if(DEBUG) {
+		if (DEBUG) {
 //		Serial.println("Decision heating:");
-		mqttClient->publish("DEBUG","Room::tempDecisionMaker()");
+			mqttClient->publish("DEBUG", "Room::tempDecisionMaker()");
+		}
+		return this->decisionHeating;
 	}
-	return this->decisionHeating;
+	return false;
 }
 
 void  Room::updateSensors(short tempSensorValue,short humSensorValue){
@@ -70,22 +91,34 @@ void  Room::updateSensors(short tempSensorValue,short humSensorValue){
 	updateHumSensor(humSensorValue);
 }
 
-void Room::updateTempSensor(short tempSensorValue) {
-	tempSensor.setValue(tempSensorValue);
-	if(DEBUG) {
-//		Serial.println("Temperature sensor:"+(int)tempSensor.getValue());
-		mqttClient->publish("DEBUG","void Room::updateTempSensor");
+void Room::updateTempSensor(float tempSensorValue) {
+	if (tempSensor != NULL) {
+		tempSensor->setValue(tempSensorValue);
+		tempDecisionMaker();
+
+		char sensorCharValue[10];
+		dtostrf(tempSensor->getValue(), 5, 2, sensorCharValue);
+		char* topic = tempSensor->getTopic();
+		mqttClient->publish(topic, sensorCharValue);
+
+		if (DEBUG) {
+			mqttClient->publish("DEBUG", "void Room::updateTempSensor");
+		}
+	} else {
+		mqttClient->publish("DEBUG", "TempSensor = NULL");
 	}
-	tempDecisionMaker();
 }
 
 void Room::updateHumSensor(short humSensorValue) {
-	humSensor.setValue(humSensorValue);
-	if(DEBUG) {
-//		Serial.println("Humidity sensor:"+(int)humSensor.getValue());
-		mqttClient->publish("DEBUG","void Room::updateHumSensor");
+	if (humSensor != NULL) {
+		humSensor->setValue(humSensorValue);
+		if (DEBUG) {
+			mqttClient->publish("DEBUG", "void Room::updateHumSensor");
+		}
+		humDecisionMaker();
+	} else {
+		mqttClient->publish("DEBUG", "HumSensor = NULL");
 	}
-	humDecisionMaker();
 }
 
 void Room::updateDesiredValues(short desiredTemperature,short desiredHumidity) {
@@ -111,6 +144,8 @@ void Room::updateDesiredHumidity(short desiredHumidity) {
 	humDecisionMaker();
 }
 
+
+// GETTERS / SETTERS
 short Room::getDesiredHumidity() const {
 	return desiredHumidity;
 }
@@ -190,3 +225,28 @@ bool Room::Debug() {
 void Room::setDebug(bool debug) {
 	DEBUG = debug;
 }
+
+HumiditySensor* Room::getHumSensor() {
+	return humSensor;
+}
+
+void Room::setHumSensor(HumiditySensor* humSensor) {
+	this->humSensor = humSensor;
+}
+
+MotionSensor* Room::getMotionSensor() {
+	return motionSensor;
+}
+
+void Room::setMotionSensor(MotionSensor* motionSensor) {
+	this->motionSensor = motionSensor;
+}
+
+TemperatureSensor* Room::getTempSensor() {
+	return tempSensor;
+}
+
+void Room::setTempSensor(TemperatureSensor* tempSensor) {
+	this->tempSensor = tempSensor;
+}
+

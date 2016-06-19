@@ -39,13 +39,13 @@ void HeatingAdapter::mqttCallback(char* topic, byte* payload, unsigned int lengt
 }
 
 void HeatingAdapter::mqttReceive(char* topic, char* payload) {
-	if(strcmp(topic, SENSOR_KIDS_01)) {
-		bedRoomKids->updateTempSensor(atoi(payload));
+	if(!strcmp(topic, RAD_KIDS_01)||!strcmp(topic, RAD_KIDS_02)) {
+		bedRoomKids->mqttReceive(topic, payload);
 	}
 }
 
 void HeatingAdapter::sensorUpdate(const char* sensor, short value) {
-	if (strcmp(sensor, SENSOR_KIDS_01)) {
+	if (!strcmp(sensor, SENSOR_KIDS_01)) {
 		bedRoomKids->updateTempSensor(value);
 		return;
 	}

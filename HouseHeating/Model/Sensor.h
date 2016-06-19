@@ -9,32 +9,27 @@
 #define SENSOR_H_
 
 #include "../Model/Util.h"
+#include "PubSubClient.h"
 
 class Sensor {
 	private:
+		PubSubClient* mqttClient;
+		char * topic;
 		float value;
 		ControlType type;
 	public:
-		Sensor();
-		Sensor(ControlType type);
-		Sensor(ControlType type,float value );
+		Sensor(ControlType type, PubSubClient* mqttClient, char* topic);
 		virtual ~Sensor();
 
-		ControlType getType() const {
-			return type;
-		}
-
-		void setType(ControlType type) {
-			this->type = type;
-		}
-
-		float getValue() const {
-			return value;
-		}
-
-		void setValue(float value) {
-			this->value = value;
-		}
+		//getters/setters
+		void setMqttClient(PubSubClient* const mqttClient);
+		PubSubClient* getMqttClient() const;
+		ControlType getType() const;
+		void setType(ControlType type);
+		float getValue() const;
+		void setValue(float value);
+		char* getTopic() const;
+		void setTopic(char* topic);
 };
 
 #endif /* SENSOR_H_ */

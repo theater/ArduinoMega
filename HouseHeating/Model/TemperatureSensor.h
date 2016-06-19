@@ -9,10 +9,10 @@
 #define MODEL_TEMPERATURESENSOR_H_
 
 #include "Sensor.h"
-
+#include "PubSubClient.h"
 class TemperatureSensor : public Sensor {
 	public:
-		TemperatureSensor();
+		TemperatureSensor(ControlType type, PubSubClient* mqttClient, char* topic);
 		virtual ~TemperatureSensor();
 };
 

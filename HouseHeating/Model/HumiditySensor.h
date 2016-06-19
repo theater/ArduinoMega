@@ -12,7 +12,7 @@
 
 class HumiditySensor: public Sensor {
 	public:
-		HumiditySensor();
+		HumiditySensor(ControlType type, PubSubClient* mqttClient, char* topic);
 		virtual ~HumiditySensor();
 };
 

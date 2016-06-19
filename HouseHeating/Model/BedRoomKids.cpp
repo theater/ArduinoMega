@@ -19,10 +19,12 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(mqttClient
 		mqttClient->publish("DEBUG","BedRoomKids::BedRoomKids");
 	}
 	setHasTemperatureControl(true);
-	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, 0);
-	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, 0);
-	// Set MQTT topics to listen to
+	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, 0, RAD_KIDS_01_CB, mqttClient);
+	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, 0, RAD_KIDS_02_CB, mqttClient);
+	Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_KIDS_01);
+	setTempSensor((TemperatureSensor*)tempSensor);
 
+	// Set MQTT topics to listen to
 	// subscribe to these topics
 	mqttSubscribe(mqttTopics, 2, mqttClient);
 }
@@ -49,7 +51,7 @@ void BedRoomKids::mqttSubscribe(const char* const* topics, int len, PubSubClient
 	}
 }
 
-void BedRoomKids::mqttParse(char* topic, char* payload) {
+void BedRoomKids::mqttReceive(char* topic, char* payload) {
 	String strTopic = String(topic);
 	String strPayload = String(payload);
 	if (strTopic == SENSOR_KIDS_01) {
@@ -60,4 +62,20 @@ void BedRoomKids::mqttParse(char* topic, char* payload) {
 		setDesiredHumidity(atoi(payload));
 		return;
 	}
+	if (strTopic.equals(RAD_KIDS_01)) {
+		getMqttClient()->publish("DEBUG","Entered into RAD_KIDS_01 case");
+		if (!strcmp(payload, "ON")) {
+			kidsRadiatorOne->setPin(ON);
+		} else {
+			kidsRadiatorOne->setPin(OFF);
+		}
+	}
+	if (strTopic.equals(RAD_KIDS_02)) {
+		if (!strcmp(payload, "ON")) {
+			kidsRadiatorOne->setPin(ON);
+		} else {
+			kidsRadiatorOne->setPin(OFF);
+		}
+	}
+	getMqttClient()->publish("DEBUG","No matching rules found");
 }

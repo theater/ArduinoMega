@@ -52,7 +52,9 @@ const bool DEBUG = true;
 // 	MQTT topics
 //	Radiators (outputs)
 #define RAD_KIDS_01					"home/floor2/kids/radiator/1"
+#define RAD_KIDS_01_CB				"home/floor2/kids/radiator/1cb"
 #define RAD_KIDS_02					"home/floor2/kids/radiator/2"
+#define RAD_KIDS_02_CB				"home/floor2/kids/radiator/2cb"
 #define RAD_CORRIDOR_01 			"home/floor2/corridor/radiator/1"
 #define RAD_CORRIDOR_02 			"home/floor2/corridor/radiator/2"
 #define RAD_BIGBATH_01				"home/floor2/bigbath/radiator/1"
@@ -70,6 +72,9 @@ const bool DEBUG = true;
 // Humidity sensors
 #define SENSOR_BIGBATH_02			"home/floor2/bigbath/humidity/1"
 #define SENSOR_BEDROOM_BATH_02		"home/floor2/bedroombath/humidity/1"
+// Setters / desired values
+#define DESIRED_KIDS_01				"home/floor2/kids/desired/temperature/1"
+
 
 // Aliases
 #define ON true						// boolean alias for ON

@@ -8,15 +8,21 @@
 #ifndef MODEL_OUTPUTCONTROL_H_
 #define MODEL_OUTPUTCONTROL_H_
 
-#include <Arduino.h>
 #include <stdbool.h>
+#include "PubSubClient.h"
+#include "../Config/Config.h"
 
 class OutputControl {
 	private:
-		short pinId;bool pinStatus;
+		short pinId;
+		bool pinStatus;
+		char * ocTopicCB;
+		PubSubClient* mqttClient;
+		bool DEBUG;
 	public:
 		OutputControl();
-		OutputControl(short pinId, bool pinStatus);bool outputIsOn();
+		OutputControl(short pinId, bool pinStatus, char * ocTopicCB, PubSubClient* mqttClient, bool DEBUG=false);
+		bool outputIsOn();
 		const char * getPinStatusToStr();
 		virtual ~OutputControl();
 		short getPinId() const;

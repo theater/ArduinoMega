@@ -12,7 +12,7 @@
 
 #include "HumiditySensor.h"
 #include "TemperatureSensor.h"
-
+#include "MotionSensor.h"
 class String;
 
 class PubSubClient;
@@ -21,13 +21,16 @@ class PubSubClient;
 class Room {
 	private:
 		PubSubClient* mqttClient;
+
+		TemperatureSensor* tempSensor;
 		short desiredTemperature;
-		TemperatureSensor tempSensor;
 		bool decisionHeating;
 
+		HumiditySensor* humSensor;
 		short desiredHumidity;
-		HumiditySensor humSensor;
 		bool decisionFan;
+
+		MotionSensor* motionSensor;
 
 		bool hasTemperatureControl;
 		bool hasHumidityControl;
@@ -37,13 +40,14 @@ class Room {
 		bool DEBUG;
 
 	public:
-		Room(PubSubClient * mqttClient, bool DEBUG = false);
+		Room(PubSubClient *  mqttClient, bool DEBUG = false);
 		virtual ~Room();
 		virtual void updateOutputControllers() = 0;
-		void updateTempSensor(short tempSensorValue);
-		void updateHumSensor(short tempSensorValue);
+		void updateTempSensor(float tempSensorValue);
+		void updateHumSensor(short humSensorValue);
 		void updateSensors(short tempSensorValue,short humSensorValue);
 		void updateDesiredValues(short desiredTemperature,short desiredHumidity);
+		Sensor* createSensor(ControlType type, PubSubClient* mqttClient, char* topic);
 
 		short getDesiredHumidity() const;
 		void setDesiredHumidity(short desiredHumidity);
@@ -65,8 +69,14 @@ class Room {
 		void setMqttClient(PubSubClient* mqttClient);
 		void updateDesiredTemperature(short desiredTemperature);
 		void updateDesiredHumidity(short desiredHumidity);
-		bool Debug();
 		void setDebug(bool debug);
+		HumiditySensor* getHumSensor();
+		void setHumSensor(HumiditySensor* humSensor);
+		MotionSensor* getMotionSensor();
+		void setMotionSensor(MotionSensor* motionSensor);
+		TemperatureSensor* getTempSensor();
+		void setTempSensor(TemperatureSensor* tempSensor);
+		bool Debug();
 
 	private:
 		bool decisionMaker();

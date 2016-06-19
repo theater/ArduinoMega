@@ -50,8 +50,8 @@ HouseHeating.cpp.o: ../HouseHeating.cpp ../HouseHeating.h \
  D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
  ../Model/../Config/Config.h ../Model/OutputControl.h ../Model/Room.h \
  ../Model/HumiditySensor.h ../Model/Sensor.h ../Model/../Model/Util.h \
- ../Model/TemperatureSensor.h ../Model/Util.h ../Util/mqtt.h \
- ../Util/../Model/HeatingAdapter.h
+ ../Model/TemperatureSensor.h ../Model/MotionSensor.h ../Model/Util.h \
+ ../Util/mqtt.h ../Util/../Model/HeatingAdapter.h
 
 ../HouseHeating.h:
 
@@ -170,6 +170,8 @@ D:\HomeAutomation\Arduino\hardware\arduino\avr\cores\arduino/WString.h:
 ../Model/../Model/Util.h:
 
 ../Model/TemperatureSensor.h:
+
+../Model/MotionSensor.h:
 
 ../Model/Util.h:
 

@@ -19,7 +19,7 @@ class BedRoomKids: public Room {
 	private:
 		OutputControl* kidsRadiatorOne;
 		OutputControl* kidsRadiatorTwo;
-		OutputControl* kidsRoomFan;
+//		OutputControl* kidsRoomFan;
 
 		//TODO: ugly - fix it somehow later
 		const char * mqttTopics[2] = {RAD_KIDS_01, RAD_KIDS_02};
@@ -29,7 +29,7 @@ class BedRoomKids: public Room {
 		virtual ~BedRoomKids();
 		void updateOutputControllers();
 		void mqttSubscribe(const char* const* topics,int len, PubSubClient* const mqttClient);
-		void mqttReceive(String* strTopic, String strPayload);
+		void mqttReceive(char* strTopic, char* strPayload);
 		void mqttParse( char* strTopic,  char* strPayload);
 };
 
