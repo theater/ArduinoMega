@@ -22,7 +22,7 @@ class HeatingAdapter {
 		virtual ~HeatingAdapter();
 		//MQTT
 		void mqttCallback(char* topic, byte* payload, unsigned int length);
-		void mqttReceive(char* topic, char* strPayload);
+		void mqttReceive(const char* topic, const char* strPayload);
 
 		// Connectors to rooms
 		void sensorUpdate(const char* sensor, short value);

@@ -51,31 +51,28 @@ void BedRoomKids::mqttSubscribe(const char* const* topics, int len, PubSubClient
 	}
 }
 
-void BedRoomKids::mqttReceive(char* topic, char* payload) {
+void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	String strTopic = String(topic);
 	String strPayload = String(payload);
 	if (strTopic == SENSOR_KIDS_01) {
 		setDesiredTemperature(atoi(payload));
 		return;
-	}
-	if (strTopic == SENSOR_BEDROOM_BATH_02) {
+	} else if (strTopic == SENSOR_BEDROOM_BATH_02) {
 		setDesiredHumidity(atoi(payload));
 		return;
-	}
-	if (strTopic.equals(RAD_KIDS_01)) {
-		getMqttClient()->publish("DEBUG","Entered into RAD_KIDS_01 case");
+	} else if (strTopic.equals(RAD_KIDS_01)) {
 		if (!strcmp(payload, "ON")) {
 			kidsRadiatorOne->setPin(ON);
 		} else {
 			kidsRadiatorOne->setPin(OFF);
 		}
-	}
-	if (strTopic.equals(RAD_KIDS_02)) {
+	} else if (strTopic.equals(RAD_KIDS_02)) {
 		if (!strcmp(payload, "ON")) {
-			kidsRadiatorOne->setPin(ON);
+			kidsRadiatorTwo->setPin(ON);
 		} else {
-			kidsRadiatorOne->setPin(OFF);
+			kidsRadiatorTwo->setPin(OFF);
 		}
+	} else {
+		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}
-	getMqttClient()->publish("DEBUG","No matching rules found");
 }

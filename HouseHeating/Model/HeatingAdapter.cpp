@@ -38,7 +38,7 @@ void HeatingAdapter::mqttCallback(char* topic, byte* payload, unsigned int lengt
 	mqttReceive(topic, cPayload);
 }
 
-void HeatingAdapter::mqttReceive(char* topic, char* payload) {
+void HeatingAdapter::mqttReceive(const char* topic, const char* payload) {
 	if(!strcmp(topic, RAD_KIDS_01)||!strcmp(topic, RAD_KIDS_02)) {
 		bedRoomKids->mqttReceive(topic, payload);
 	}

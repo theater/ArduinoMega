@@ -55,8 +55,8 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
 		cPayload[i] = (char) payload[i];
 	}
 	cPayload[length] = '\0';
-	String strPayload = String(cPayload);
-	String strTopic = String(topic);
+//	String strPayload = String(cPayload);
+//	String strTopic = String(topic);
 	mqttSendUpdatedData(topic, cPayload);
 }
 

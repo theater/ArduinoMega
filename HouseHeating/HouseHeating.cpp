@@ -68,6 +68,8 @@ void setup()
 // The loop function is called in an endless loop
 void loop()
 {
-	mqttClient->loop();
+	if (mqttConnect(mqttClient, heatingAdapter)) {
+		mqttClient->loop();
+	}
 	trigger.update();
 }

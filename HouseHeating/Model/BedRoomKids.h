@@ -29,7 +29,7 @@ class BedRoomKids: public Room {
 		virtual ~BedRoomKids();
 		void updateOutputControllers();
 		void mqttSubscribe(const char* const* topics,int len, PubSubClient* const mqttClient);
-		void mqttReceive(char* strTopic, char* strPayload);
+		void mqttReceive(const char* strTopic, const char* strPayload);
 		void mqttParse( char* strTopic,  char* strPayload);
 };
 
