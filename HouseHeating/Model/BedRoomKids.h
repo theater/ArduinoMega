@@ -23,10 +23,11 @@ class BedRoomKids: public Room {
 		OutputControl* kidsFan;
 
 		//TODO: ugly - fix it somehow later
-		const static int length = 6;
+		const static int length = 7;
 		const char * topics[length] = {	RAD_KIDS_01,
 										RAD_KIDS_02,
 										DESIRED_TEMP_KIDS_01,
+										DESIRED_HUM_KIDS_01,
 										CHILLER,
 										MODE_KIDS,
 										FAN_KIDS_01};
