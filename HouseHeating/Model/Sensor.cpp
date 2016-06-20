@@ -7,10 +7,11 @@
 
 #include "../Model/Sensor.h"
 
-Sensor::Sensor(ControlType type, PubSubClient* mqttClient, char* topic) {
+Sensor::Sensor(ControlType type, PubSubClient* mqttClient, char* topic, bool DEBUG) {
 	this->type = type;
 	this->mqttClient = mqttClient;
 	this->topic = topic;
+	this->DEBUG = DEBUG;
 }
 
 Sensor::~Sensor() {
@@ -47,4 +48,12 @@ char* Sensor::getTopic() const {
 
 void Sensor::setTopic(char* topic) {
 	this->topic = topic;
+}
+
+bool Sensor::Debug() const {
+	return DEBUG;
+}
+
+void Sensor::setDebug(bool debug) {
+	DEBUG = debug;
 }

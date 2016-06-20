@@ -107,6 +107,8 @@ class Room {
 		bool ventDecisionMaker();
 		bool heatingDecisionMaker();
 		bool coolingDecisionMaker();
+		void sensorToMqttData();
+		void sensorToMqttData(Sensor* sensor, PubSubClient* mqttClient);
 };
 
 #endif /* MODEL_ROOM_H_ */

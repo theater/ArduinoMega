@@ -19,11 +19,17 @@ class BedRoomKids: public Room {
 	private:
 		OutputControl* kidsRadiatorOne;
 		OutputControl* kidsRadiatorTwo;
-		OutputControl* chiller;
+		OutputControl* kidsChiller;
+		OutputControl* kidsFan;
 
 		//TODO: ugly - fix it somehow later
-		const static int length = 5;
-		const char * topics[length] = {RAD_KIDS_01, RAD_KIDS_02, DESIRED_TEMP_KIDS_01, CHILLER, MODE_KIDS};
+		const static int length = 6;
+		const char * topics[length] = {	RAD_KIDS_01,
+										RAD_KIDS_02,
+										DESIRED_TEMP_KIDS_01,
+										CHILLER,
+										MODE_KIDS,
+										FAN_KIDS_01};
 
 	public:
 		BedRoomKids(PubSubClient* mqttClient, bool DEBUG=false);

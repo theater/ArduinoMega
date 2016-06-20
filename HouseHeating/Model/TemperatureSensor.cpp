@@ -13,3 +13,12 @@ TemperatureSensor::TemperatureSensor(ControlType type, PubSubClient* mqttClient,
 TemperatureSensor::~TemperatureSensor() {
 }
 
+void TemperatureSensor::sensorToMqttData(PubSubClient* mqttClient) {
+		char sensorCharValue[10];
+		dtostrf(this->getValue(), 5, 2, sensorCharValue);
+		char* topic = this->getTopic();
+		mqttClient->publish(topic, sensorCharValue);
+		if (Debug()) {
+			mqttClient->publish("DEBUG", "void TemperatureSensor::sensorToMqttData");
+		}
+}

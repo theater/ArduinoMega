@@ -49,6 +49,9 @@ void triggerFunc(){
 	//simulation value for temperature sensor for testing purposes
 	short tempSensorReal = random(15,35);
 	heatingAdapter->sensorUpdate(SENSOR_KIDS_01,tempSensorReal);
+
+	short humSensorReal = random(40,100);
+	heatingAdapter->sensorUpdate(SENSOR_KIDS_02,humSensorReal);
 }
 
 //The setup function is called once at startup of the sketch

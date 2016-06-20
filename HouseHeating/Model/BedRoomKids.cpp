@@ -21,12 +21,18 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(mqttClient
 	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, OFF, RAD_KIDS_01_CB, mqttClient);
 	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, OFF, RAD_KIDS_02_CB, mqttClient);
 	setHasHeatingControl(true);
-	chiller = new OutputControl(CHILLER_PIN, OFF, CHILLER_CB, mqttClient);
+
+	kidsChiller = new OutputControl(CHILLER_PIN, OFF, CHILLER_CB, mqttClient);
 	setHasCoolingControl(true);
+
+	kidsFan = new OutputControl(FAN_PIN, OFF, FAN_KIDS_01_CB, mqttClient);
+	setHasVentControl(true);
 
 	// initialize and create sensors
 	Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_KIDS_01);
 	setTempSensor((TemperatureSensor*)tempSensor);
+	Sensor* humSensor = createSensor(HUMIDITY, mqttClient, SENSOR_KIDS_02);
+	setHumSensor((HumiditySensor*)humSensor);
 
 	// Set MQTT topics to listen to...
 	setMqttTopics(topics);
@@ -38,7 +44,7 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(mqttClient
 BedRoomKids::~BedRoomKids() {
 	delete kidsRadiatorOne;
 	delete kidsRadiatorTwo;
-	delete chiller;
+	delete kidsChiller;
 }
 
 void BedRoomKids::updateOutputControllers() {
@@ -51,10 +57,14 @@ void BedRoomKids::updateOutputControllers() {
 		kidsRadiatorTwo->setPin(OFF);
 	}
 	if(getHasCoolingControl() && getDecisionCool()) { //
-		chiller->setPin(ON);
+		kidsChiller->setPin(ON);
 	} else {
-		chiller->setPin(OFF);
-		return;
+		kidsChiller->setPin(OFF);
+	}
+	if(getHasVentControl() && getDecisionVent()) {
+		kidsFan->setPin(ON);
+	} else {
+		kidsFan->setPin(OFF);
 	}
 }
 
@@ -71,7 +81,11 @@ void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(RAD_KIDS_02)) {
 		handleMqttCommandOC(kidsRadiatorTwo, payload);
 	} else if (strTopic.equals(CHILLER)) {
-		handleMqttCommandOC(chiller, payload);
+		handleMqttCommandOC(kidsChiller, payload);
+	} else if(strTopic.equals(FAN_KIDS_01)){
+		handleMqttCommandOC(kidsFan, payload);
+	} else if(strTopic.equals(DESIRED_HUM_KIDS_01)) {
+		updateDesiredHumidity(atoi(payload));
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}

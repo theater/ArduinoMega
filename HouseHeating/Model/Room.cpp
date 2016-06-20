@@ -66,9 +66,9 @@ bool Room::ventDecisionMaker() {
 	if (humSensor != NULL) {
 		float sensorValue = this->humSensor->getValue();
 		if (hasVentControl) {
-			if (desiredHumidity >= sensorValue) {
+			if (desiredHumidity <= sensorValue + 3) {
 				setDecisionVent(true);
-			} else if (desiredHumidity <= sensorValue - 1) {
+			} else if (desiredHumidity >= sensorValue - 3) {
 				setDecisionVent(false);
 			}
 		}
@@ -139,14 +139,8 @@ void Room::updateTempSensor(float tempSensorValue) {
 		heatingDecisionMaker();
 		coolingDecisionMaker();
 
-		char sensorCharValue[10];
-		dtostrf(tempSensor->getValue(), 5, 2, sensorCharValue);
-		char* topic = tempSensor->getTopic();
-		mqttClient->publish(topic, sensorCharValue);
+		tempSensor->sensorToMqttData(mqttClient);
 
-		if (DEBUG) {
-			mqttClient->publish("DEBUG", "void Room::updateTempSensor");
-		}
 	} else {
 		mqttClient->publish("DEBUG", "TempSensor = NULL");
 	}
@@ -158,10 +152,13 @@ void Room::updateTempSensor(float tempSensorValue) {
 void Room::updateHumSensor(short humSensorValue) {
 	if (humSensor != NULL) {
 		humSensor->setValue(humSensorValue);
+		ventDecisionMaker();
+
+		humSensor->sensorToMqttData(mqttClient);
+
 		if (DEBUG) {
 			mqttClient->publish("DEBUG", "void Room::updateHumSensor");
 		}
-		ventDecisionMaker();
 	} else {
 		mqttClient->publish("DEBUG", "HumSensor = NULL");
 	}
@@ -228,9 +225,10 @@ void Room::subscribeMqttTopics(PubSubClient* mqttClient) {
 void Room::mqttSubscribe(const char* const * topics, int len, PubSubClient* const mqttClient) {
 	for (int i = 0; i < len; i++) {
 		mqttClient->subscribe(topics[i]);
-		mqttClient->publish("DEBUG", topics[i]);
+//		mqttClient->publish("DEBUG", topics[i]);
 	}
 }
+
 
 void Room::handleMqttCommandOC(OutputControl* outputControl, const char* payload) {
 	if (!strcmp(payload, "ON")) {
@@ -384,3 +382,4 @@ Mode Room::getMode() const {
 void Room::setMode(Mode mode) {
 	this->mode = mode;
 }
+

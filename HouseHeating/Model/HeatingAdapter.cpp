@@ -52,6 +52,9 @@ void HeatingAdapter::sensorUpdate(const char* sensor, short value) {
 	if (!strcmp(sensor, SENSOR_KIDS_01)) {
 		bedRoomKids->updateTempSensor(value);
 		return;
+	} else if (!strcmp(sensor, SENSOR_KIDS_02)) {
+		bedRoomKids->updateHumSensor(value);
+		return;
 	}
 }
 
@@ -69,8 +72,6 @@ void HeatingAdapter::updateRoomDesiredValue(const char* room, ControlType type, 
 }
 
 void HeatingAdapter::updateDesiredTemperature(const char* room, short value) {
-	if (DEBUG) mqttClient->publish("DEBUG", "HeatingAdapter::updateDesiredTemperature");
-
 	if (!strcmp(room, KIDS_BEDROOM)) {
 		bedRoomKids->updateDesiredTemperature(value);
 		if (DEBUG) mqttClient->publish("DEBUG", "Updated desired temperatures");

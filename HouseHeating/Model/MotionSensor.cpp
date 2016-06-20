@@ -14,3 +14,15 @@ MotionSensor::MotionSensor(ControlType type, PubSubClient* mqttClient, char* top
 MotionSensor::~MotionSensor() {
 }
 
+void MotionSensor::sensorToMqttData(PubSubClient* mqttClient) {
+	bool sensorValue = this->getValue();
+	char* topic = this->getTopic();
+	if (sensorValue) {
+		mqttClient->publish(topic, "CLOSED");
+	} else {
+		mqttClient->publish(topic, "OPEN");
+	}
+	if (Debug()) {
+		mqttClient->publish("DEBUG", "void MotionSensor::sensorToMqttData");
+	}
+}

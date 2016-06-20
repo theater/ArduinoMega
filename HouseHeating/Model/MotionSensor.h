@@ -17,6 +17,7 @@ class MotionSensor: public Sensor {
 	public:
 		MotionSensor(ControlType type, PubSubClient* mqttClient, char* topic);
 		virtual ~MotionSensor();
+		void sensorToMqttData(PubSubClient* mqttClient);
 
 		bool isValue() const {
 			return value;

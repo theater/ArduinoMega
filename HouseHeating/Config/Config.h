@@ -48,6 +48,7 @@ const bool DEBUG = true;
 #define WARDROBE_RAD 				37				// Wardrobe room radiator - pin 37
 #define SMALL_BATH_RAD 				40				// Small bathroom next to our bedroom - pin 40
 #define CHILLER_PIN					41				// Just to test chilling logic
+#define FAN_PIN						42				// Just to test fan logic
 
 // 	MQTT topics
 // Modes
@@ -68,9 +69,12 @@ const bool DEBUG = true;
 #define RAD_BEDROOM_BATH			"home/floor2/bedroombath/radiator/1"
 #define CHILLER 					"home/floor1/aquarium/chiller/1"
 #define CHILLER_CB 					"home/floor1/aquarium/chiller/1cb"
+#define FAN_KIDS_01 				"home/floor1/kids/fan/1"
+#define FAN_KIDS_01_CB 				"home/floor1/kids/fan/1cb"
 
 // Temperature sensors
 #define SENSOR_KIDS_01				"home/floor2/kids/temperature/1"
+#define SENSOR_KIDS_02				"home/floor2/kids/humidity/1"
 #define SENSOR_CORRIDOR_01			"home/floor2/corridor/temperature/1"
 #define SENSOR_BIGBATH_01			"home/floor2/bigbath/temperature/1"
 #define SENSOR_BEDROOM_01			"home/floor2/bedroom/temperature/1"
@@ -82,7 +86,8 @@ const bool DEBUG = true;
 #define SENSOR_BEDROOM_BATH_02		"home/floor2/bedroombath/humidity/1"
 
 // Setters / desired values
-#define DESIRED_TEMP_KIDS_01				"home/floor2/kids/desired/temperature/1"
+#define DESIRED_TEMP_KIDS_01		"home/floor2/kids/desired/temperature/1"
+#define DESIRED_HUM_KIDS_01			"home/floor2/kids/desired/humidity/1"
 
 
 // Aliases
