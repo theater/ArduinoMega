@@ -66,9 +66,9 @@ bool Room::ventDecisionMaker() {
 	if (humSensor != NULL) {
 		float sensorValue = this->humSensor->getValue();
 		if (hasVentControl) {
-			if (desiredHumidity <= sensorValue + 3) {
+			if (desiredHumidity <= sensorValue - 3) {
 				setDecisionVent(true);
-			} else if (desiredHumidity >= sensorValue - 3) {
+			} else if (desiredHumidity >= sensorValue + 3) {
 				setDecisionVent(false);
 			}
 		}
