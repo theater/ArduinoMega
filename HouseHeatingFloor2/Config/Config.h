@@ -10,7 +10,7 @@
 #include "Restricted.h"
 
 // DEBUG
-const bool DEBUG = true;
+const bool DEBUG = false;
 
 // NETWORK SETTINGS
 // MQTT stuff

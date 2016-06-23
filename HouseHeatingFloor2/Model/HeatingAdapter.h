@@ -11,8 +11,9 @@
 #include <PubSubClient.h>
 #include <UIPClient.h>
 #include "BedRoomKids.h"
+#include "Adapter.h"
 
-class HeatingAdapter {
+class HeatingAdapter : public Adapter {
 	private:
 		PubSubClient* mqttClient;
 		BedRoomKids* bedRoomKids;

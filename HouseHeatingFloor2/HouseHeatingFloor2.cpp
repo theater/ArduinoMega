@@ -17,7 +17,7 @@
 
 #include "Config/Config.h"
 #include "Model/HeatingAdapter.h"
-#include "Util/mqtt.h"
+#include "MqttUtil.h"
 
 // Ethernet client
 uint8_t macAddress[6] = MAC_ADDRESS;
@@ -26,7 +26,7 @@ EthernetClient ethClient;
 
 //MQTT
 byte mqttServerAddress[] = MQTT_SERVER;
-PubSubClient *mqttClient = new PubSubClient(mqttServerAddress, 1883, mqttCallback, ethClient);
+PubSubClient *mqttClient = new PubSubClient(mqttServerAddress, 1883, MqttUtil::mqttCallback, ethClient);
 
 //	HeatingAdapter -> all logic and model is inside this
 HeatingAdapter* heatingAdapter;
@@ -58,8 +58,8 @@ void setup()
 {
 	Serial.begin(115200);
 	Ethernet.begin(macAddress, ipAddress);
-	mqttConnect(mqttClient, heatingAdapter);
-	heatingAdapter = new HeatingAdapter(mqttClient, false);
+	MqttUtil::mqttConnect(mqttClient, heatingAdapter);
+	heatingAdapter = new HeatingAdapter(mqttClient, DEBUG);
 
 	trigger.every(REOCCURRENCE,&triggerFunc);
 	triggerFunc();
@@ -68,7 +68,7 @@ void setup()
 // The loop function is called in an endless loop
 void loop()
 {
-	if (mqttConnect(mqttClient, heatingAdapter)) {
+	if (MqttUtil::mqttConnect(mqttClient, heatingAdapter)) {
 		mqttClient->loop();
 	}
 	trigger.update();
