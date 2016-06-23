@@ -239,12 +239,29 @@ void Room::mqttSubscribe(const char* const * topics, int len, PubSubClient* cons
 	}
 }
 
-
 void Room::handleMqttCommandOC(OutputControl* outputControl, const char* payload) {
 	if (!strcmp(payload, "ON")) {
 		outputControl->setPin(ON);
 	} else {
 		outputControl->setPin(OFF);
+	}
+}
+
+void Room::updateOutputControllers() {
+	if (getHasHeatingControl() && getDecisionHeat()) {
+		heatOutputs(ON);
+	} else {
+		heatOutputs(OFF);
+	}
+	if(getHasCoolingControl() && getDecisionCool()) { //
+		chillOutputs(ON);
+	} else {
+		chillOutputs(OFF);
+	}
+	if(getHasVentControl() && getDecisionVent()) {
+		humidityOutputs(ON);
+	} else {
+		humidityOutputs(OFF);
 	}
 }
 

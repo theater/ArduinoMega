@@ -52,8 +52,11 @@ class Room {
 	public:
 		Room(PubSubClient *  mqttClient, bool DEBUG = false);
 		virtual ~Room();
-		virtual void updateOutputControllers() = 0;
 		virtual void mqttReceive(const char* topic, const char* payload) = 0;
+		virtual void heatOutputs(bool state) = 0;
+		virtual void chillOutputs(bool state) = 0;
+		virtual void humidityOutputs(bool state) = 0;
+
 		void updateTempSensor(float tempSensorValue);
 		void updateHumSensor(short humSensorValue);
 		void updateMotionSensor(bool motionSensorValue);
@@ -65,6 +68,7 @@ class Room {
 		void subscribeMqttTopics(PubSubClient* mqttClient);
 		void mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient);
 		void handleMqttCommandOC(OutputControl* outputControl, const char* payload);
+		void updateOutputControllers();
 		void updateDecisionMakers();
 
 		short getDesiredHumidity() const;

@@ -47,27 +47,19 @@ BedRoomKids::~BedRoomKids() {
 	delete kidsChiller;
 }
 
-void BedRoomKids::updateOutputControllers() {
-	//Heating
-	if (getHasHeatingControl() && getDecisionHeat()) {
-		kidsRadiatorOne->setPin(ON);
-		kidsRadiatorTwo->setPin(ON);
-	} else {
-		kidsRadiatorOne->setPin(OFF);
-		kidsRadiatorTwo->setPin(OFF);
-	}
-	if(getHasCoolingControl() && getDecisionCool()) { //
-		kidsChiller->setPin(ON);
-	} else {
-		kidsChiller->setPin(OFF);
-	}
-	if(getHasVentControl() && getDecisionVent()) {
-		kidsFan->setPin(ON);
-	} else {
-		kidsFan->setPin(OFF);
-	}
+// Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)
+void BedRoomKids::heatOutputs(bool state) {
+	kidsRadiatorOne->setPin(state);
+	kidsRadiatorTwo->setPin(state);
 }
 
+void BedRoomKids::chillOutputs(bool state) {
+	kidsChiller->setPin(state);
+}
+
+void BedRoomKids::humidityOutputs(bool state) {
+	kidsFan->setPin(state);
+}
 
 void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	String strTopic = String(topic);
