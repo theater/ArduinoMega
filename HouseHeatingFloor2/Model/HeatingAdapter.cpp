@@ -27,17 +27,6 @@ HeatingAdapter::~HeatingAdapter() {
 	delete bedRoomKids;
 }
 
-void HeatingAdapter::mqttCallback(char* topic, byte* payload, unsigned int length) {
-	char cPayload[10];
-	for (int i = 0; i <= length; i++) {
-		cPayload[i] = (char) payload[i];
-	}
-	cPayload[length] = '\0';
-	String strPayload = String(cPayload);
-	String strTopic = String(topic);
-	mqttReceive(topic, cPayload);
-}
-
 void HeatingAdapter::mqttSubscribe(PubSubClient* mqttClient) {
 	bedRoomKids->subscribeMqttTopics(mqttClient);
 }
@@ -55,34 +44,6 @@ void HeatingAdapter::sensorUpdate(const char* sensor, short value) {
 	} else if (!strcmp(sensor, SENSOR_KIDS_02)) {
 		bedRoomKids->updateHumSensor(value);
 		return;
-	}
-}
-
-void HeatingAdapter::updateRoomDesiredValue(const char* room, ControlType type, short value) {
-	switch (type) {
-		case TEMPERATURE:
-			updateDesiredTemperature(room, value);
-			break;
-		case HUMIDITY:
-			updateDesiredHumidity(room, value);
-			break;
-		default:
-			break;
-	}
-}
-
-void HeatingAdapter::updateDesiredTemperature(const char* room, short value) {
-	if (!strcmp(room, KIDS_BEDROOM)) {
-		bedRoomKids->updateDesiredTemperature(value);
-		if (DEBUG) mqttClient->publish("DEBUG", "Updated desired temperatures");
-	}
-
-	if (DEBUG) mqttClient->publish("DEBUG", "No matching rule.(HeatingAdapter::updateDesiredTemperature)");
-}
-
-void HeatingAdapter::updateDesiredHumidity(const char* room, short value) {
-	if (!strcmp(room, KIDS_BEDROOM)) {
-		bedRoomKids->updateDesiredHumidity(value);
 	}
 }
 

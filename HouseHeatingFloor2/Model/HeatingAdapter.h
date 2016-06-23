@@ -21,24 +21,19 @@ class HeatingAdapter : public Adapter {
 	public:
 		HeatingAdapter(PubSubClient* mqttClient, bool DEBUG = false);
 		virtual ~HeatingAdapter();
-		//MQTT
-		void mqttCallback(char* topic, byte* payload, unsigned int length);
+
+		//MQTT handling
 		void mqttReceive(const char* topic, const char* strPayload);
 		void mqttSubscribe(PubSubClient* mqttClient);
 
 		// Connectors to rooms
 		void sensorUpdate(const char* sensor, short value);
-		void updateRoomDesiredValue(const char* room, ControlType type, short value);
 
 		// Getters/setters
 		BedRoomKids* getBedRoomKids() const;
 		void setBedRoomKids(BedRoomKids* bedRoomKids);
 		PubSubClient* getMqttClient() const;
 		void setMqttClient(PubSubClient* mqttClient);
-
-	private:
-		void updateDesiredTemperature(const char* room, short value);
-		void updateDesiredHumidity(const char* room, short value);
 };
 
 #endif /* MODEL_HEATINGADAPTER_H_ */
