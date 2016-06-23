@@ -14,6 +14,8 @@ enum ControlType {
 	MOTION
 };
 
+#define SensorType ControlType
+
 enum Mode {
 	ALL_OFF,
 	MANUAL,

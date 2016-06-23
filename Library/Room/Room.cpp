@@ -167,6 +167,16 @@ void Room::updateHumSensor(short humSensorValue) {
 	}
 }
 
+void Room::updateMotionSensor(bool motionSensorValue) {
+	if (motionSensor != NULL) {
+		motionSensor->setValue(motionSensorValue);
+		motionSensor->sensorToMqttData(mqttClient);
+	}
+	if(getMode() != MANUAL) {
+		updateOutputControllers();
+	}
+}
+
 void Room::updateDesiredValues(short desiredTemperature, short desiredHumidity) {
 	updateDesiredTemperature(desiredTemperature);
 	updateDesiredHumidity(desiredHumidity);

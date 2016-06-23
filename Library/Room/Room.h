@@ -10,6 +10,8 @@
 
 #include <stdbool.h>
 
+#include "Config.h"
+#include "Util.h"
 #include "HumiditySensor.h"
 #include "TemperatureSensor.h"
 #include "MotionSensor.h"
@@ -34,6 +36,7 @@ class Room {
 		bool decisionVent;
 
 		MotionSensor* motionSensor;
+		bool decisionMotion;
 
 		bool hasHeatingControl;
 		bool hasVentControl;
@@ -53,6 +56,7 @@ class Room {
 		virtual void mqttReceive(const char* topic, const char* payload) = 0;
 		void updateTempSensor(float tempSensorValue);
 		void updateHumSensor(short humSensorValue);
+		void updateMotionSensor(bool motionSensorValue);
 		void updateSensors(short tempSensorValue,short humSensorValue);
 		void updateDesiredValues(short desiredTemperature,short desiredHumidity);
 		void updateMode(const char* mode);

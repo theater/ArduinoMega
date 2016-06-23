@@ -9,7 +9,7 @@
 #define SENSOR_H_
 
 #include "Util.h"
-#include "PubSubClient.h"
+#include <PubSubClient.h>
 
 class Sensor {
 	private:
