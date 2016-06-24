@@ -27,12 +27,12 @@ const bool DEBUG = false;
 #define REOCCURRENCE 				30000  		// Decision maker triggered on every xxxxx ms
 
 // ROOMS
-#define KIDS_BEDROOM 	"Kids bedroom"
-#define OUR_BEDROOM 	"Our bedroom"
-#define OUR_BATHROOM 	"Our bathroom"
-#define CORRIDOR 		"Corridor"
-#define WARDROBE 		"Wardrobe"
-#define BIG_BATHROOM 	"Big bathroom"
+//#define KIDS_BEDROOM 	"Kids bedroom"
+//#define MASTER_BEDROOM 	"Our bedroom"
+//#define MASTER_BATHROOM 	"Our bathroom"
+//#define CORRIDOR 		"Corridor"
+//#define WARDROBE 		"Wardrobe"
+//#define BIG_BATHROOM 	"Big bathroom"
 
 
 // PIN assignments
@@ -44,7 +44,7 @@ const bool DEBUG = false;
 #define CORRIDOR_RAD_TWO 			33				// CORRIDOR RADIATOR TWO IS ON PIN 33
 #define BIG_BATH_RAD_ONE 			34				// Big bathroom radiator one  - pin 34
 #define BIG_BATH_RAD_TWO 			35				// Big bathroom radiator two  - pin 35
-#define OUR_BEDROOM_RAD 			36				// Our bedroom radiator - pin 36
+#define MASTER_BEDROOM_RAD 			36				// Our bedroom radiator - pin 36
 #define WARDROBE_RAD 				37				// Wardrobe room radiator - pin 37
 #define SMALL_BATH_RAD 				40				// Small bathroom next to our bedroom - pin 40
 #define CHILLER_PIN					41				// Just to test chilling logic
