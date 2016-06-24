@@ -12,15 +12,15 @@ HouseHeatingFloor2.cpp.o: ../HouseHeatingFloor2.cpp \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Arduino.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\variants\mega/pins_arduino.h \
  D:\src\ArduinoMega\Library\Room/MqttUtil.h \
- C:/eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.5/cores/arduino/Arduino.h \
- C:/eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include/stdbool.h \
- D:\src\ArduinoMega\Library\Room/Adapter.h \
  D:\HomeAutomation\Arduino\libraries\MQTT/PubSubClient.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/IPAddress.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Printable.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Client.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/IPAddress.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Stream.h \
+ C:/eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.5/cores/arduino/Arduino.h \
+ C:/eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include/stdbool.h \
+ D:\src\ArduinoMega\Library\Room/Adapter.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h \
  D:\HomeAutomation\Arduino\libraries\EmonLib/EmonLib.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/HardwareSerial.h \
@@ -63,7 +63,9 @@ HouseHeatingFloor2.cpp.o: ../HouseHeatingFloor2.cpp \
  D:\src\ArduinoMega\Library\Room/TemperatureSensor.h \
  D:\src\ArduinoMega\Library\Room/MotionSensor.h \
  D:\src\ArduinoMega\Library\Room/OutputControl.h \
- D:\src\ArduinoMega\Library\Room/Adapter.h
+ D:\src\ArduinoMega\Library\Room/Adapter.h ../Model/RoomManager.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet\utility/Util.h \
+ ../Model/RoomManager.h
 
 ../HouseHeatingFloor2.h:
 
@@ -91,12 +93,6 @@ C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\variants\mega/pins_
 
 D:\src\ArduinoMega\Library\Room/MqttUtil.h:
 
-C:/eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.5/cores/arduino/Arduino.h:
-
-C:/eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include/stdbool.h:
-
-D:\src\ArduinoMega\Library\Room/Adapter.h:
-
 D:\HomeAutomation\Arduino\libraries\MQTT/PubSubClient.h:
 
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/IPAddress.h:
@@ -108,6 +104,12 @@ C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Clien
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/IPAddress.h:
 
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Stream.h:
+
+C:/eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.5/cores/arduino/Arduino.h:
+
+C:/eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include/stdbool.h:
+
+D:\src\ArduinoMega\Library\Room/Adapter.h:
 
 D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h:
 
@@ -200,3 +202,9 @@ D:\src\ArduinoMega\Library\Room/MotionSensor.h:
 D:\src\ArduinoMega\Library\Room/OutputControl.h:
 
 D:\src\ArduinoMega\Library\Room/Adapter.h:
+
+../Model/RoomManager.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet\utility/Util.h:
+
+../Model/RoomManager.h:

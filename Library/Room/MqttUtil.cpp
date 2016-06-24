@@ -25,7 +25,7 @@ bool MqttUtil::mqttConnect(PubSubClient* const mqttClient, Adapter* const inputA
 			String str = MQTT_CLIENT_NAME;
 			mqttClient->publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
 			if (inputAdapter != NULL) {
-				mqttSubscribe(mqttClient, inputAdapter);
+				mqttSubscribe(inputAdapter);
 			}
 			return true;
 		} else {
@@ -35,8 +35,8 @@ bool MqttUtil::mqttConnect(PubSubClient* const mqttClient, Adapter* const inputA
 		return true;
 }
 
-void MqttUtil::mqttSubscribe(PubSubClient* const mqttClient, Adapter* const inputAdapter) {
-	inputAdapter->mqttSubscribe(mqttClient);
+void MqttUtil::mqttSubscribe(Adapter* const inputAdapter) {
+	inputAdapter->mqttSubscribe();
 }
 
 void MqttUtil::mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value) {
@@ -49,8 +49,6 @@ void MqttUtil::mqttCallback(char* topic, byte* payload, unsigned int length) {
 		cPayload[i] = (char) payload[i];
 	}
 	cPayload[length] = '\0';
-//	String strPayload = String(cPayload);
-//	String strTopic = String(topic);
 	mqttSendUpdatedData(topic, cPayload);
 }
 

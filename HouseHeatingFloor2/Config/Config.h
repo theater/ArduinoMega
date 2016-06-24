@@ -26,15 +26,6 @@ const bool DEBUG = false;
 #define DEFAULT_DESIRED_HUMIDITY 	65
 #define REOCCURRENCE 				30000  		// Decision maker triggered on every xxxxx ms
 
-// ROOMS
-//#define KIDS_BEDROOM 	"Kids bedroom"
-//#define MASTER_BEDROOM 	"Our bedroom"
-//#define MASTER_BATHROOM 	"Our bathroom"
-//#define CORRIDOR 		"Corridor"
-//#define WARDROBE 		"Wardrobe"
-//#define BIG_BATHROOM 	"Big bathroom"
-
-
 // PIN assignments
 #define DHT_PIN						8
 #define ONE_WIRE_PIN_01 			9

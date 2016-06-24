@@ -18,6 +18,7 @@
 #include "Config/Config.h"
 #include "Model/HeatingAdapter.h"
 #include "MqttUtil.h"
+#include "Model/RoomManager.h"
 
 // Ethernet client
 uint8_t macAddress[6] = MAC_ADDRESS;
@@ -40,7 +41,8 @@ DallasTemperature sensors(&oneWire);
 //
 //// DHT22
 dht DHT22;
-
+RoomManager* RoomManager::manager = NULL;
+RoomManager* roomManager = RoomManager::getInstance(mqttClient);
 
 
 Timer trigger;
@@ -58,8 +60,12 @@ void setup()
 {
 	Serial.begin(115200);
 	Ethernet.begin(macAddress, ipAddress);
+
+	roomManager->createRoom(KIDS_BEDROOM);
+
 	MqttUtil::mqttConnect(mqttClient, heatingAdapter);
-	heatingAdapter = new HeatingAdapter(mqttClient, DEBUG);
+	heatingAdapter = new HeatingAdapter(roomManager, mqttClient, DEBUG);
+	heatingAdapter->mqttSubscribe();
 
 	trigger.every(REOCCURRENCE,&triggerFunc);
 	triggerFunc();

@@ -13,7 +13,8 @@
 #include "Config.h"
 #include "Util.h"
 
-Room::Room(PubSubClient* mqttClient, bool DEBUG) {
+Room::Room(RoomId id, PubSubClient* mqttClient, bool DEBUG) {
+	this->id = id;
 	this->mqttClient = mqttClient;
 	this->DEBUG = DEBUG;
 	setMode(AUTO);
@@ -235,7 +236,6 @@ void Room::subscribeMqttTopics(PubSubClient* mqttClient) {
 void Room::mqttSubscribe(const char* const * topics, int len, PubSubClient* const mqttClient) {
 	for (int i = 0; i < len; i++) {
 		mqttClient->subscribe(topics[i]);
-//		mqttClient->publish("DEBUG", topics[i]);
 	}
 }
 
@@ -409,4 +409,13 @@ Mode Room::getMode() const {
 void Room::setMode(Mode mode) {
 	this->mode = mode;
 }
+
+RoomId Room::getId() const {
+	return id;
+}
+
+void Room::setId(RoomId id) {
+	this->id = id;
+}
+
 

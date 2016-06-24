@@ -7,12 +7,35 @@
 
 #include "RoomManager.h"
 
-RoomManager::RoomManager() {
-	// TODO Auto-generated constructor stub
-
+RoomManager::RoomManager(PubSubClient* mqttClient) {
+	this->mqttClient = mqttClient;
 }
 
 RoomManager::~RoomManager() {
-	// TODO Auto-generated destructor stub
 }
 
+Room* RoomManager::createRoom(RoomId id) {
+	if (rooms[id] == NULL) {
+			switch(id) {
+			case KIDS_BEDROOM: rooms[id] = new BedRoomKids(mqttClient);
+			default: return NULL;
+			}
+		}
+		return rooms[id];
+}
+
+Room* RoomManager::getRoom(RoomId id) {
+	return createRoom(id);
+}
+
+RoomManager* RoomManager::getInstance(PubSubClient* mqttClient) {
+	if(manager == NULL) {
+		manager = new RoomManager(mqttClient);
+	}
+	return manager;
+}
+
+// Getters and setters
+Room** RoomManager::getRooms() {
+	return rooms;
+}

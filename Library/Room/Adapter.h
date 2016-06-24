@@ -14,7 +14,7 @@ public:
 	Adapter();
 	virtual ~Adapter();
 	virtual void mqttReceive(const char* topic, const char* strPayload) = 0;
-	virtual void mqttSubscribe(PubSubClient *mqttClient) = 0;
+	virtual void mqttSubscribe() = 0;
 };
 
 #endif /* ROOM_ADAPTER_H_ */

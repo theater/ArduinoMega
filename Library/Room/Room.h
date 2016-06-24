@@ -23,6 +23,7 @@ class PubSubClient;
 // Abstract base class for all rooms
 class Room {
 	private:
+		RoomId id;
 		PubSubClient* mqttClient;
 		Mode mode;
 
@@ -50,7 +51,7 @@ class Room {
 		bool DEBUG;
 
 	public:
-		Room(PubSubClient *  mqttClient, bool DEBUG = false);
+		Room(RoomId id, PubSubClient *  mqttClient, bool DEBUG = false);
 		virtual ~Room();
 		virtual void mqttReceive(const char* topic, const char* payload) = 0;
 		virtual void heatOutputs(bool state) = 0;
@@ -109,6 +110,8 @@ class Room {
 		void setLen(int len);
 		Mode getMode() const;
 		void setMode(Mode mode);
+		RoomId getId() const;
+		void setId(RoomId id);
 
 		private:
 		bool decisionMaker();

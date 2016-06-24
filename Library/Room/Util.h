@@ -22,6 +22,14 @@ enum Mode {
 	AUTO
 };
 
+enum RoomId {
+	KIDS_BEDROOM,
+	MASTER_BEDROOM,
+	MASTER_BATHROOM,
+	CORRIDOR,
+	WARDROBE,
+	BIG_BATHROOM
+};
 namespace Util {
 
 	static const char* getSensorTypeToStr(ControlType type) {
@@ -37,5 +45,6 @@ namespace Util {
 		}
 	}
 }
+
 
 #endif /* UTIL_H_ */

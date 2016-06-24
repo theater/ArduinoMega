@@ -12,26 +12,27 @@
 #include <UIPClient.h>
 #include "BedRoomKids.h"
 #include "Adapter.h"
+#include "RoomManager.h"
 
 class HeatingAdapter : public Adapter {
 	private:
 		PubSubClient* mqttClient;
-		BedRoomKids* bedRoomKids;
+		Room** rooms;
+		RoomManager* roomManager;
+
 		bool DEBUG;
 	public:
-		HeatingAdapter(PubSubClient* mqttClient, bool DEBUG = false);
+		HeatingAdapter(RoomManager* roomManager, PubSubClient* mqttClient, bool DEBUG = false);
 		virtual ~HeatingAdapter();
 
 		//MQTT handling
 		void mqttReceive(const char* topic, const char* strPayload);
-		void mqttSubscribe(PubSubClient* mqttClient);
+		void mqttSubscribe();
 
 		// Connectors to rooms
 		void sensorUpdate(const char* sensor, short value);
 
 		// Getters/setters
-		BedRoomKids* getBedRoomKids() const;
-		void setBedRoomKids(BedRoomKids* bedRoomKids);
 		PubSubClient* getMqttClient() const;
 		void setMqttClient(PubSubClient* mqttClient);
 };

@@ -17,6 +17,8 @@
 // specific implementation for Kids bedroom
 class BedRoomKids: public Room {
 	private:
+		const static RoomId id=KIDS_BEDROOM;
+
 		OutputControl* kidsRadiatorOne;
 		OutputControl* kidsRadiatorTwo;
 		OutputControl* kidsChiller;
@@ -30,7 +32,7 @@ class BedRoomKids: public Room {
 										DESIRED_HUM_KIDS_01,
 										CHILLER,
 										MODE_KIDS,
-										FAN_KIDS_01};
+										FAN_KIDS_01 };
 
 	public:
 		BedRoomKids(PubSubClient* mqttClient, bool DEBUG=false);

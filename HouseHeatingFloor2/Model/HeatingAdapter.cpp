@@ -12,50 +12,50 @@
 #include <WString.h>
 #include <UIPClient.h>
 #include "../Config/Config.h"
+#include "RoomManager.h"
 
-HeatingAdapter::HeatingAdapter(PubSubClient* mqttClient, bool DEBUG) {
+HeatingAdapter::HeatingAdapter(RoomManager* roomManager, PubSubClient* mqttClient, bool DEBUG) {
 	this->DEBUG = DEBUG;
 	setMqttClient(mqttClient);
-	bedRoomKids = new BedRoomKids(mqttClient, this->DEBUG);
 	if(DEBUG) {
-//		Serial.println("Calling HeatingAdapter constructor");
 		mqttClient->publish("DEBUG","HeatingAdapter::HeatingAdapter");
 	}
+	this->roomManager = roomManager;
+	rooms = roomManager->getRooms();
 }
 
 HeatingAdapter::~HeatingAdapter() {
-	delete bedRoomKids;
 }
 
-void HeatingAdapter::mqttSubscribe(PubSubClient* mqttClient) {
-	bedRoomKids->subscribeMqttTopics(mqttClient);
+void HeatingAdapter::mqttSubscribe() {
+//	for(int i=0; i<10 ; i++) {
+//		if(rooms[i]) {
+//			rooms[i]->subscribeMqttTopics(mqttClient);
+//		}
+//	}
+	rooms[KIDS_BEDROOM]->subscribeMqttTopics(mqttClient);
 }
 
 void HeatingAdapter::mqttReceive(const char* topic, const char* payload) {
-	if (bedRoomKids->containsTopic(topic)) {
-		bedRoomKids->mqttReceive(topic, payload);
-	}
+//	for (int i = 0; i < 10; i++) {
+//		if (rooms[i] != NULL && rooms[i]->containsTopic(topic)) {
+//			rooms[i]->mqttReceive(topic, payload);
+//		}
+//	}
+	rooms[KIDS_BEDROOM]->mqttReceive(topic, payload);
 }
 
 void HeatingAdapter::sensorUpdate(const char* sensor, short value) {
 	if (!strcmp(sensor, SENSOR_KIDS_01)) {
-		bedRoomKids->updateTempSensor(value);
+		rooms[KIDS_BEDROOM]->updateTempSensor(value);
 		return;
 	} else if (!strcmp(sensor, SENSOR_KIDS_02)) {
-		bedRoomKids->updateHumSensor(value);
+		rooms[KIDS_BEDROOM]->updateHumSensor(value);
 		return;
 	}
 }
 
 // Getters/setters
-
-BedRoomKids* HeatingAdapter::getBedRoomKids() const {
-	return bedRoomKids;
-}
-
-void HeatingAdapter::setBedRoomKids(BedRoomKids* bedRoomKids) {
-	this->bedRoomKids = bedRoomKids;
-}
 
 PubSubClient* HeatingAdapter::getMqttClient() const {
 	return mqttClient;
