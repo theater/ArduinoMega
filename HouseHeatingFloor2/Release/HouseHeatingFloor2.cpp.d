@@ -66,7 +66,8 @@ HouseHeatingFloor2.cpp.o: ../HouseHeatingFloor2.cpp \
  D:\src\ArduinoMega\Library\Room/Manager.h ../Model/BedRoomKids.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/WString.h \
  ../Model/../Config/Config.h \
- D:\src\ArduinoMega\Library\Room/OutputControl.h ../Model/Corridor.h
+ D:\src\ArduinoMega\Library\Room/OutputControl.h ../Model/Corridor.h \
+ ../Model/BigBathroom.h
 
 ../HouseHeatingFloor2.h:
 
@@ -211,3 +212,5 @@ C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/WStri
 D:\src\ArduinoMega\Library\Room/OutputControl.h:
 
 ../Model/Corridor.h:
+
+../Model/BigBathroom.h:

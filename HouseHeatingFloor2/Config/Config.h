@@ -35,6 +35,7 @@ const bool DEBUG = false;
 #define CORRIDOR_RAD_TWO 				33				// CORRIDOR RADIATOR TWO IS ON PIN 33
 #define BIG_BATH_RAD_ONE 				34				// Big bathroom radiator one  - pin 34
 #define BIG_BATH_RAD_TWO 				35				// Big bathroom radiator two  - pin 35
+#define BIG_BATH_FAN	 				43				// Big bathroom fan  - pin 43
 #define MASTER_BEDROOM_RAD 				36				// Our bedroom radiator - pin 36
 #define WARDROBE_RAD 					37				// Wardrobe room radiator - pin 37
 #define SMALL_BATH_RAD 					40				// Small bathroom next to our bedroom - pin 40
