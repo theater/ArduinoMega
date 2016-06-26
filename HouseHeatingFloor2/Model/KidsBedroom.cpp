@@ -5,13 +5,13 @@
  *      Author: theater
  */
 
-#include "BedRoomKids.h"
+#include "KidsBedroom.h"
 
 #include <PubSubClient.h>
 #include <stdbool.h>
 #include <WString.h>
 
-BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
+KidsBedroom::KidsBedroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
 	setDebug(DEBUG);
 	if(Debug()) {
 		mqttClient->publish("DEBUG","BedRoomKids::BedRoomKids");
@@ -32,18 +32,18 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 	subscribeMqttTopics(mqttClient);
 }
 
-BedRoomKids::~BedRoomKids() {
+KidsBedroom::~KidsBedroom() {
 	delete kidsRadiatorOne;
 	delete kidsRadiatorTwo;
 }
 
 // Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)
-void BedRoomKids::heatOutputs(bool state) {
+void KidsBedroom::heatOutputs(bool state) {
 	kidsRadiatorOne->setPin(state);
 	kidsRadiatorTwo->setPin(state);
 }
 
-void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
+void KidsBedroom::mqttReceive(const char* topic, const char* payload) {
 	String strTopic = String(topic);
 	String strPayload = String(payload);
 	if (strTopic.equals(MODE_KIDS)) {

@@ -5,8 +5,8 @@
  *      Author: theater
  */
 
-#ifndef MODEL_BEDROOMKIDS_H_
-#define MODEL_BEDROOMKIDS_H_
+#ifndef MODEL_KIDSBEDROOM_H_
+#define MODEL_KIDSBEDROOM_H_
 
 #include <WString.h>
 
@@ -15,7 +15,7 @@
 #include "Room.h"
 
 // specific implementation for Kids bedroom
-class BedRoomKids: public Room {
+class KidsBedroom: public Room {
 	private:
 		const static RoomId id=KIDS_BEDROOM;
 
@@ -31,11 +31,11 @@ class BedRoomKids: public Room {
 									};
 
 	public:
-		BedRoomKids(PubSubClient* mqttClient, bool DEBUG=false);
-		virtual ~BedRoomKids();
+		KidsBedroom(PubSubClient* mqttClient, bool DEBUG=false);
+		virtual ~KidsBedroom();
 		void updateOutputControllers();
 		void mqttReceive(const char* strTopic, const char* strPayload);
 		void heatOutputs(bool state);
 };
 
-#endif /* MODEL_BEDROOMKIDS_H_ */
+#endif /* MODEL_KIDSBEDROOM_H_ */

@@ -25,7 +25,7 @@ Room* RoomManager::createRoom(RoomId id) {
 	if (rooms[id] == NULL) {
 		switch (id) {
 		case KIDS_BEDROOM:
-			rooms[id] = new BedRoomKids(mqttClient);
+			rooms[id] = new KidsBedroom(mqttClient);
 		default:
 			break;
 		}

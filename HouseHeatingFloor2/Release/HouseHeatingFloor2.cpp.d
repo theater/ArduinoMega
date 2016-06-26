@@ -62,11 +62,11 @@ HouseHeatingFloor2.cpp.o: ../HouseHeatingFloor2.cpp \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_clock.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/clock-arch.h \
  ../Config/Config.h ../Config/Restricted.h ../Model/RoomManager.h \
- D:\src\ArduinoMega\Library\Room/Room.h ../Model/BedRoomKids.h \
+ D:\src\ArduinoMega\Library\Room/Room.h \
+ D:\src\ArduinoMega\Library\Room/Manager.h ../Model/KidsBedroom.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/WString.h \
  ../Model/../Config/Config.h \
- D:\src\ArduinoMega\Library\Room/OutputControl.h \
- D:\src\ArduinoMega\Library\Room/Manager.h
+ D:\src\ArduinoMega\Library\Room/OutputControl.h
 
 ../HouseHeatingFloor2.h:
 
@@ -200,12 +200,12 @@ D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/clock-arch.h:
 
 D:\src\ArduinoMega\Library\Room/Room.h:
 
-../Model/BedRoomKids.h:
+D:\src\ArduinoMega\Library\Room/Manager.h:
+
+../Model/KidsBedroom.h:
 
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/WString.h:
 
 ../Model/../Config/Config.h:
 
 D:\src\ArduinoMega\Library\Room/OutputControl.h:
-
-D:\src\ArduinoMega\Library\Room/Manager.h:

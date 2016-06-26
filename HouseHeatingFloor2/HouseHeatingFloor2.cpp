@@ -54,7 +54,7 @@ void triggerFunc(){
 	heatingAdapter->sensorUpdate(SENSOR_KIDS_01,tempSensorReal);
 
 	short humSensorReal = random(40,100);
-	heatingAdapter->sensorUpdate(SENSOR_KIDS_02,humSensorReal);
+//	heatingAdapter->sensorUpdate(SENSOR_KIDS_02,humSensorReal);
 }
 
 //The setup function is called once at startup of the sketch
