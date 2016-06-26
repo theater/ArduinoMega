@@ -7,25 +7,8 @@
 
 #include "RoomManager.h"
 
-RoomManager::RoomManager(PubSubClient* mqttClient) {
+RoomManager::RoomManager(PubSubClient* mqttClient) : Manager(mqttClient){
 	this->mqttClient = mqttClient;
-}
-
-RoomManager::~RoomManager() {
-}
-
-Room* RoomManager::createRoom(RoomId id) {
-	if (rooms[id] == NULL) {
-			switch(id) {
-			case KIDS_BEDROOM: rooms[id] = new BedRoomKids(mqttClient);
-			default: return NULL;
-			}
-		}
-		return rooms[id];
-}
-
-Room* RoomManager::getRoom(RoomId id) {
-	return createRoom(id);
 }
 
 RoomManager* RoomManager::getInstance(PubSubClient* mqttClient) {
@@ -35,7 +18,26 @@ RoomManager* RoomManager::getInstance(PubSubClient* mqttClient) {
 	return manager;
 }
 
-// Getters and setters
-Room** RoomManager::getRooms() {
-	return rooms;
+RoomManager::~RoomManager() {
+}
+
+Room* RoomManager::createRoom(RoomId id) {
+	if (rooms[id] == NULL) {
+		switch (id) {
+		case KIDS_BEDROOM:
+			rooms[id] = new BedRoomKids(mqttClient);
+		default:
+			break;
+		}
+	}
+	return rooms[id];
+}
+void RoomManager::sensorsUpdate(const char* sensor, short value) {
+	if (!strcmp(sensor, SENSOR_KIDS_01)) {
+		rooms[KIDS_BEDROOM]->updateTempSensor(value);
+		return;
+	} else if (!strcmp(sensor, SENSOR_KIDS_02)) {
+		rooms[KIDS_BEDROOM]->updateHumSensor(value);
+		return;
+	}
 }

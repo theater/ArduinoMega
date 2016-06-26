@@ -8,13 +8,22 @@
 #ifndef ROOM_ADAPTER_H_
 #define ROOM_ADAPTER_H_
 #include <PubSubClient.h>
+#include "Manager.h"
 
 class Adapter {
+private:
+	PubSubClient* mqttClient;
+	Manager* manager;
+	Room** rooms;
+	int count;
+
+	bool DEBUG;
 public:
-	Adapter();
+	Adapter(Manager* roomManager, PubSubClient* mqttClient, bool DEBUG = false);
 	virtual ~Adapter();
-	virtual void mqttReceive(const char* topic, const char* strPayload) = 0;
-	virtual void mqttSubscribe() = 0;
+	void mqttReceive(const char* topic, const char* strPayload);
+	void mqttSubscribe();
+	void sensorUpdate(const char* sensor, short value);
 };
 
 #endif /* ROOM_ADAPTER_H_ */

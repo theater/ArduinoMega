@@ -1,23 +1,25 @@
 // Do not remove the include below
+
 #include "HouseHeatingFloor2.h"
 
-// Do not remove the include below
-
+#include <Adapter.h>
 #include <Arduino.h>
+#include <dht.h>
+#include <DallasTemperature.h>
 #include <ethernet_comp.h>
-#include <EmonLib.h>
 #include <HardwareSerial.h>
 #include <IPAddress.h>
+#include <MqttUtil.h>
 #include <OneWire.h>
+#include <PubSubClient.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <Timer.h>
 #include <UIPClient.h>
 #include <UIPEthernet.h>
-#include <DallasTemperature.h>
-#include <dht.h>
+#include <Util.h>
 
 #include "Config/Config.h"
-#include "Model/HeatingAdapter.h"
-#include "MqttUtil.h"
 #include "Model/RoomManager.h"
 
 // Ethernet client
@@ -30,7 +32,7 @@ byte mqttServerAddress[] = MQTT_SERVER;
 PubSubClient *mqttClient = new PubSubClient(mqttServerAddress, 1883, MqttUtil::mqttCallback, ethClient);
 
 //	HeatingAdapter -> all logic and model is inside this
-HeatingAdapter* heatingAdapter;
+Adapter* heatingAdapter;
 
 //EMON
 //EnergyMonitor energyMon;
@@ -64,7 +66,7 @@ void setup()
 	roomManager->createRoom(KIDS_BEDROOM);
 
 	MqttUtil::mqttConnect(mqttClient, heatingAdapter);
-	heatingAdapter = new HeatingAdapter(roomManager, mqttClient, DEBUG);
+	heatingAdapter = new Adapter(roomManager, mqttClient, DEBUG);
 	heatingAdapter->mqttSubscribe();
 
 	trigger.every(REOCCURRENCE,&triggerFunc);

@@ -21,10 +21,23 @@ HouseHeatingFloor2.cpp.o: ../HouseHeatingFloor2.cpp \
  C:/eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.5/cores/arduino/Arduino.h \
  C:/eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include/stdbool.h \
  D:\src\ArduinoMega\Library\Room/Adapter.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h \
- D:\HomeAutomation\Arduino\libraries\EmonLib/EmonLib.h \
- C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/HardwareSerial.h \
+ D:\src\ArduinoMega\Library\Room/Manager.h \
+ D:\src\ArduinoMega\Library\Room/Room.h \
+ D:\src\ArduinoMega\Library\Room/Config.h \
+ D:\src\ArduinoMega\Library\Room/Restricted.h \
+ D:\src\ArduinoMega\Library\Room/Util.h \
+ D:\src\ArduinoMega\Library\Room/HumiditySensor.h \
+ D:\src\ArduinoMega\Library\Room/Sensor.h \
+ D:\src\ArduinoMega\Library\Room/TemperatureSensor.h \
+ D:\src\ArduinoMega\Library\Room/MotionSensor.h \
+ D:\src\ArduinoMega\Library\Room/OutputControl.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet\utility/Util.h \
+ D:\src\ArduinoMega\Library\Room/Adapter.h \
+ D:\HomeAutomation\Arduino\libraries\DHTlib/dht.h \
+ D:\HomeAutomation\Arduino\libraries\Dallas\ Temperature/DallasTemperature.h \
  D:\HomeAutomation\Arduino\libraries\OneWire/OneWire.h \
+ D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h \
+ C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/HardwareSerial.h \
  D:\HomeAutomation\Arduino\libraries\Timer/Timer.h \
  D:\HomeAutomation\Arduino\libraries\Timer/Event.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPClient.h \
@@ -48,24 +61,12 @@ HouseHeatingFloor2.cpp.o: ../HouseHeatingFloor2.cpp \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_timer.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_clock.h \
  D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/clock-arch.h \
- D:\HomeAutomation\Arduino\libraries\Dallas\ Temperature/DallasTemperature.h \
- D:\HomeAutomation\Arduino\libraries\DHTlib/dht.h ../Config/Config.h \
- ../Config/Restricted.h ../Model/HeatingAdapter.h ../Model/BedRoomKids.h \
+ ../Config/Config.h ../Config/Restricted.h ../Model/RoomManager.h \
+ D:\src\ArduinoMega\Library\Room/Room.h ../Model/BedRoomKids.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/WString.h \
  ../Model/../Config/Config.h \
  D:\src\ArduinoMega\Library\Room/OutputControl.h \
- D:\src\ArduinoMega\Library\Room/Config.h \
- D:\src\ArduinoMega\Library\Room/Restricted.h \
- D:\src\ArduinoMega\Library\Room/Room.h \
- D:\src\ArduinoMega\Library\Room/Util.h \
- D:\src\ArduinoMega\Library\Room/HumiditySensor.h \
- D:\src\ArduinoMega\Library\Room/Sensor.h \
- D:\src\ArduinoMega\Library\Room/TemperatureSensor.h \
- D:\src\ArduinoMega\Library\Room/MotionSensor.h \
- D:\src\ArduinoMega\Library\Room/OutputControl.h \
- D:\src\ArduinoMega\Library\Room/Adapter.h ../Model/RoomManager.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet\utility/Util.h \
- ../Model/RoomManager.h
+ D:\src\ArduinoMega\Library\Room/Manager.h
 
 ../HouseHeatingFloor2.h:
 
@@ -111,13 +112,39 @@ C:/eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/
 
 D:\src\ArduinoMega\Library\Room/Adapter.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h:
+D:\src\ArduinoMega\Library\Room/Manager.h:
 
-D:\HomeAutomation\Arduino\libraries\EmonLib/EmonLib.h:
+D:\src\ArduinoMega\Library\Room/Room.h:
 
-C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/HardwareSerial.h:
+D:\src\ArduinoMega\Library\Room/Config.h:
+
+D:\src\ArduinoMega\Library\Room/Restricted.h:
+
+D:\src\ArduinoMega\Library\Room/Util.h:
+
+D:\src\ArduinoMega\Library\Room/HumiditySensor.h:
+
+D:\src\ArduinoMega\Library\Room/Sensor.h:
+
+D:\src\ArduinoMega\Library\Room/TemperatureSensor.h:
+
+D:\src\ArduinoMega\Library\Room/MotionSensor.h:
+
+D:\src\ArduinoMega\Library\Room/OutputControl.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet\utility/Util.h:
+
+D:\src\ArduinoMega\Library\Room/Adapter.h:
+
+D:\HomeAutomation\Arduino\libraries\DHTlib/dht.h:
+
+D:\HomeAutomation\Arduino\libraries\Dallas\ Temperature/DallasTemperature.h:
 
 D:\HomeAutomation\Arduino\libraries\OneWire/OneWire.h:
+
+D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h:
+
+C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/HardwareSerial.h:
 
 D:\HomeAutomation\Arduino\libraries\Timer/Timer.h:
 
@@ -165,15 +192,13 @@ D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_clock.h:
 
 D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/clock-arch.h:
 
-D:\HomeAutomation\Arduino\libraries\Dallas\ Temperature/DallasTemperature.h:
-
-D:\HomeAutomation\Arduino\libraries\DHTlib/dht.h:
-
 ../Config/Config.h:
 
 ../Config/Restricted.h:
 
-../Model/HeatingAdapter.h:
+../Model/RoomManager.h:
+
+D:\src\ArduinoMega\Library\Room/Room.h:
 
 ../Model/BedRoomKids.h:
 
@@ -183,28 +208,4 @@ C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/WStri
 
 D:\src\ArduinoMega\Library\Room/OutputControl.h:
 
-D:\src\ArduinoMega\Library\Room/Config.h:
-
-D:\src\ArduinoMega\Library\Room/Restricted.h:
-
-D:\src\ArduinoMega\Library\Room/Room.h:
-
-D:\src\ArduinoMega\Library\Room/Util.h:
-
-D:\src\ArduinoMega\Library\Room/HumiditySensor.h:
-
-D:\src\ArduinoMega\Library\Room/Sensor.h:
-
-D:\src\ArduinoMega\Library\Room/TemperatureSensor.h:
-
-D:\src\ArduinoMega\Library\Room/MotionSensor.h:
-
-D:\src\ArduinoMega\Library\Room/OutputControl.h:
-
-D:\src\ArduinoMega\Library\Room/Adapter.h:
-
-../Model/RoomManager.h:
-
-D:\HomeAutomation\Arduino\libraries\UIPEthernet\utility/Util.h:
-
-../Model/RoomManager.h:
+D:\src\ArduinoMega\Library\Room/Manager.h:

@@ -7,12 +7,38 @@
 
 #include "Adapter.h"
 
-Adapter::Adapter() {
-	// TODO Auto-generated constructor stub
-
+Adapter::Adapter(Manager* manager, PubSubClient* mqttClient, bool DEBUG) {
+	this->DEBUG = DEBUG;
+	this->mqttClient = mqttClient;
+	if (DEBUG) {
+		mqttClient->publish("DEBUG", "HeatingAdapter::HeatingAdapter");
+	}
+	this->manager = manager;
+	rooms = manager->getRooms();
+	count = manager->getCount();
 }
 
 Adapter::~Adapter() {
 	// TODO Auto-generated destructor stub
 }
 
+void Adapter::mqttSubscribe() {
+	for (int i = 0; i < count; i++) {
+		if (rooms[i]) {
+			rooms[i]->subscribeMqttTopics(mqttClient);
+		}
+	}
+}
+
+void Adapter::mqttReceive(const char* topic, const char* payload) {
+	for (int i = 0; i < count; i++) {
+		if (rooms[i] != NULL && rooms[i]->containsTopic(topic)) {
+			rooms[i]->mqttReceive(topic, payload);
+		}
+	}
+//	rooms[KIDS_BEDROOM]->mqttReceive(topic, payload);
+}
+
+void Adapter::sensorUpdate(const char* sensor, short value) {
+	manager->sensorsUpdate(sensor, value);
+}
