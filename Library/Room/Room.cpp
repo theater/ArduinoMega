@@ -98,8 +98,12 @@ bool Room::heatingDecisionMaker() {
 			}
 		}
 		if (DEBUG) {
-//		Serial.println("Decision heating:");
 			mqttClient->publish("DEBUG", "Room::tempDecisionMaker()");
+			if(decisionHeat) {
+				mqttClient->publish("DEBUG", "Decision heat = TRUE");
+			} else {
+				mqttClient->publish("DEBUG", "Decision heat = FALSE");
+			}
 		}
 		return decisionHeat;
 	}
@@ -121,8 +125,7 @@ bool Room::coolingDecisionMaker() {
 			}
 		}
 		if (DEBUG) {
-//		Serial.println("Decision heating:");
-			mqttClient->publish("DEBUG", "Room::tempDecisionMaker()");
+			mqttClient->publish("DEBUG", "Room::coolingDecisionMaker()");
 		}
 		return decisionCool;
 	}
@@ -264,19 +267,6 @@ void Room::updateOutputControllers() {
 		humidityOutputs(OFF);
 	}
 }
-
-void Room::heatOutputs(bool state) {
-	// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC. Not virtual as none is mandatory.
-}
-
-void Room::chillOutputs(bool state) {
-	// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC. Not virtual as none is mandatory.
-}
-
-void Room::humidityOutputs(bool state) {
-	// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC. Not virtual as none is mandatory.
-}
-
 
 // GETTERS / SETTERS
 short Room::getDesiredHumidity() const {

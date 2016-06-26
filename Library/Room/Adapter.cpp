@@ -36,7 +36,6 @@ void Adapter::mqttReceive(const char* topic, const char* payload) {
 			rooms[i]->mqttReceive(topic, payload);
 		}
 	}
-//	rooms[KIDS_BEDROOM]->mqttReceive(topic, payload);
 }
 
 void Adapter::sensorUpdate(const char* sensor, short value) {

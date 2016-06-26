@@ -16,7 +16,7 @@ OutputControl::OutputControl(short pinId, bool pinStatus, char * ocTopicCB, PubS
 	this->ocTopicCB = ocTopicCB;
 	this->DEBUG = DEBUG;
 	pinMode(pinId, OUTPUT); // sets pin as output
-	setPin(OFF);
+	setPin(pinStatus);
 }
 
 //TODO: check if 1 is on and 0 is off, otherwise return !pinstatus

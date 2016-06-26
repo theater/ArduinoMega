@@ -25,7 +25,11 @@ Room* RoomManager::createRoom(RoomId id) {
 	if (rooms[id] == NULL) {
 		switch (id) {
 		case KIDS_BEDROOM:
-			rooms[id] = new KidsBedroom(mqttClient);
+			rooms[id] = new BedRoomKids(mqttClient);
+			break;
+		case CORRIDOR:
+			rooms[id] = new Corridor(mqttClient, true);
+			break;
 		default:
 			break;
 		}
@@ -35,6 +39,9 @@ Room* RoomManager::createRoom(RoomId id) {
 void RoomManager::sensorsUpdate(const char* sensor, short value) {
 	if (!strcmp(sensor, SENSOR_KIDS_01)) {
 		rooms[KIDS_BEDROOM]->updateTempSensor(value);
+		return;
+	} else if (!strcmp(sensor, SENSOR_CORRIDOR_01)) {
+		rooms[CORRIDOR]->updateTempSensor(value);
 		return;
 	}
 }

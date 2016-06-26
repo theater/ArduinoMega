@@ -45,6 +45,16 @@ const bool DEBUG = false;
 // Modes
 #define MODE_KIDS						"home/floor2/kids/mode/1"
 #define MODE_KIDS_CB					"home/floor2/kids/mode/1cb"
+#define MODE_CORRIDOR					"home/floor2/corridor/mode/1"
+#define MODE_CORRIDOR_CB				"home/floor2/corridor/mode/1cb"
+#define MODE_BIGBATH					"home/floor2/bigbath/mode/1"
+#define MODE_BIGBATH_CB					"home/floor2/bigbath/mode/1cb"
+#define MODE_BEDROOM					"home/floor2/bedroom/mode/1"
+#define MODE_BEDROOM_CB					"home/floor2/bedroom/mode/1cb"
+#define MODE_WARDROBE					"home/floor2/wardrobe/mode/1"
+#define MODE_WARDROBE_CB				"home/floor2/wardrobe/mode/1cb"
+#define MODE_BEDROOM_BATH				"home/floor2/bedroombath/mode/1"
+#define MODE_BEDROOM_BATH_CB			"home/floor2/bedroombath/mode/1cb"
 
 //	Radiators (outputs)
 #define RAD_KIDS_01						"home/floor2/kids/radiator/1"

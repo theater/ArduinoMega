@@ -12,8 +12,8 @@
 #include <Util.h>
 #include <PubSubClient.h>
 #include "Manager.h"
-#include "KidsBedroom.h"
-
+#include "BedRoomKids.h"
+#include "Corridor.h"
 
 class RoomManager : public Manager {
 public:

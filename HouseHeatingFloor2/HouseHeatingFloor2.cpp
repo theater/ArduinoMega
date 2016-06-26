@@ -43,6 +43,8 @@ DallasTemperature sensors(&oneWire);
 //
 //// DHT22
 dht DHT22;
+
+// Initialize manager
 RoomManager* RoomManager::manager = NULL;
 RoomManager* roomManager = RoomManager::getInstance(mqttClient);
 
@@ -50,11 +52,11 @@ RoomManager* roomManager = RoomManager::getInstance(mqttClient);
 Timer trigger;
 void triggerFunc(){
 	//simulation value for temperature sensor for testing purposes
-	short tempSensorReal = random(15,35);
-	heatingAdapter->sensorUpdate(SENSOR_KIDS_01,tempSensorReal);
+	short tempSensorKids = random(15,35);
+	heatingAdapter->sensorUpdate(SENSOR_KIDS_01,tempSensorKids);
 
-	short humSensorReal = random(40,100);
-//	heatingAdapter->sensorUpdate(SENSOR_KIDS_02,humSensorReal);
+	short tempSensorCorridor = random(15,35);
+	heatingAdapter->sensorUpdate(SENSOR_CORRIDOR_01,tempSensorCorridor);
 }
 
 //The setup function is called once at startup of the sketch
@@ -63,10 +65,13 @@ void setup()
 	Serial.begin(115200);
 	Ethernet.begin(macAddress, ipAddress);
 
-	roomManager->createRoom(KIDS_BEDROOM);
 
 	MqttUtil::mqttConnect(mqttClient, heatingAdapter);
 	heatingAdapter = new Adapter(roomManager, mqttClient, DEBUG);
+
+	roomManager->createRoom(KIDS_BEDROOM);
+	roomManager->createRoom(CORRIDOR);
+
 	heatingAdapter->mqttSubscribe();
 
 	trigger.every(REOCCURRENCE,&triggerFunc);

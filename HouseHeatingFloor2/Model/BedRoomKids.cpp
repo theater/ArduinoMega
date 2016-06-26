@@ -5,22 +5,23 @@
  *      Author: theater
  */
 
-#include "KidsBedroom.h"
+#include "BedRoomKids.h"
 
 #include <PubSubClient.h>
 #include <stdbool.h>
 #include <WString.h>
 
-KidsBedroom::KidsBedroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
+BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
 	setDebug(DEBUG);
 	if(Debug()) {
 		mqttClient->publish("DEBUG","BedRoomKids::BedRoomKids");
 	}
 
 	// initialize and create Output controllers
-	kidsRadiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, OFF, RAD_KIDS_01_CB, mqttClient);
-	kidsRadiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, OFF, RAD_KIDS_02_CB, mqttClient);
+	radiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, OFF, RAD_KIDS_01_CB, mqttClient);
+	radiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, OFF, RAD_KIDS_02_CB, mqttClient);
 	setHasHeatingControl(true);
+
 	// initialize and create sensors
 	Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_KIDS_01);
 	setTempSensor((TemperatureSensor*)tempSensor);
@@ -32,18 +33,18 @@ KidsBedroom::KidsBedroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 	subscribeMqttTopics(mqttClient);
 }
 
-KidsBedroom::~KidsBedroom() {
-	delete kidsRadiatorOne;
-	delete kidsRadiatorTwo;
+BedRoomKids::~BedRoomKids() {
+	delete radiatorOne;
+	delete radiatorTwo;
 }
 
 // Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)
-void KidsBedroom::heatOutputs(bool state) {
-	kidsRadiatorOne->setPin(state);
-	kidsRadiatorTwo->setPin(state);
+void BedRoomKids::heatOutputs(bool state) {
+	radiatorOne->setPin(state);
+	radiatorTwo->setPin(state);
 }
 
-void KidsBedroom::mqttReceive(const char* topic, const char* payload) {
+void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	String strTopic = String(topic);
 	String strPayload = String(payload);
 	if (strTopic.equals(MODE_KIDS)) {
@@ -51,9 +52,9 @@ void KidsBedroom::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(DESIRED_TEMP_KIDS_01)) {
 		updateDesiredTemperature(atof(payload));
 	} else if (strTopic.equals(RAD_KIDS_01)) {
-		handleMqttCommandOC(kidsRadiatorOne, payload);
+		handleMqttCommandOC(radiatorOne, payload);
 	} else if (strTopic.equals(RAD_KIDS_02)) {
-		handleMqttCommandOC(kidsRadiatorTwo, payload);
+		handleMqttCommandOC(radiatorTwo, payload);
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}
