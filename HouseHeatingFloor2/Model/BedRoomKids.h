@@ -21,18 +21,14 @@ class BedRoomKids: public Room {
 
 		OutputControl* kidsRadiatorOne;
 		OutputControl* kidsRadiatorTwo;
-		OutputControl* kidsChiller;
-		OutputControl* kidsFan;
 
 		//TODO: ugly - fix it somehow later
-		const static int length = 7;
+		const static int length = 4;
 		const char * topics[length] = {	RAD_KIDS_01,
 										RAD_KIDS_02,
 										DESIRED_TEMP_KIDS_01,
-										DESIRED_HUM_KIDS_01,
-										CHILLER,
-										MODE_KIDS,
-										FAN_KIDS_01 };
+										MODE_KIDS
+									};
 
 	public:
 		BedRoomKids(PubSubClient* mqttClient, bool DEBUG=false);
@@ -40,8 +36,6 @@ class BedRoomKids: public Room {
 		void updateOutputControllers();
 		void mqttReceive(const char* strTopic, const char* strPayload);
 		void heatOutputs(bool state);
-		void chillOutputs(bool state);
-		void humidityOutputs(bool state);
 };
 
 #endif /* MODEL_BEDROOMKIDS_H_ */

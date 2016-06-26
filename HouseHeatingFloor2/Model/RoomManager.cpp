@@ -36,9 +36,6 @@ Room* RoomManager::createRoom(RoomId id) {
 	if (!strcmp(sensor, SENSOR_KIDS_01)) {
 		rooms[KIDS_BEDROOM]->updateTempSensor(value);
 		return;
-	} else if (!strcmp(sensor, SENSOR_KIDS_02)) {
-		rooms[KIDS_BEDROOM]->updateHumSensor(value);
-		return;
 	}
 }
 
