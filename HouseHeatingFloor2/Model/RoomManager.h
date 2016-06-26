@@ -25,7 +25,9 @@ public:
 	static RoomManager* manager;
 
 	// Getters/setters
-	Room** getRooms();
+	PubSubClient* getMqttClient();
+	void setMqttClient(PubSubClient* mqttClient);
+
 private:
 	RoomManager(PubSubClient* mqttClient);
 	PubSubClient* mqttClient;

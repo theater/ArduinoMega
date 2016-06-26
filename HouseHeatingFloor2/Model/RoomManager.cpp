@@ -41,3 +41,12 @@ Room* RoomManager::createRoom(RoomId id) {
 		return;
 	}
 }
+
+// Getters and setters
+PubSubClient* RoomManager::getMqttClient() {
+	return mqttClient;
+}
+
+void RoomManager::setMqttClient(PubSubClient* mqttClient) {
+	this->mqttClient = mqttClient;
+}
