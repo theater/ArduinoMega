@@ -265,6 +265,19 @@ void Room::updateOutputControllers() {
 	}
 }
 
+void Room::heatOutputs(bool state) {
+	// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC. Not virtual as none is mandatory.
+}
+
+void Room::chillOutputs(bool state) {
+	// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC. Not virtual as none is mandatory.
+}
+
+void Room::humidityOutputs(bool state) {
+	// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC. Not virtual as none is mandatory.
+}
+
+
 // GETTERS / SETTERS
 short Room::getDesiredHumidity() const {
 	return desiredHumidity;
