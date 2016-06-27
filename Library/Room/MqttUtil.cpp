@@ -16,6 +16,7 @@
 #include "Config.h"
 
 Adapter* adapter;
+
 bool MqttUtil::mqttConnect(PubSubClient* const mqttClient, Adapter* const inputAdapter) {
 	if (adapter != inputAdapter) {
 		adapter = inputAdapter;

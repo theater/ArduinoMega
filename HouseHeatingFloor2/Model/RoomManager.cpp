@@ -33,6 +33,8 @@ Room* RoomManager::createRoom(RoomId id) {
 		case BIG_BATHROOM:
 			rooms[id] = new BigBathroom(mqttClient);
 			break;
+		case MASTER_BEDROOM:
+			rooms[id] = new MasterBedroom(mqttClient);
 		default:
 			break;
 		}
@@ -51,6 +53,9 @@ Room* RoomManager::createRoom(RoomId id) {
 		return;
 	} else if (!strcmp(sensor, SENSOR_BIGBATH_02)) {
 		rooms[BIG_BATHROOM]->updateHumSensor(value);
+		return;
+	} else  if (!strcmp(sensor, SENSOR_MASTER_BEDROOM_01)) {
+		rooms[MASTER_BEDROOM]->updateTempSensor(value);
 		return;
 	}
 }
