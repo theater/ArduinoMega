@@ -66,6 +66,9 @@ void triggerFunc() {
 
 	short tempSensorMasterBedroom = random(15, 35);
 	mainAdapter->sensorUpdate(SENSOR_MASTER_BEDROOM_01, tempSensorMasterBedroom);
+
+	short tempSensorWardrobe = random(15, 35);
+	mainAdapter->sensorUpdate(SENSOR_WARDROBE_01, tempSensorWardrobe);
 }
 
 //The setup function is called once at startup of the sketch
@@ -82,6 +85,7 @@ void setup()
 	roomManager->createRoom(CORRIDOR);
 	roomManager->createRoom(BIG_BATHROOM);
 	roomManager->createRoom(MASTER_BEDROOM);
+	roomManager->createRoom(WARDROBE);
 
 	mainAdapter->mqttSubscribe();
 
