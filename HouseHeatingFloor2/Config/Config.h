@@ -38,8 +38,8 @@ const bool DEBUG = false;
 #define BIG_BATH_FAN	 				43				// Big bathroom fan  - pin 43
 #define MASTER_BEDROOM_RAD 				36				// Our bedroom radiator - pin 36
 #define WARDROBE_RAD 					37				// Wardrobe room radiator - pin 37
-#define SMALL_BATH_RAD 					40				// Small bathroom next to our bedroom - pin 40
-#define CHILLER_PIN						41				// Just to test chilling logic
+#define BEDROOM_BATH_RAD				40				// Small bathroom next to our bedroom radiator - pin 40
+#define BEDROOM_FAN						41				// Small bathroom next to our bedroom fan- pin 41
 #define FAN_PIN							42				// Just to test fan logic
 
 // 	MQTT topics

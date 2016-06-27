@@ -17,6 +17,7 @@
 #include "BigBathroom.h"
 #include "MasterBedroom.h"
 #include "Wardrobe.h"
+#include "BedroomBath.h"
 
 class RoomManager : public Manager {
 public:

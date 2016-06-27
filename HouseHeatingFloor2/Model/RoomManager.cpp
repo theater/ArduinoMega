@@ -39,6 +39,9 @@ Room* RoomManager::createRoom(RoomId id) {
 		case WARDROBE:
 			rooms[id] = new Wardrobe(mqttClient);
 			break;
+		case BEDROOM_BATH:
+			rooms[id] = new BedroomBath(mqttClient);
+			break;
 		default:
 			break;
 		}
@@ -58,11 +61,17 @@ Room* RoomManager::createRoom(RoomId id) {
 	} else if (!strcmp(sensor, SENSOR_BIGBATH_02)) {
 		rooms[BIG_BATHROOM]->updateHumSensor(value);
 		return;
-	} else  if (!strcmp(sensor, SENSOR_MASTER_BEDROOM_01)) {
+	} else if (!strcmp(sensor, SENSOR_MASTER_BEDROOM_01)) {
 		rooms[MASTER_BEDROOM]->updateTempSensor(value);
 		return;
-	} else  if (!strcmp(sensor, SENSOR_WARDROBE_01)) {
+	} else if (!strcmp(sensor, SENSOR_WARDROBE_01)) {
 		rooms[WARDROBE]->updateTempSensor(value);
+		return;
+	} else if (!strcmp(sensor, SENSOR_BEDROOM_BATH_01)) {
+		rooms[BEDROOM_BATH]->updateTempSensor(value);
+		return;
+	} else if (!strcmp(sensor, SENSOR_BEDROOM_BATH_02)) {
+		rooms[BEDROOM_BATH]->updateHumSensor(value);
 		return;
 	}
 }
