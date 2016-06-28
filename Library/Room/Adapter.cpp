@@ -38,6 +38,6 @@ void Adapter::mqttReceive(const char* topic, const char* payload) {
 	}
 }
 
-void Adapter::sensorUpdate(const char* sensor, short value) {
+void Adapter::sensorUpdate(const char* sensor, float value) {
 	manager->sensorsUpdate(sensor, value);
 }

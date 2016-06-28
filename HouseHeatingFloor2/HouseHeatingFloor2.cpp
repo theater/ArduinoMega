@@ -4,8 +4,8 @@
 
 #include <Adapter.h>
 #include <Arduino.h>
-#include <dht.h>
 #include <DallasTemperature.h>
+#include <dht.h>
 #include <ethernet_comp.h>
 #include <HardwareSerial.h>
 #include <IPAddress.h>
@@ -39,20 +39,27 @@ Adapter* mainAdapter;
 
 //DS18B20
 OneWire oneWire(ONE_WIRE_PIN_01);
-DallasTemperature sensors(&oneWire);
+DallasTemperature owSensors(&oneWire);
 //
 //// DHT22
 
-dht DHT22;
+DHT humBigBath(DHT_BIG_BATH, DHT22);
+DHT humBedroomBath(DHT_BEDROOM_BATH, DHT22);
+
 // Initialize manager
 RoomManager* RoomManager::manager = NULL;
 RoomManager* roomManager = RoomManager::getInstance(mqttClient);
 
 
 Timer trigger;
-void triggerFunc() {
-	//	Simulation values for sensors for testing purposes.
-	//	In main program these will be triggered by real sensors updates
+void sensorsUpdate() {
+	owSensors.requestTemperatures();
+	float bedroomBathTemp = humBedroomBath.readTemperature();
+	float bedroomBathHum = humBedroomBath.readHumidity();
+
+	float bigBathTemp = humBigBath.readTemperature();
+	float bigBathHum = humBigBath.readHumidity();
+
 	short tempSensorKids = random(15, 35);
 	mainAdapter->sensorUpdate(SENSOR_KIDS_01, tempSensorKids);
 
@@ -64,8 +71,11 @@ void triggerFunc() {
 	short humSensorBigBath = random(45, 100);
 	mainAdapter->sensorUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
 
-	short tempSensorMasterBedroom = random(15, 35);
-	mainAdapter->sensorUpdate(SENSOR_MASTER_BEDROOM_01, tempSensorMasterBedroom);
+//	short tempSensorMasterBedroom = random(15, 35);
+	float tempSensorMasterBedroom = owSensors.getTempCByIndex(0);
+	if(tempSensorMasterBedroom > -20) {
+		mainAdapter->sensorUpdate(SENSOR_MASTER_BEDROOM_01, tempSensorMasterBedroom);
+	}
 
 	short tempSensorWardrobe = random(15, 35);
 	mainAdapter->sensorUpdate(SENSOR_WARDROBE_01, tempSensorWardrobe);
@@ -82,7 +92,6 @@ void setup()
 	Serial.begin(115200);
 	Ethernet.begin(macAddress, ipAddress);
 
-
 	MqttUtil::mqttConnect(mqttClient, mainAdapter);
 	mainAdapter = new Adapter(roomManager, mqttClient, DEBUG);
 
@@ -95,8 +104,13 @@ void setup()
 
 	mainAdapter->mqttSubscribe();
 
-	trigger.every(REOCCURRENCE,&triggerFunc);
-	triggerFunc();
+	owSensors.begin();
+	humBedroomBath.begin();
+	humBigBath.begin();
+
+
+	trigger.every(REOCCURRENCE,&sensorsUpdate);
+	sensorsUpdate();
 }
 
 // The loop function is called in an endless loop

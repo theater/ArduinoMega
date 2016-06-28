@@ -48,7 +48,7 @@ Room* RoomManager::createRoom(RoomId id) {
 	}
 	return rooms[id];
 }
-void RoomManager::sensorsUpdate(const char* sensor, short value) {
+void RoomManager::sensorsUpdate(const char* sensor, float value) {
 	if (!strcmp(sensor, SENSOR_KIDS_01)) {
 		rooms[KIDS_BEDROOM]->updateTempSensor(value);
 		return;

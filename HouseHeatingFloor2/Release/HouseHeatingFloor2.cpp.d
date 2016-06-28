@@ -12,7 +12,7 @@ HouseHeatingFloor2.cpp.o: ../HouseHeatingFloor2.cpp \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Arduino.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\variants\mega/pins_arduino.h \
  D:\src\ArduinoMega\Library\Room/MqttUtil.h \
- D:\HomeAutomation\Arduino\libraries\MQTT/PubSubClient.h \
+ D:\HomeAutomation\ArduinoLibs\MQTT/PubSubClient.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/IPAddress.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Printable.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Client.h \
@@ -31,36 +31,36 @@ HouseHeatingFloor2.cpp.o: ../HouseHeatingFloor2.cpp \
  D:\src\ArduinoMega\Library\Room/TemperatureSensor.h \
  D:\src\ArduinoMega\Library\Room/MotionSensor.h \
  D:\src\ArduinoMega\Library\Room/OutputControl.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet\utility/Util.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet\utility/Util.h \
  D:\src\ArduinoMega\Library\Room/Adapter.h \
- D:\HomeAutomation\Arduino\libraries\DHTlib/dht.h \
- D:\HomeAutomation\Arduino\libraries\Dallas\ Temperature/DallasTemperature.h \
- D:\HomeAutomation\Arduino\libraries\OneWire/OneWire.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h \
+ D:\HomeAutomation\ArduinoLibs\Dallas\ Temperature/DallasTemperature.h \
+ D:\HomeAutomation\ArduinoLibs\OneWire/OneWire.h \
+ D:\HomeAutomation\ArduinoLibs\DHT/dht.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/ethernet_comp.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/HardwareSerial.h \
- D:\HomeAutomation\Arduino\libraries\Timer/Timer.h \
- D:\HomeAutomation\Arduino\libraries\Timer/Event.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPClient.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h \
+ D:\HomeAutomation\ArduinoLibs\Timer/Timer.h \
+ D:\HomeAutomation\ArduinoLibs\Timer/Event.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPClient.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/ethernet_comp.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Print.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/mempool.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/mempool_conf.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uipethernet-conf.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uipopt.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip-conf.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/enc28j60.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPEthernet.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/Dhcp.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPUdp.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/mempool.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/mempool_conf.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uipethernet-conf.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uipopt.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uip-conf.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/enc28j60.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uip.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPEthernet.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/Dhcp.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPUdp.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Udp.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/Enc28J60Network.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPClient.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPServer.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/Enc28J60Network.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPClient.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPServer.h \
  C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Server.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_timer.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_clock.h \
- D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/clock-arch.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uip_timer.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uip_clock.h \
+ D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/clock-arch.h \
  ../Config/Config.h ../Config/Restricted.h ../Model/RoomManager.h \
  D:\src\ArduinoMega\Library\Room/Room.h \
  D:\src\ArduinoMega\Library\Room/Manager.h ../Model/BedRoomKids.h \
@@ -96,7 +96,7 @@ C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\variants\mega/pins_
 
 D:\src\ArduinoMega\Library\Room/MqttUtil.h:
 
-D:\HomeAutomation\Arduino\libraries\MQTT/PubSubClient.h:
+D:\HomeAutomation\ArduinoLibs\MQTT/PubSubClient.h:
 
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/IPAddress.h:
 
@@ -134,65 +134,65 @@ D:\src\ArduinoMega\Library\Room/MotionSensor.h:
 
 D:\src\ArduinoMega\Library\Room/OutputControl.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet\utility/Util.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet\utility/Util.h:
 
 D:\src\ArduinoMega\Library\Room/Adapter.h:
 
-D:\HomeAutomation\Arduino\libraries\DHTlib/dht.h:
+D:\HomeAutomation\ArduinoLibs\Dallas\ Temperature/DallasTemperature.h:
 
-D:\HomeAutomation\Arduino\libraries\Dallas\ Temperature/DallasTemperature.h:
+D:\HomeAutomation\ArduinoLibs\OneWire/OneWire.h:
 
-D:\HomeAutomation\Arduino\libraries\OneWire/OneWire.h:
+D:\HomeAutomation\ArduinoLibs\DHT/dht.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/ethernet_comp.h:
 
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/HardwareSerial.h:
 
-D:\HomeAutomation\Arduino\libraries\Timer/Timer.h:
+D:\HomeAutomation\ArduinoLibs\Timer/Timer.h:
 
-D:\HomeAutomation\Arduino\libraries\Timer/Event.h:
+D:\HomeAutomation\ArduinoLibs\Timer/Event.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPClient.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPClient.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/ethernet_comp.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/ethernet_comp.h:
 
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Print.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/mempool.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/mempool.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/mempool_conf.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/mempool_conf.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uipethernet-conf.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uipethernet-conf.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uipopt.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uipopt.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip-conf.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uip-conf.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/enc28j60.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/enc28j60.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uip.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPEthernet.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPEthernet.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/Dhcp.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/Dhcp.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPUdp.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPUdp.h:
 
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Udp.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/Enc28J60Network.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/Enc28J60Network.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPClient.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPClient.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/UIPServer.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/UIPServer.h:
 
 C:\eclipse\arduinoPlugin\packages\arduino\hardware\avr\1.6.5\cores\arduino/Server.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_timer.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uip_timer.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/uip_clock.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/uip_clock.h:
 
-D:\HomeAutomation\Arduino\libraries\UIPEthernet/utility/clock-arch.h:
+D:\HomeAutomation\ArduinoLibs\UIPEthernet/utility/clock-arch.h:
 
 ../Config/Config.h:
 

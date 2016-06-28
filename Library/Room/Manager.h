@@ -19,7 +19,7 @@ public:
 	virtual ~Manager();
 
 	virtual Room* createRoom(RoomId id) = 0;
-	virtual void sensorsUpdate(const char* sensor, short value) = 0;
+	virtual void sensorsUpdate(const char* sensor, float value) = 0;
 	Room* getRoom(RoomId id);
 
 	// Getters and setters

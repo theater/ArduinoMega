@@ -27,8 +27,9 @@ const bool DEBUG = false;
 #define REOCCURRENCE 					30000  		// Decision maker triggered on every xxxxx ms
 
 // PIN assignments
-#define DHT_PIN							8
+#define DHT_BIG_BATH					8
 #define ONE_WIRE_PIN_01 				9
+#define DHT_BEDROOM_BATH				10
 #define KIDS_BEDROOM_RAD_ONE 			30   			// KIDS RADIATOR ONE IS ON PIN 30
 #define KIDS_BEDROOM_RAD_TWO 			31  			// KIDS RADIATOR TWO IS ON PIN 31
 #define CORRIDOR_RAD_ONE 				32				// CORRIDOR RADIATOR ONE IS ON PIN 32

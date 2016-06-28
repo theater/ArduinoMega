@@ -23,7 +23,7 @@ public:
 	virtual ~Adapter();
 	void mqttReceive(const char* topic, const char* strPayload);
 	void mqttSubscribe();
-	void sensorUpdate(const char* sensor, short value);
+	void sensorUpdate(const char* sensor, float value);
 };
 
 #endif /* ROOM_ADAPTER_H_ */
