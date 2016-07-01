@@ -47,9 +47,9 @@ void Corridor::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(DESIRED_TEMP_CORRIDOR_01)) {
 		updateDesiredTemperature(atof(payload));
 	} else if (strTopic.equals(RAD_CORRIDOR_01)) {
-		handleMqttCommandOC(radiatorOne, payload);
+		mqttUpdateOutputControl(radiatorOne, payload);
 	} else if (strTopic.equals(RAD_CORRIDOR_02)) {
-		handleMqttCommandOC(radiatorTwo, payload);
+		mqttUpdateOutputControl(radiatorTwo, payload);
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}

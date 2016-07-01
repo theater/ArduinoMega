@@ -18,7 +18,7 @@ public:
 	Manager(PubSubClient* mqttClient);
 	virtual ~Manager();
 
-	virtual Room* createRoom(RoomId id) = 0;
+	virtual Room* createRoom(RoomId id, bool DEBUG) = 0;
 	virtual void sensorsUpdate(const char* sensor, float value) = 0;
 	Room* getRoom(RoomId id);
 

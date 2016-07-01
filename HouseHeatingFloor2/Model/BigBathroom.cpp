@@ -22,9 +22,9 @@ BigBathroom::BigBathroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 		setHasVentControl(true);
 
 		// initialize and create sensors
-		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BIGBATH_01);
+		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BIGBATH_01, false);
 		setTempSensor((TemperatureSensor*)tempSensor);
-		Sensor* humSensor = createSensor(HUMIDITY, mqttClient, SENSOR_BIGBATH_02);
+		Sensor* humSensor = createSensor(HUMIDITY, mqttClient, SENSOR_BIGBATH_02, false);
 		setHumSensor((HumiditySensor*)humSensor);
 
 		// Set MQTT topics to listen to...
@@ -58,11 +58,13 @@ void BigBathroom::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(DESIRED_HUM_BIGBATH_01)) {
 		updateDesiredHumidity(atof(payload));
 	} else if (strTopic.equals(RAD_BIGBATH_01)) {
-		handleMqttCommandOC(radiatorOne, payload);
+		mqttUpdateOutputControl(radiatorOne, payload);
 	} else if (strTopic.equals(RAD_BIGBATH_02)) {
-		handleMqttCommandOC(radiatorTwo, payload);
+		mqttUpdateOutputControl(radiatorTwo, payload);
 	} else if (strTopic.equals(FAN_BIGBATH)) {
-		handleMqttCommandOC(fan, payload);
+		mqttUpdateOutputControl(fan, payload);
+	} else if (strTopic.equals(SENSOR_BIGBATH_01) || strTopic.equals(SENSOR_BIGBATH_02)) {
+		mqttUpdateSensors(topic, payload);
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}

@@ -36,16 +36,16 @@ Room::Room(RoomId id, PubSubClient* mqttClient, bool DEBUG) {
 Room::~Room() {
 }
 
-Sensor* Room::createSensor(ControlType type, PubSubClient* mqttClient, char* topic) {
+Sensor* Room::createSensor(ControlType type, PubSubClient* mqttClient, char* topic, boolean directlyAttached) {
 	switch (type) {
 		case TEMPERATURE: {
-			return new TemperatureSensor(type, mqttClient, topic);
+			return new TemperatureSensor(type, mqttClient, topic, directlyAttached);
 		}
 		case HUMIDITY: {
-			return new HumiditySensor(type, mqttClient, topic);
+			return new HumiditySensor(type, mqttClient, topic, directlyAttached);
 		}
 		case MOTION: {
-			return new MotionSensor(type, mqttClient, topic);
+			return new MotionSensor(type, mqttClient, topic, directlyAttached);
 		}
 	}
 	return NULL;
@@ -74,8 +74,12 @@ bool Room::ventDecisionMaker() {
 			}
 		}
 		if (DEBUG) {
-//		Serial.println("Decision fan:"+decisionFan);
 			mqttClient->publish("DEBUG", "Room::humDecisionMaker()");
+			if (decisionVent) {
+				mqttClient->publish("DEBUG", "Decision vent = TRUE");
+			} else {
+				mqttClient->publish("DEBUG", "Decision vent = FALSE");
+			}
 		}
 		return this->decisionVent;
 	}
@@ -236,13 +240,25 @@ void Room::subscribeMqttTopics(PubSubClient* mqttClient) {
 	mqttSubscribe(getMqttTopics(), getLen(), mqttClient);
 }
 
+
 void Room::mqttSubscribe(const char* const * topics, int len, PubSubClient* const mqttClient) {
 	for (int i = 0; i < len; i++) {
 		mqttClient->subscribe(topics[i]);
 	}
 }
 
-void Room::handleMqttCommandOC(OutputControl* outputControl, const char* payload) {
+void Room::mqttUpdateSensors(const char* topic, const char* value) {
+	if(tempSensor != NULL) {
+		tempSensor->mqttToSensor(topic, value);
+	} else if(humSensor != NULL) {
+		humSensor->mqttToSensor(topic, value);
+	} else if(motionSensor != NULL) {
+		motionSensor->mqttToSensor(topic, value);
+	}
+	updateDecisionMakers();
+}
+
+void Room::mqttUpdateOutputControl(OutputControl* outputControl, const char* payload) {
 	if (!strcmp(payload, "ON")) {
 		outputControl->setPin(ON);
 	} else {

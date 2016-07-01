@@ -56,9 +56,9 @@ void BedroomBath::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(DESIRED_HUM_BEDROOM_BATH_01)) {
 		updateDesiredHumidity(atof(payload));
 	} else if (strTopic.equals(RAD_BEDROOM_BATH)) {
-		handleMqttCommandOC(radiatorOne, payload);
+		mqttUpdateOutputControl(radiatorOne, payload);
 	} else if (strTopic.equals(FAN_BEDROOM_BATH)) {
-		handleMqttCommandOC(fan, payload);
+		mqttUpdateOutputControl(fan, payload);
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}

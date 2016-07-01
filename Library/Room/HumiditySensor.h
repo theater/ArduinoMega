@@ -12,9 +12,8 @@
 
 class HumiditySensor: public Sensor {
 	public:
-		HumiditySensor(ControlType type, PubSubClient* mqttClient, char* topic);
+		HumiditySensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached);
 		virtual ~HumiditySensor();
-		void sensorToMqttData(PubSubClient* mqttClient);
 };
 
 #endif /* MODEL_HUMIDITYSENSOR_H_ */

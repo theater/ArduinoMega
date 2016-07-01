@@ -21,26 +21,26 @@ RoomManager* RoomManager::getInstance(PubSubClient* mqttClient) {
 RoomManager::~RoomManager() {
 }
 
-Room* RoomManager::createRoom(RoomId id) {
+Room* RoomManager::createRoom(RoomId id, bool DEBUG) {
 	if (rooms[id] == NULL) {
 		switch (id) {
 		case KIDS_BEDROOM:
-			rooms[id] = new BedRoomKids(mqttClient);
+			rooms[id] = new BedRoomKids(mqttClient, DEBUG);
 			break;
 		case CORRIDOR:
-			rooms[id] = new Corridor(mqttClient);
+			rooms[id] = new Corridor(mqttClient, DEBUG);
 			break;
 		case BIG_BATHROOM:
-			rooms[id] = new BigBathroom(mqttClient);
+			rooms[id] = new BigBathroom(mqttClient, DEBUG);
 			break;
 		case MASTER_BEDROOM:
-			rooms[id] = new MasterBedroom(mqttClient);
+			rooms[id] = new MasterBedroom(mqttClient, DEBUG);
 			break;
 		case WARDROBE:
-			rooms[id] = new Wardrobe(mqttClient);
+			rooms[id] = new Wardrobe(mqttClient, DEBUG);
 			break;
 		case BEDROOM_BATH:
-			rooms[id] = new BedroomBath(mqttClient);
+			rooms[id] = new BedroomBath(mqttClient, DEBUG);
 			break;
 		default:
 			break;
@@ -66,12 +66,6 @@ Room* RoomManager::createRoom(RoomId id) {
 		return;
 	} else if (!strcmp(sensor, SENSOR_WARDROBE_01)) {
 		rooms[WARDROBE]->updateTempSensor(value);
-		return;
-	} else if (!strcmp(sensor, SENSOR_BEDROOM_BATH_01)) {
-		rooms[BEDROOM_BATH]->updateTempSensor(value);
-		return;
-	} else if (!strcmp(sensor, SENSOR_BEDROOM_BATH_02)) {
-		rooms[BEDROOM_BATH]->updateHumSensor(value);
 		return;
 	}
 }

@@ -44,7 +44,7 @@ void Wardrobe::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(DESIRED_TEMP_WARDROBE_01)) {
 		updateDesiredTemperature(atof(payload));
 	} else if (strTopic.equals(RAD_WARDROBE)) {
-		handleMqttCommandOC(radiatorOne, payload);
+		mqttUpdateOutputControl(radiatorOne, payload);
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}

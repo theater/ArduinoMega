@@ -7,22 +7,9 @@
 
 #include "MotionSensor.h"
 
-MotionSensor::MotionSensor(ControlType type, PubSubClient* mqttClient, char* topic) : Sensor(MOTION, mqttClient, topic) {
+MotionSensor::MotionSensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached) : Sensor(MOTION, mqttClient, topic, directlyAttached) {
 
 }
 
 MotionSensor::~MotionSensor() {
-}
-
-void MotionSensor::sensorToMqttData(PubSubClient* mqttClient) {
-	bool sensorValue = this->getValue();
-	char* topic = this->getTopic();
-	if (sensorValue) {
-		mqttClient->publish(topic, "CLOSED");
-	} else {
-		mqttClient->publish(topic, "OPEN");
-	}
-	if (Debug()) {
-		mqttClient->publish("DEBUG", "void MotionSensor::sensorToMqttData");
-	}
 }

@@ -85,13 +85,15 @@ const bool DEBUG = false;
 // Temperature sensors
 #define SENSOR_KIDS_01					"home/floor2/kids/temperature/1"
 #define SENSOR_CORRIDOR_01				"home/floor2/corridor/temperature/1"
-#define SENSOR_BIGBATH_01				"home/floor2/bigbath/temperature/1"
-#define SENSOR_MASTER_BEDROOM_01				"home/floor2/masterbedroom/temperature/1"
+#define SENSOR_BIGBATH_01				"BR_TEMP_SENSOR"
+//#define SENSOR_BIGBATH_01				"home/floor2/bigbath/temperature/1"
+#define SENSOR_MASTER_BEDROOM_01		"home/floor2/masterbedroom/temperature/1"
 #define SENSOR_WARDROBE_01				"home/floor2/wardrobe/temperature/1"
 #define SENSOR_BEDROOM_BATH_01			"home/floor2/bedroombath/temperature/1"
 
 // Humidity sensors
-#define SENSOR_BIGBATH_02				"home/floor2/bigbath/humidity/1"
+#define SENSOR_BIGBATH_02				"BR_H_SENSOR"
+//#define SENSOR_BIGBATH_02				"home/floor2/bigbath/humidity/1"
 #define SENSOR_BEDROOM_BATH_02			"home/floor2/bedroombath/humidity/1"
 
 // Setters / desired values

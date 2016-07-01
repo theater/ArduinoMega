@@ -54,11 +54,11 @@ RoomManager* roomManager = RoomManager::getInstance(mqttClient);
 Timer trigger;
 void sensorsUpdate() {
 	owSensors.requestTemperatures();
-	float bedroomBathTemp = humBedroomBath.readTemperature();
-	float bedroomBathHum = humBedroomBath.readHumidity();
-
-	float bigBathTemp = humBigBath.readTemperature();
-	float bigBathHum = humBigBath.readHumidity();
+//	float bedroomBathTemp = humBedroomBath.readTemperature();
+//	float bedroomBathHum = humBedroomBath.readHumidity();
+//
+//	float bigBathTemp = humBigBath.readTemperature();
+//	float bigBathHum = humBigBath.readHumidity();
 
 	short tempSensorKids = random(15, 35);
 	mainAdapter->sensorUpdate(SENSOR_KIDS_01, tempSensorKids);
@@ -66,10 +66,10 @@ void sensorsUpdate() {
 	short tempSensorCorridor = random(15, 35);
 	mainAdapter->sensorUpdate(SENSOR_CORRIDOR_01, tempSensorCorridor);
 
-	short tempSensorBigBath = random(15, 35);
-	mainAdapter->sensorUpdate(SENSOR_BIGBATH_01, tempSensorBigBath);
-	short humSensorBigBath = random(45, 100);
-	mainAdapter->sensorUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
+//	short tempSensorBigBath = random(15, 35);
+//	mainAdapter->sensorUpdate(SENSOR_BIGBATH_01, tempSensorBigBath);
+//	short humSensorBigBath = random(45, 100);
+//	mainAdapter->sensorUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
 
 //	short tempSensorMasterBedroom = random(15, 35);
 	float tempSensorMasterBedroom = owSensors.getTempCByIndex(0);
@@ -77,8 +77,11 @@ void sensorsUpdate() {
 		mainAdapter->sensorUpdate(SENSOR_MASTER_BEDROOM_01, tempSensorMasterBedroom);
 	}
 
-	short tempSensorWardrobe = random(15, 35);
+//	short tempSensorWardrobe = random(15, 35);
+	float tempSensorWardrobe = owSensors.getTempCByIndex(1);
+	if(tempSensorWardrobe > -20) {
 	mainAdapter->sensorUpdate(SENSOR_WARDROBE_01, tempSensorWardrobe);
+	}
 
 	short tempSensorBedroomBath = random(15, 35);
 	mainAdapter->sensorUpdate(SENSOR_BEDROOM_BATH_01, tempSensorBedroomBath);
@@ -97,7 +100,7 @@ void setup()
 
 	roomManager->createRoom(KIDS_BEDROOM);
 	roomManager->createRoom(CORRIDOR);
-	roomManager->createRoom(BIG_BATHROOM);
+	roomManager->createRoom(BIG_BATHROOM, true);
 	roomManager->createRoom(MASTER_BEDROOM);
 	roomManager->createRoom(WARDROBE);
 	roomManager->createRoom(BEDROOM_BATH);

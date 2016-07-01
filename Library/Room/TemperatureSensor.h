@@ -12,9 +12,8 @@
 #include "PubSubClient.h"
 class TemperatureSensor : public Sensor {
 	public:
-		TemperatureSensor(ControlType type, PubSubClient* mqttClient, char* topic);
+		TemperatureSensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached);
 		virtual ~TemperatureSensor();
-		void sensorToMqttData(PubSubClient* mqttClient);
 };
 
 #endif /* MODEL_TEMPERATURESENSOR_H_ */

@@ -17,11 +17,15 @@ class Sensor {
 		char * topic;
 		float value;
 		ControlType type;
+		bool directlyAttached;
+
 		bool DEBUG;
+
 	public:
-		Sensor(ControlType type, PubSubClient* mqttClient, char* topic, bool DEBUG=false);
-		virtual void sensorToMqttData(PubSubClient* mqttClient) = 0;
+		Sensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached, bool DEBUG=false);
+		void sensorToMqttData(PubSubClient* mqttClient);
 		virtual ~Sensor();
+		void mqttToSensor(const char* topic, const char* value);
 
 		//getters/setters
 		void setMqttClient(PubSubClient* const mqttClient);

@@ -45,7 +45,7 @@ void MasterBedroom::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(DESIRED_TEMP_MASTER_BEDROOM_01)) {
 		updateDesiredTemperature(atof(payload));
 	} else if (strTopic.equals(RAD_MASTER_BEDROOM)) {
-		handleMqttCommandOC(radiatorOne, payload);
+		mqttUpdateOutputControl(radiatorOne, payload);
 	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}

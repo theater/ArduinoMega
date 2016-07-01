@@ -64,11 +64,12 @@ class Room {
 		void updateSensors(short tempSensorValue,short humSensorValue);
 		void updateDesiredValues(short desiredTemperature,short desiredHumidity);
 		void updateMode(const char* mode);
-		Sensor* createSensor(ControlType type, PubSubClient* mqttClient, char* topic);
+		Sensor* createSensor(ControlType type, PubSubClient* mqttClient, char* topic, boolean directlyAttached=true);
 		bool containsTopic(const char * topic);
 		void subscribeMqttTopics(PubSubClient* mqttClient);
+		void mqttUpdateSensors(const char* topic, const char* value);
 		void mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient);
-		void handleMqttCommandOC(OutputControl* outputControl, const char* payload);
+		void mqttUpdateOutputControl(OutputControl* outputControl, const char* payload);
 		void updateOutputControllers();
 		void updateDecisionMakers();
 

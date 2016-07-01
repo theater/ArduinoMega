@@ -21,13 +21,15 @@ public:
 		OutputControl* fan;
 
 		//TODO: ugly - fix it somehow later
-		const static int length = 6;
+		const static int length = 8;
 		const char * topics[length] = { RAD_BIGBATH_01,
 										RAD_BIGBATH_02,
 										FAN_BIGBATH,
 										DESIRED_TEMP_BIGBATH_01,
 										DESIRED_HUM_BIGBATH_01,
-										MODE_BIGBATH };
+										MODE_BIGBATH,
+										SENSOR_BIGBATH_01,
+										SENSOR_BIGBATH_02};
 public:
 	BigBathroom(PubSubClient* mqttClient, bool DEBUG=false);
 	virtual ~BigBathroom();

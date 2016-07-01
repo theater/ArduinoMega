@@ -7,18 +7,8 @@
 
 #include "HumiditySensor.h"
 
-HumiditySensor::HumiditySensor(ControlType type, PubSubClient* mqttClient, char* topic) : Sensor(HUMIDITY, mqttClient, topic) {
+HumiditySensor::HumiditySensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached) : Sensor(HUMIDITY, mqttClient, topic, directlyAttached) {
 }
 
 HumiditySensor::~HumiditySensor() {
-}
-
-void HumiditySensor::sensorToMqttData(PubSubClient* mqttClient) {
-	char sensorCharValue[10];
-	dtostrf(this->getValue(), 4, 2, sensorCharValue);
-	char* topic = this->getTopic();
-	mqttClient->publish(topic, sensorCharValue);
-	if (Debug()) {
-		mqttClient->publish("DEBUG", "void HumiditySensor::sensorToMqttData");
-	}
 }
