@@ -31,6 +31,7 @@ Corridor::Corridor(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
 Corridor::~Corridor() {
 	delete radiatorOne;
 	delete radiatorTwo;
+	delete getTempSensor();
 }
 
 // Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)

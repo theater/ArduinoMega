@@ -35,7 +35,11 @@ BigBathroom::BigBathroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 }
 
 BigBathroom::~BigBathroom() {
-	// TODO Auto-generated destructor stub
+	delete radiatorOne;
+	delete radiatorTwo;
+	delete fan;
+	delete getTempSensor();
+	delete getHumSensor();
 }
 
 // Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)

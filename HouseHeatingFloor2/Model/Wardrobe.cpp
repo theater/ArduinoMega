@@ -29,6 +29,7 @@ Wardrobe::Wardrobe(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient) 
 
 Wardrobe::~Wardrobe() {
 	delete radiatorOne;
+	delete getTempSensor();
 }
 
 // Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)

@@ -35,6 +35,9 @@ BedroomBath::BedroomBath(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 
 BedroomBath::~BedroomBath() {
 	delete radiatorOne;
+	delete fan;
+	delete getTempSensor();
+	delete getHumSensor();
 }
 
 // Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)

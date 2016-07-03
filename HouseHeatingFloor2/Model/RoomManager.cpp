@@ -7,6 +7,12 @@
 
 #include "RoomManager.h"
 
+#include <stdbool.h>
+#include <string.h>
+#include <Util.h>
+
+#include "../Config/Config.h"
+
 RoomManager::RoomManager(PubSubClient* mqttClient) : Manager(mqttClient){
 	this->mqttClient = mqttClient;
 }
@@ -19,6 +25,10 @@ RoomManager* RoomManager::getInstance(PubSubClient* mqttClient) {
 }
 
 RoomManager::~RoomManager() {
+	for (int i = 0; i < count; i++) {
+		Room** room = getRooms();
+		delete room[i];
+	}
 }
 
 Room* RoomManager::createRoom(RoomId id, bool DEBUG) {

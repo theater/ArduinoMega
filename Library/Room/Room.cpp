@@ -250,9 +250,11 @@ void Room::mqttSubscribe(const char* const * topics, int len, PubSubClient* cons
 void Room::mqttUpdateSensors(const char* topic, const char* value) {
 	if(tempSensor != NULL) {
 		tempSensor->mqttToSensor(topic, value);
-	} else if(humSensor != NULL) {
+	}
+	if(humSensor != NULL) {
 		humSensor->mqttToSensor(topic, value);
-	} else if(motionSensor != NULL) {
+	}
+	if(motionSensor != NULL) {
 		motionSensor->mqttToSensor(topic, value);
 	}
 	updateDecisionMakers();

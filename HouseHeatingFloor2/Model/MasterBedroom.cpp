@@ -30,6 +30,7 @@ MasterBedroom::MasterBedroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mq
 
 MasterBedroom::~MasterBedroom() {
 	delete radiatorOne;
+	delete getTempSensor();
 }
 
 // Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)

@@ -35,6 +35,7 @@ public:
 private:
 	RoomManager(PubSubClient* mqttClient);
 	PubSubClient* mqttClient;
+	Room** room;
 };
 
 #endif /* MODEL_ROOMMANAGER_H_ */
