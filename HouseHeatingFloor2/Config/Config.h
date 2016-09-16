@@ -40,7 +40,8 @@ const bool DEBUG = false;
 #define MASTER_BEDROOM_RAD 				36				// Our bedroom radiator - pin 36
 #define WARDROBE_RAD 					37				// Wardrobe room radiator - pin 37
 #define BEDROOM_BATH_RAD				40				// Small bathroom next to our bedroom radiator - pin 40
-#define BEDROOM_FAN						41				// Small bathroom next to our bedroom fan- pin 41
+#define BEDROOM_FAN_SWITCH				41				// Small bathroom next to our bedroom fan-on off switch pin 41
+#define BEDROOM_FAN_SPEED				43				// Small bathroom next to our bedroom fan-speed control pin 43
 #define FAN_PIN							42				// Just to test fan logic
 
 // 	MQTT topics
@@ -110,6 +111,9 @@ const bool DEBUG = false;
 // Aliases
 #define ON true						// boolean alias for ON
 #define OFF false  					// boolean alias for OFF
+
+#define FAST true					// boolean alias for fan speed pin - fast
+#define SLOW false					// boolean alias for fan speed pin - slow
 
 #endif /* CONFIG_H_ */
 

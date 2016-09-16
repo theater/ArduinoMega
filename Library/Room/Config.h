@@ -23,6 +23,7 @@
 #define ON true						// boolean alias for ON
 #define OFF false  					// boolean alias for OFF
 
-
+#define FAST true					// boolean alias for fan speed pin - fast
+#define SLOW false					// boolean alias for fan speed pin - slow
 
 #endif /* ROOM_CONFIG_H_ */

@@ -37,7 +37,7 @@ public:
 	void mqttReceive(const char* strTopic, const char* strPayload);
 	void heatOutputs(bool state);
 	void chillOutputs(bool state) {};
-	void humidityOutputs(bool state);
+	void humidityOutputs(bool state, bool fanSpeed);
 };
 
 #endif /* MODEL_BIGBATHROOM_H_ */

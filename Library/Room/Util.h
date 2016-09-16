@@ -30,6 +30,13 @@ enum RoomId {
 	WARDROBE,
 	BIG_BATHROOM
 };
+
+enum FanControlType {
+	NONE,
+	NORMAL,
+	DUAL_SPEED
+};
+
 namespace Util {
 
 	static const char* getSensorTypeToStr(ControlType type) {

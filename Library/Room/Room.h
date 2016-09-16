@@ -34,7 +34,8 @@ class Room {
 
 		HumiditySensor* humSensor;
 		short desiredHumidity;
-		bool decisionVent;
+		bool decisionFan;
+		bool fanSpeed;
 
 		MotionSensor* motionSensor;
 		bool decisionMotion;
@@ -56,7 +57,7 @@ class Room {
 		virtual void mqttReceive(const char* topic, const char* payload) = 0;
 		virtual void heatOutputs(bool state) = 0; 			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
 		virtual void chillOutputs(bool state) = 0;			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
-		virtual void humidityOutputs(bool state) = 0;		// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
+		virtual void humidityOutputs(bool state, bool fanSpeed) = 0;		// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
 
 		void updateTempSensor(float tempSensorValue);
 		void updateHumSensor(short humSensorValue);
@@ -113,6 +114,8 @@ class Room {
 		void setMode(Mode mode);
 		RoomId getId() const;
 		void setId(RoomId id);
+		bool getFanSpeed();
+		void setFanSpeed(bool fanSpeed);
 
 		private:
 		bool decisionMaker();

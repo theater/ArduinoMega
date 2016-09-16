@@ -17,8 +17,8 @@ BedroomBath::BedroomBath(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 		radiatorOne = new OutputControl(BEDROOM_BATH_RAD, OFF, RAD_BEDROOM_BATH_CB, mqttClient);
 		setHasHeatingControl(true);
 
-		fan = new OutputControl(BEDROOM_FAN, OFF, FAN_BEDROOM_BATH_CB, mqttClient);
-		setHasVentControl(true);
+		fan = new OutputControl(BEDROOM_FAN_SWITCH, OFF, FAN_BEDROOM_BATH_CB, mqttClient);
+		setHasVentControl(DUAL_SPEED);
 
 		// initialize and create sensors
 		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BEDROOM_BATH_01);
@@ -45,7 +45,7 @@ void BedroomBath::heatOutputs(bool state) {
 	radiatorOne->setPin(state);
 }
 
-void BedroomBath::humidityOutputs(bool state) {
+void BedroomBath::humidityOutputs(bool state, bool fanSpeed) {
 	fan->setPin(state);
 }
 

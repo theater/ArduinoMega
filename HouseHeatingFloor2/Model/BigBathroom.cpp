@@ -19,7 +19,7 @@ BigBathroom::BigBathroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 		radiatorTwo = new OutputControl(BIG_BATH_RAD_TWO, OFF, RAD_BIGBATH_02_CB, mqttClient);
 		setHasHeatingControl(true);
 		fan = new OutputControl(BIG_BATH_FAN, OFF, FAN_BIGBATH_CB, mqttClient);
-		setHasVentControl(true);
+		setHasVentControl(DUAL_SPEED);
 
 		// initialize and create sensors
 		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BIGBATH_01, false);
@@ -48,7 +48,7 @@ void BigBathroom::heatOutputs(bool state) {
 	radiatorTwo->setPin(state);
 }
 
-void BigBathroom::humidityOutputs(bool state) {
+void BigBathroom::humidityOutputs(bool state, bool fanSpeed) {
 	fan->setPin(state);
 }
 

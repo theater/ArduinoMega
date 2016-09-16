@@ -23,7 +23,7 @@ Room::Room(RoomId id, PubSubClient* mqttClient, bool DEBUG) {
 	decisionCool = false;
 
 	desiredHumidity = DEFAULT_DESIRED_HUMIDITY;
-	decisionVent = false;
+	decisionFan = false;
 
 	hasHeatingControl = false;		//default: no control in base class
 	hasCoolingControl = false;		//default: no control in base class
@@ -66,22 +66,24 @@ bool Room::ventDecisionMaker() {
 	}
 	if (humSensor != NULL) {
 		float sensorValue = this->humSensor->getValue();
-		if (hasVentControl) {
-			if (desiredHumidity <= sensorValue - 3) {
-				setDecisionVent(true);
-			} else if (desiredHumidity >= sensorValue + 3) {
-				setDecisionVent(false);
-			}
+		if (desiredHumidity <= sensorValue - 3) {
+			setDecisionVent(ON);
+			setFanSpeed(FAST);
+		} else if (desiredHumidity <= sensorValue - 3) {
+			setDecisionVent(ON);
+			setFanSpeed(SLOW);
+		} else if (desiredHumidity >= sensorValue + 3) {
+			setDecisionVent(OFF);
 		}
 		if (DEBUG) {
 			mqttClient->publish("DEBUG", "Room::humDecisionMaker()");
-			if (decisionVent) {
+			if (decisionFan) {
 				mqttClient->publish("DEBUG", "Decision vent = TRUE");
 			} else {
 				mqttClient->publish("DEBUG", "Decision vent = FALSE");
 			}
 		}
-		return this->decisionVent;
+		return this->decisionFan;
 	}
 	return false;
 }
@@ -280,9 +282,9 @@ void Room::updateOutputControllers() {
 		chillOutputs(OFF);
 	}
 	if(getHasVentControl() && getDecisionVent()) {
-		humidityOutputs(ON);
+		humidityOutputs(ON, fanSpeed);
 	} else {
-		humidityOutputs(OFF);
+		humidityOutputs(OFF, fanSpeed);
 	}
 }
 
@@ -376,11 +378,11 @@ void Room::setDecisionHeat(bool decisionHeat) {
 }
 
 bool Room::getDecisionVent() const {
-	return decisionVent;
+	return decisionFan;
 }
 
 void Room::setDecisionVent(bool decisionVent) {
-	this->decisionVent = decisionVent;
+	this->decisionFan = decisionVent;
 }
 
 bool Room::getHasCoolingControl() const {
@@ -439,4 +441,11 @@ void Room::setId(RoomId id) {
 	this->id = id;
 }
 
+bool Room::getFanSpeed() {
+	return fanSpeed;
+}
+
+void Room::setFanSpeed(bool fanSpeed) {
+	this->fanSpeed = fanSpeed;
+}
 
