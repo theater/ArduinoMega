@@ -66,7 +66,7 @@ bool Room::ventDecisionMaker() {
 	}
 	if (humSensor != NULL) {
 		float sensorValue = this->humSensor->getValue();
-		if (desiredHumidity <= sensorValue - 3) {
+		if (desiredHumidity +15 <= sensorValue) {
 			setDecisionVent(ON);
 			setFanSpeed(FAST);
 		} else if (desiredHumidity <= sensorValue - 3) {
@@ -74,6 +74,7 @@ bool Room::ventDecisionMaker() {
 			setFanSpeed(SLOW);
 		} else if (desiredHumidity >= sensorValue + 3) {
 			setDecisionVent(OFF);
+			setFanSpeed(SLOW);
 		}
 		if (DEBUG) {
 			mqttClient->publish("DEBUG", "Room::humDecisionMaker()");
