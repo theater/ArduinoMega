@@ -57,7 +57,7 @@ class Room {
 		virtual void mqttReceive(const char* topic, const char* payload) = 0;
 		virtual void heatOutputs(bool state) = 0; 			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
 		virtual void chillOutputs(bool state) = 0;			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
-		virtual void humidityOutputs(bool state, bool fanSpeed) = 0;		// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
+		virtual void humidityControl(bool state, bool fanSpeed) = 0;		// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
 
 		void updateTempSensor(float tempSensorValue);
 		void updateHumSensor(short humSensorValue);

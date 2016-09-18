@@ -11,6 +11,7 @@
 #include <Room.h>
 
 #include "../Config/Config.h"
+#include "Fan.h"
 
 class BigBathroom: public Room {
 public:
@@ -18,13 +19,13 @@ public:
 
 		OutputControl* radiatorOne;
 		OutputControl* radiatorTwo;
-		OutputControl* fan;
+		Fan* fan;
 
 		//TODO: ugly - fix it somehow later
 		const static int length = 8;
 		const char * topics[length] = { RAD_BIGBATH_01,
 										RAD_BIGBATH_02,
-										FAN_BIGBATH,
+										FAN_SWITCH_BIGBATH,
 										DESIRED_TEMP_BIGBATH_01,
 										DESIRED_HUM_BIGBATH_01,
 										MODE_BIGBATH,
@@ -37,7 +38,7 @@ public:
 	void mqttReceive(const char* strTopic, const char* strPayload);
 	void heatOutputs(bool state);
 	void chillOutputs(bool state) {};
-	void humidityOutputs(bool state, bool fanSpeed);
+	void humidityControl(bool state, bool fanSpeed);
 };
 
 #endif /* MODEL_BIGBATHROOM_H_ */

@@ -36,7 +36,8 @@ const bool DEBUG = false;
 #define CORRIDOR_RAD_TWO 				33				// CORRIDOR RADIATOR TWO IS ON PIN 33
 #define BIG_BATH_RAD_ONE 				34				// Big bathroom radiator one  - pin 34
 #define BIG_BATH_RAD_TWO 				35				// Big bathroom radiator two  - pin 35
-#define BIG_BATH_FAN	 				43				// Big bathroom fan  - pin 43
+#define BIG_BATH_FAN_SWITCH				45				// Big bathroom fan  - pin 43
+#define BIG_BATH_FAN_SPEED				46				// Big bathroom fan  - pin 43
 #define MASTER_BEDROOM_RAD 				36				// Our bedroom radiator - pin 36
 #define WARDROBE_RAD 					37				// Wardrobe room radiator - pin 37
 #define BEDROOM_BATH_RAD				40				// Small bathroom next to our bedroom radiator - pin 40
@@ -78,10 +79,14 @@ const bool DEBUG = false;
 #define RAD_WARDROBE_CB					"home/floor2/wardrobe/radiator/1cb"
 #define RAD_BEDROOM_BATH				"home/floor2/bedroombath/radiator/1"
 #define RAD_BEDROOM_BATH_CB				"home/floor2/bedroombath/radiator/1cb"
-#define FAN_BIGBATH						"home/floor2/bigbath/fan/1"
-#define FAN_BIGBATH_CB					"home/floor2/bigbath/fan/1cb"
-#define FAN_BEDROOM_BATH				"home/floor2/bedroombath/fan/1"
-#define FAN_BEDROOM_BATH_CB				"home/floor2/bedroombath/fan/1cb"
+#define FAN_SWITCH_BIGBATH				"home/floor2/bigbath/fan/1"
+#define FAN_SWITCH_BIGBATH_CB			"home/floor2/bigbath/fan/1cb"
+#define FAN_SPEED_BIGBATH				"home/floor2/bigbath/fan/1/speed"
+#define FAN_SPEED_BIGBATH_CB			"home/floor2/bigbath/fan/1/speed/cb"
+#define FAN_SWITCH_BEDROOM_BATH			"home/floor2/bedroombath/fan/1"
+#define FAN_SWITCH_BEDROOM_BATH_CB		"home/floor2/bedroombath/fan/1/cb"
+#define FAN_SPEED_BEDROOM_BATH			"home/floor2/bedroombath/fan/1/speed"
+#define FAN_SPEED_BEDROOM_BATH_CB		"home/floor2/bedroombath/fan/1/speed/cb"
 
 // Temperature sensors
 #define SENSOR_KIDS_01					"home/floor2/kids/temperature/1"
@@ -116,5 +121,6 @@ const bool DEBUG = false;
 #define SLOW false					// boolean alias for fan speed pin - slow
 
 #endif /* CONFIG_H_ */
+
 
 

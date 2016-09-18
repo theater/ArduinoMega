@@ -24,7 +24,7 @@ public:
 	Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB,
 									PubSubClient* mqttClient, bool DEBUG=false);
 	virtual ~Fan();
-	void FanControl(bool state, bool speed);
+	void fanControl(bool state, bool speed);
 
 private:
 	FanControlType fanType;
@@ -35,6 +35,8 @@ private:
 public:
 	FanControlType getFanType();
 	void setFanType(FanControlType fanType);
+	OutputControl* getFanSpeedControl();
+	OutputControl* getFanSwitch();
 };
 
 #endif /* LIBRARIES_ROOM_FAN_H_ */

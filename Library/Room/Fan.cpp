@@ -21,7 +21,7 @@ Fan::Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, 
 	fanSwitch = new OutputControl(fanSwitchPinId, fanSwitchPinStatus, fanSwitchTopicCB, mqttClient);
 }
 
-void Fan::FanControl(bool state, bool speed) {
+void Fan::fanControl(bool state, bool speed) {
 	fanSwitch->setPin(state);
 	if(fanType == DUAL_SPEED) {
 		fanSpeedControl->setPin(speed);
@@ -36,6 +36,14 @@ Fan::~Fan() {
 
 FanControlType Fan::getFanType() {
 	return fanType;
+}
+
+OutputControl* Fan::getFanSpeedControl() {
+	return fanSpeedControl;
+}
+
+OutputControl* Fan::getFanSwitch() {
+	return fanSwitch;
 }
 
 void Fan::setFanType(FanControlType fanType) {

@@ -282,9 +282,9 @@ void Room::updateOutputControllers() {
 		chillOutputs(OFF);
 	}
 	if(getHasVentControl() && getDecisionVent()) {
-		humidityOutputs(ON, fanSpeed);
+		humidityControl(ON, fanSpeed);
 	} else {
-		humidityOutputs(OFF, fanSpeed);
+		humidityControl(OFF, fanSpeed);
 	}
 }
 

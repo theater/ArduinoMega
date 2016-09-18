@@ -11,18 +11,19 @@
 #include <Room.h>
 
 #include "../Config/Config.h"
+#include "Fan.h"
 
 class BedroomBath: public Room {
 public:
 	const static RoomId id = BEDROOM_BATH;
 
 		OutputControl* radiatorOne;
-		OutputControl* fan;
+		Fan* fan;
 
 		//TODO: ugly - fix it somehow later
 		const static int length = 5;
 		const char * topics[length] = { RAD_BEDROOM_BATH,
-										FAN_BEDROOM_BATH,
+										FAN_SWITCH_BEDROOM_BATH,
 										DESIRED_TEMP_BEDROOM_BATH_01,
 										DESIRED_HUM_BEDROOM_BATH_01,
 										MODE_BEDROOM_BATH };
@@ -33,7 +34,7 @@ public:
 	void mqttReceive(const char* strTopic, const char* strPayload);
 	void heatOutputs(bool state);
 	void chillOutputs(bool state) {};
-	void humidityOutputs(bool state, bool fanSpeed);
+	void humidityControl(bool state, bool fanSpeed);
 };
 
 #endif /* MODEL_BEDROOMBATH_H_ */

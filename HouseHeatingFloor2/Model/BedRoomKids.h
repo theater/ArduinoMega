@@ -37,7 +37,7 @@ class BedRoomKids: public Room {
 		void mqttReceive(const char* strTopic, const char* strPayload);
 		void heatOutputs(bool state);
 		void chillOutputs(bool state) {};
-		void humidityOutputs(bool state, bool fanSpeed) {};
+		void humidityControl(bool state, bool fanSpeed){};
 };
 
 #endif /* MODEL_BEDROOMKIDS_H_ */
