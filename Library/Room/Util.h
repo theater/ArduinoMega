@@ -1,7 +1,7 @@
 /*
  * Util.h
  *
- *  Created on: 11.06.2016 ã.
+ *  Created on: 11.06.2016 Ã£.
  *      Author: theater
  */
 
@@ -53,5 +53,6 @@ namespace Util {
 	}
 }
 
+// check how to merge
 
 #endif /* UTIL_H_ */
