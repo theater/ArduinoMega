@@ -22,10 +22,11 @@ public:
 		Fan* fan;
 
 		//TODO: ugly - fix it somehow later
-		const static int length = 8;
+		const static int length = 9;
 		const char * topics[length] = { RAD_BIGBATH_01,
 										RAD_BIGBATH_02,
 										FAN_SWITCH_BIGBATH,
+										FAN_SPEED_BIGBATH,
 										DESIRED_TEMP_BIGBATH_01,
 										DESIRED_HUM_BIGBATH_01,
 										MODE_BIGBATH,

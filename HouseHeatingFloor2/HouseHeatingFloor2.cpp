@@ -66,10 +66,10 @@ void sensorsUpdate() {
 	short tempSensorCorridor = random(15, 35);
 	mainAdapter->sensorUpdate(SENSOR_CORRIDOR_01, tempSensorCorridor);
 
-//	short tempSensorBigBath = random(15, 35);
-//	mainAdapter->sensorUpdate(SENSOR_BIGBATH_01, tempSensorBigBath);
-//	short humSensorBigBath = random(45, 100);
-//	mainAdapter->sensorUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
+	short tempSensorBigBath = random(15, 35);
+	mainAdapter->sensorUpdate(SENSOR_BIGBATH_01, tempSensorBigBath);
+	short humSensorBigBath = random(45, 100);
+	mainAdapter->sensorUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
 
 //	short tempSensorMasterBedroom = random(15, 35);
 	float tempSensorMasterBedroom = owSensors.getTempCByIndex(0);
@@ -100,7 +100,7 @@ void setup()
 
 	roomManager->createRoom(KIDS_BEDROOM);
 	roomManager->createRoom(CORRIDOR);
-	roomManager->createRoom(BIG_BATHROOM, true);
+	roomManager->createRoom(BIG_BATHROOM);
 	roomManager->createRoom(MASTER_BEDROOM);
 	roomManager->createRoom(WARDROBE);
 	roomManager->createRoom(BEDROOM_BATH);

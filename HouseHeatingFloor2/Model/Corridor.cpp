@@ -18,7 +18,7 @@ Corridor::Corridor(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
 		radiatorTwo = new OutputControl(CORRIDOR_RAD_TWO, OFF, RAD_CORRIDOR_02_CB, mqttClient);
 		setHasHeatingControl(true);
 		// initialize and create sensors
-		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_CORRIDOR_01);
+		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_CORRIDOR_01, true);
 		setTempSensor((TemperatureSensor*)tempSensor);
 
 		// Set MQTT topics to listen to...

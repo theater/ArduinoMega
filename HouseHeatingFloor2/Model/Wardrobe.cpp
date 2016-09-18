@@ -17,7 +17,7 @@ Wardrobe::Wardrobe(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient) 
 			radiatorOne = new OutputControl(WARDROBE_RAD, OFF, RAD_WARDROBE_CB, mqttClient);
 			setHasHeatingControl(true);
 			// initialize and create sensors
-			Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_WARDROBE_01);
+			Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_WARDROBE_01, true);
 			setTempSensor((TemperatureSensor*)tempSensor);
 
 			// Set MQTT topics to listen to...

@@ -23,9 +23,9 @@ BedroomBath::BedroomBath(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 		setHasVentControl(true);
 
 		// initialize and create sensors
-		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BEDROOM_BATH_01);
+		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BEDROOM_BATH_01, true);
 		setTempSensor((TemperatureSensor*)tempSensor);
-		Sensor* humSensor = createSensor(HUMIDITY, mqttClient, SENSOR_BEDROOM_BATH_02);
+		Sensor* humSensor = createSensor(HUMIDITY, mqttClient, SENSOR_BEDROOM_BATH_02, true);
 		setHumSensor((HumiditySensor*)humSensor);
 
 		// Set MQTT topics to listen to...
@@ -64,7 +64,9 @@ void BedroomBath::mqttReceive(const char* topic, const char* payload) {
 		mqttUpdateOutputControl(radiatorOne, payload);
 	} else if (strTopic.equals(FAN_SWITCH_BEDROOM_BATH)) {
 		mqttUpdateOutputControl(fan->getFanSwitch(), payload);
-	} else {
+	} else if (strTopic.equals(FAN_SPEED_BEDROOM_BATH)) {
+		mqttUpdateOutputControl(fan->getFanSpeedControl(), payload);
+	}else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}
 }

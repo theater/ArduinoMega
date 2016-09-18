@@ -23,7 +23,7 @@ BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 	setHasHeatingControl(true);
 
 	// initialize and create sensors
-	Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_KIDS_01);
+	Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_KIDS_01, true);
 	setTempSensor((TemperatureSensor*)tempSensor);
 
 	// Set MQTT topics to listen to...
