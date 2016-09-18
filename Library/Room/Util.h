@@ -36,7 +36,7 @@ enum FanControlType {
 	NORMAL,
 	DUAL_SPEED
 };
-// test how to merge
+
 namespace Util {
 
 	static const char* getSensorTypeToStr(ControlType type) {
@@ -52,7 +52,5 @@ namespace Util {
 		}
 	}
 }
-
-// check how to merge
 
 #endif /* UTIL_H_ */
