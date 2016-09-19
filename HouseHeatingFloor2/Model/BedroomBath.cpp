@@ -20,7 +20,7 @@ BedroomBath::BedroomBath(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 //		fan = new OutputControl(BEDROOM_FAN_SWITCH, OFF, FAN_BEDROOM_BATH_CB, mqttClient);
 		fan = new Fan(DUAL_SPEED, BEDROOM_FAN_SWITCH, OFF, FAN_SWITCH_BEDROOM_BATH_CB,
 					  BEDROOM_FAN_SPEED, OFF, FAN_SPEED_BEDROOM_BATH_CB, mqttClient);
-		setHasVentControl(true);
+		setHasFanControl(DUAL_SPEED);
 
 		// initialize and create sensors
 		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BEDROOM_BATH_01, true);
@@ -66,7 +66,7 @@ void BedroomBath::mqttReceive(const char* topic, const char* payload) {
 		mqttUpdateOutputControl(fan->getFanSwitch(), payload);
 	} else if (strTopic.equals(FAN_SPEED_BEDROOM_BATH)) {
 		mqttUpdateOutputControl(fan->getFanSpeedControl(), payload);
-	}else {
+	} else {
 		getMqttClient()->publish("DEBUG", "No matching rules found");
 	}
 }

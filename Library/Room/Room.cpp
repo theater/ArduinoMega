@@ -66,13 +66,13 @@ bool Room::ventDecisionMaker() {
 	}
 	if (humSensor != NULL) {
 		float sensorValue = this->humSensor->getValue();
-		if (desiredHumidity +15 <= sensorValue) {
+		if (desiredHumidity + FAN_HIGH_SPEED_TRESHOLD <= sensorValue) {
 			setDecisionVent(ON);
 			setFanSpeed(FAST);
-		} else if (desiredHumidity <= sensorValue - 3) {
+		} else if (desiredHumidity <= sensorValue - FAN_DEVIATION_TRESHOLD) {
 			setDecisionVent(ON);
 			setFanSpeed(SLOW);
-		} else if (desiredHumidity >= sensorValue + 3) {
+		} else if (desiredHumidity >= sensorValue + FAN_DEVIATION_TRESHOLD) {
 			setDecisionVent(OFF);
 			setFanSpeed(SLOW);
 		}
@@ -98,9 +98,9 @@ bool Room::heatingDecisionMaker() {
 	if (tempSensor != NULL) {
 		float sensorValue = tempSensor->getValue();
 		if (hasHeatingControl) {
-			if (desiredTemperature >= sensorValue + 0.5) {
+			if (desiredTemperature >= sensorValue + HEATER_TRESHOLD_DEVIATION) {
 				setDecisionHeat(true);
-			} else if (desiredTemperature <= sensorValue - 0.5) {
+			} else if (desiredTemperature <= sensorValue - HEATER_TRESHOLD_DEVIATION) {
 				setDecisionHeat(false);
 			}
 		}
@@ -125,9 +125,9 @@ bool Room::coolingDecisionMaker() {
 	if (tempSensor != NULL) {
 		float sensorValue = tempSensor->getValue();
 		if (hasCoolingControl) {
-			if (desiredTemperature <= sensorValue - 0.5) {
+			if (desiredTemperature <= sensorValue - HEATER_TRESHOLD_DEVIATION) {
 				setDecisionCool(true);
-			} else if (desiredTemperature >= sensorValue + 0.5) {
+			} else if (desiredTemperature >= sensorValue + HEATER_TRESHOLD_DEVIATION) {
 				setDecisionCool(false);
 			}
 		}
@@ -406,7 +406,7 @@ bool Room::getHasVentControl() const {
 	return hasVentControl;
 }
 
-void Room::setHasVentControl(bool hasVentControl) {
+void Room::setHasFanControl(bool hasVentControl) {
 	this->hasVentControl = hasVentControl;
 }
 

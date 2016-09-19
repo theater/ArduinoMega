@@ -20,7 +20,7 @@ BigBathroom::BigBathroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttCl
 		setHasHeatingControl(true);
 		fan = new Fan(DUAL_SPEED, BIG_BATH_FAN_SWITCH, OFF, FAN_SWITCH_BIGBATH_CB,
 					  	  	  	  BIG_BATH_FAN_SPEED, SLOW, FAN_SPEED_BIGBATH_CB, mqttClient);
-		setHasVentControl(DUAL_SPEED);
+		setHasFanControl(DUAL_SPEED);
 
 		// initialize and create sensors
 		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BIGBATH_01, true);

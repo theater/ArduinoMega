@@ -50,6 +50,9 @@ class Room {
 		int len;
 
 		bool DEBUG;
+		static const int FAN_HIGH_SPEED_TRESHOLD = 15;
+		static const double HEATER_TRESHOLD_DEVIATION = 0.5;
+		static const int FAN_DEVIATION_TRESHOLD = 3;
 
 	public:
 		Room(RoomId id, PubSubClient *  mqttClient, bool DEBUG = false);
@@ -105,7 +108,7 @@ class Room {
 		bool getHasHeatingControl() const;
 		void setHasHeatingControl(bool hasHeatingControl);
 		bool getHasVentControl() const;
-		void setHasVentControl(bool hasVentControl);
+		void setHasFanControl(bool hasVentControl);
 		const char** getMqttTopics() const;
 		void setMqttTopics(const char** mqttTopics);
 		int getLen() const;

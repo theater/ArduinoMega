@@ -77,6 +77,12 @@ Room* RoomManager::createRoom(RoomId id, bool DEBUG) {
 	} else if (!strcmp(sensor, SENSOR_WARDROBE_01)) {
 		rooms[WARDROBE]->updateTempSensor(value);
 		return;
+	} else if (!strcmp(sensor, SENSOR_BEDROOM_BATH_01)) {
+		rooms[BEDROOM_BATH]->updateTempSensor(value);
+		return;
+	}  else if (!strcmp(sensor, SENSOR_BEDROOM_BATH_02)) {
+		rooms[BEDROOM_BATH]->updateHumSensor(value);
+		return;
 	}
 }
 

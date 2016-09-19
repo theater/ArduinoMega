@@ -80,7 +80,7 @@ void sensorsUpdate() {
 //	short tempSensorWardrobe = random(15, 35);
 	float tempSensorWardrobe = owSensors.getTempCByIndex(1);
 	if(tempSensorWardrobe > -20) {
-	mainAdapter->sensorUpdate(SENSOR_WARDROBE_01, tempSensorWardrobe);
+		mainAdapter->sensorUpdate(SENSOR_WARDROBE_01, tempSensorWardrobe);
 	}
 
 	short tempSensorBedroomBath = random(15, 35);

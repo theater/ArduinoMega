@@ -21,9 +21,10 @@ public:
 		Fan* fan;
 
 		//TODO: ugly - fix it somehow later
-		const static int length = 5;
+		const static int length = 6;
 		const char * topics[length] = { RAD_BEDROOM_BATH,
 										FAN_SWITCH_BEDROOM_BATH,
+										FAN_SPEED_BEDROOM_BATH,
 										DESIRED_TEMP_BEDROOM_BATH_01,
 										DESIRED_HUM_BEDROOM_BATH_01,
 										MODE_BEDROOM_BATH };
