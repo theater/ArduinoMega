@@ -6,7 +6,7 @@
 
 #ifndef _ArduinoLibraries_H_
 #define _ArduinoLibraries_H_
-#include "Arduino.h"
+#include <Arduino.h>
 //add your includes for the project ArduinoLibraries here
 
 

@@ -14,51 +14,122 @@
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 				<configuration artifactName="${ProjName}" buildProperties="" description="" id="it.baeyens.arduino.core.toolChain.release.1299034578" name="Release" parent="org.eclipse.cdt.build.core.emptycfg">
 					<folderInfo id="it.baeyens.arduino.core.toolChain.release.1299034578.2060988799" name="/" resourcePath="">
-						<toolChain id="it.baeyens.arduino.core.toolChain.release.2062001812" name="Arduino Toolchain" superClass="it.baeyens.arduino.core.toolChain.release">
-							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="it.baeyens.arduino.targetplatform.844219450" name="Arduino Target" osList="all" superClass="it.baeyens.arduino.targetplatform"/>
-							<builder buildPath="${workspace_loc:/HouseHeatingFloor2}/Release" id="it.baeyens.arduino.sketch.builder.954313694" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Arduino sketch builder" superClass="it.baeyens.arduino.sketch.builder"/>
-							<tool id="it.baeyens.arduino.tool.sketch.compiler.cpp.1826863228" name="Arduino C++ Compiler" superClass="it.baeyens.arduino.tool.sketch.compiler.cpp">
-								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.765535401" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
+						<toolChain id="io.sloeber.core.toolChain.release.651417464" name="Arduino Toolchain (Sloeber edition)" superClass="io.sloeber.core.toolChain.release">
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="io.sloeber.targetplatform.694364351" name="Arduino Target" osList="all" superClass="io.sloeber.targetplatform"/>
+							<builder buildPath="${workspace_loc:/HouseHeatingFloor2}/Release" id="io.sloeber.sketch.builder.856716162" keepEnvironmentInBuildfile="false" name="Arduino sketch builder" superClass="io.sloeber.sketch.builder"/>
+							<tool id="io.sloeber.tool.sketch.compiler.cpp.299697469" name="Arduino C++ Compiler" superClass="io.sloeber.tool.sketch.compiler.cpp">
+								<option id="io.sloeber.compiler.cpp.sketch.option.incpath.1664086128" name="Include Paths (-I)" superClass="io.sloeber.compiler.cpp.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/EmonLib}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/MQTT}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Room}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Dallas Temperature}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DHT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
 								</option>
-								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.392011356" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
+								<inputType id="io.sloeber.compiler.cpp.sketch.input.1571942204" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
-							<tool id="it.baeyens.arduino.tool.compiler.c.555334573" name="Arduino C Compiler" superClass="it.baeyens.arduino.tool.compiler.c">
-								<option id="it.baeyens.arduino.compiler.c.sketch.option.incpath.1689411037" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.c.sketch.option.incpath" valueType="includePath">
+							<tool id="io.sloeber.tool.compiler.c.1789653737" name="Arduino C Compiler" superClass="io.sloeber.tool.compiler.c">
+								<option id="io.sloeber.compiler.c.sketch.option.incpath.1255031530" name="Include Paths (-I)" superClass="io.sloeber.compiler.c.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/EmonLib}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/MQTT}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Room}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Dallas Temperature}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DHT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
 								</option>
-								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.300414981" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
+								<inputType id="io.sloeber.compiler.c.sketch.input.269997682" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
-							<tool id="it.baeyens.arduino.tool.sketch.compiler.s.63066958" name="Arduino Assembler" superClass="it.baeyens.arduino.tool.sketch.compiler.s"/>
-							<tool id="it.baeyens.arduino.tool.ar.2104762756" name="Arduino archiver" superClass="it.baeyens.arduino.tool.ar"/>
-							<tool id="it.baeyens.arduino.tool.combine.1413565973" name="Arduino combiner" superClass="it.baeyens.arduino.tool.combine"/>
-							<tool id="it.baeyens.arduino.tool.objcopy.eep.1807719109" name="Arduino tool Create eeprom" superClass="it.baeyens.arduino.tool.objcopy.eep"/>
-							<tool id="it.baeyens.arduino.tool.objcopy.flash.307910041" name="Arduino tool Create hex" superClass="it.baeyens.arduino.tool.objcopy.flash"/>
-							<tool id="it.baeyens.arduino.tool.size.1510589522" name="Arduino tool Print Size" superClass="it.baeyens.arduino.tool.size"/>
+							<tool id="io.sloeber.tool.sketch.compiler.s.917339813" name="Arduino Assembler" superClass="io.sloeber.tool.sketch.compiler.s">
+								<option id="io.sloeber.compiler.asm.sketch.option.incpath.1781692507" name="Include Paths (-I)" superClass="io.sloeber.compiler.asm.sketch.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
+								</option>
+								<inputType id="io.sloeber.compiler.S.sketch.input.1330808851" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
+							</tool>
+							<tool id="io.sloeber.tool.ar.1745780454" name="Arduino archiver" superClass="io.sloeber.tool.ar"/>
+							<tool id="io.sloeber.tool.combine.717855207" name="Arduino combiner" superClass="io.sloeber.tool.combine"/>
+							<tool id="io.sloeber.tool.objcopy.eep.592836119" name="Arduino tool Create eeprom" superClass="io.sloeber.tool.objcopy.eep"/>
+							<tool id="io.sloeber.tool.size.1822458481" name="Arduino tool Print Size" superClass="io.sloeber.tool.size"/>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="it.baeyens.arduino.core.toolChain.release.1299034578.1962817640" name="/" resourcePath="libraries">
+						<toolChain id="io.sloeber.core.toolChain.release.1172980332" name="Arduino Toolchain (Sloeber edition)" superClass="io.sloeber.core.toolChain.release" unusedChildren="">
+							<tool id="io.sloeber.tool.sketch.compiler.cpp.1477736139" name="Arduino C++ Compiler" superClass="io.sloeber.tool.sketch.compiler.cpp.299697469">
+								<option id="io.sloeber.compiler.cpp.sketch.option.incpath.1267095919" superClass="io.sloeber.compiler.cpp.sketch.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
+								</option>
+								<inputType id="io.sloeber.compiler.cpp.sketch.input.1119065407" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
+							</tool>
+							<tool id="io.sloeber.tool.compiler.c.1494640572" name="Arduino C Compiler" superClass="io.sloeber.tool.compiler.c.1789653737">
+								<option id="io.sloeber.compiler.c.sketch.option.incpath.35270855" superClass="io.sloeber.compiler.c.sketch.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
+								</option>
+								<inputType id="io.sloeber.compiler.c.sketch.input.2013932752" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
+							</tool>
+							<tool id="io.sloeber.tool.sketch.compiler.s.2101426212" name="Arduino Assembler" superClass="io.sloeber.tool.sketch.compiler.s.917339813">
+								<option id="io.sloeber.compiler.asm.sketch.option.incpath.845829988" superClass="io.sloeber.compiler.asm.sketch.option.incpath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
+								</option>
+								<inputType id="io.sloeber.compiler.S.sketch.input.81069736" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
+							</tool>
+							<tool id="io.sloeber.tool.ar.1569937359" name="Arduino archiver" superClass="io.sloeber.tool.ar.1745780454"/>
+							<tool id="io.sloeber.tool.combine.475382482" name="Arduino combiner" superClass="io.sloeber.tool.combine.717855207"/>
+							<tool id="io.sloeber.tool.objcopy.eep.744614" name="Arduino tool Create eeprom" superClass="io.sloeber.tool.objcopy.eep.592836119"/>
+							<tool id="io.sloeber.tool.size.1756798264" name="Arduino tool Print Size" superClass="io.sloeber.tool.size.1822458481"/>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="libraries/**/?xamples/**|libraries/**/?xtras/**|libraries/**/test/**|libraries/**/third-party/**|libraries**/._*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+						<entry excluding="libraries/UIPEthernet/tests|libraries/UIPEthernet/mbed|libraries/UIPEthernet/hardware|libraries/Room|libraries/PubSubClient/tests|libraries/**/?xamples/**|libraries/**/?xtras/**|libraries/**/test/**|libraries/**/third-party/**|libraries**/._*" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -72,5 +143,11 @@
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/HouseHeatingFloor2"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

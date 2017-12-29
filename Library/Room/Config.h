@@ -8,7 +8,6 @@
 #ifndef ROOM_CONFIG_H_
 #define ROOM_CONFIG_H_
 
-#include "Restricted.h"
 
 
 // DEFAULT VALUES

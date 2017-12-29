@@ -11,8 +11,6 @@
 #include <stdbool.h>
 #include <PubSubClient.h>
 
-#include "C:/eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.5/cores/arduino/Arduino.h"
-#include "C:/eclipse/arduinoPlugin/tools/arduino/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include/stdbool.h"
 #include "Adapter.h"
 
 

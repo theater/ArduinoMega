@@ -2,24 +2,23 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
--include ../makefile.init
+-include ..\makefile.init
 
-RM := rm -f
+RM := del 
 
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir.mk
--include libraries/UIPEthernet/utility/subdir.mk
--include libraries/UIPEthernet/subdir.mk
--include libraries/Timer/subdir.mk
--include libraries/Room/subdir.mk
--include libraries/OneWire/subdir.mk
--include libraries/MQTT/subdir.mk
--include libraries/EmonLib/subdir.mk
--include libraries/Dallas\ Temperature/subdir.mk
--include libraries/DHT/subdir.mk
--include core/core/subdir.mk
--include Model/subdir.mk
+-include libraries\UIPEthernet\utility\subdir.mk
+-include libraries\UIPEthernet\subdir.mk
+-include libraries\Timer\subdir.mk
+-include libraries\PubSubClient\src\subdir.mk
+-include libraries\OneWire\subdir.mk
+-include libraries\EmonLib\subdir.mk
+-include libraries\DallasTemperature\subdir.mk
+-include libraries\DHT\subdir.mk
+-include core\core\subdir.mk
+-include Model\subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -55,19 +54,16 @@ ifneq ($(strip $(C_DEPS)),)
 endif
 endif
 
--include ../makefile.defs
+-include ..\makefile.defs
 
 # Add inputs and outputs from these tool invocations to the build variables 
 AR += \
-arduino.ar \
+D:\src\ArduinoMega\HouseHeatingFloor2\Release\arduino.ar \
 
 ELF += \
 HouseHeatingFloor2.elf \
 
-EEP += \
-HouseHeatingFloor2.eep \
-
-FLASH_IMAGE += \
+HEX += \
 HouseHeatingFloor2.hex \
 
 
@@ -75,43 +71,38 @@ HouseHeatingFloor2.hex \
 all: HouseHeatingFloor2
 
 # Tool invocations
-HouseHeatingFloor2: $(FLASH_IMAGE)
+HouseHeatingFloor2: $(HEX)
 	@echo 'Building target: $@'
 	@echo 'Printing size:'
-	"C:\eclipse\arduinoPlugin\tools\arduino\avr-gcc\4.8.1-arduino5/bin/avr-size" -A "D:/src/ArduinoMega/HouseHeatingFloor2/Release/HouseHeatingFloor2.elf"
+	"C:\Eclipse\sloeber\/arduinoPlugin/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-size" -A "D:/src/ArduinoMega/HouseHeatingFloor2/Release/HouseHeatingFloor2.elf"
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-arduino.ar: $(AR_OBJ)
+D:\src\ArduinoMega\HouseHeatingFloor2\Release\arduino.ar: $(AR_OBJ)
 	@echo 'Starting archiver'
-	"C:\eclipse\arduinoPlugin\tools\arduino\avr-gcc\4.8.1-arduino5/bin/avr-ar" rcs     arduino.ar $(AR_OBJ)
+	"C:\Eclipse\sloeber\/arduinoPlugin/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc-ar" rcs    D:/src/ArduinoMega/HouseHeatingFloor2/Release/arduino.ar $(AR_OBJ)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 HouseHeatingFloor2.elf: $(LINK_OBJ) $(AR)
 	@echo 'Starting combiner'
-	"C:\eclipse\arduinoPlugin\tools\arduino\avr-gcc\4.8.1-arduino5/bin/avr-gcc" -Os -Wl,--gc-sections,--relax -mmcu=atmega2560  -o "D:/src/ArduinoMega/HouseHeatingFloor2/Release/HouseHeatingFloor2.elf"   $(LINK_OBJ) $(AR)    "-LD:/src/ArduinoMega/HouseHeatingFloor2/Release" -lm
+	"C:\Eclipse\sloeber\/arduinoPlugin/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/bin/avr-gcc" -Wall -Wextra -Os -Wl,--gc-sections,--relax -mmcu=atmega2560 -o "D:\src\ArduinoMega\HouseHeatingFloor2/Release/HouseHeatingFloor2.elf"   $(LINK_OBJ)   D:/src/ArduinoMega/HouseHeatingFloor2/Release/arduino.ar  "-LD:\src\ArduinoMega\HouseHeatingFloor2/Release" -lm
 	@echo 'Finished building: $@'
 	@echo ' '
 
-HouseHeatingFloor2.eep: $(ELF)
+HouseHeatingFloor2.hex: $(ELF)
 	@echo 'Create eeprom image'
-	"C:\eclipse\arduinoPlugin\tools\arduino\avr-gcc\4.8.1-arduino5/bin/avr-objcopy" -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0  "D:/src/ArduinoMega/HouseHeatingFloor2/Release/HouseHeatingFloor2.elf" "D:/src/ArduinoMega/HouseHeatingFloor2/Release/HouseHeatingFloor2.eep"
-	@echo 'Finished building: $@'
-	@echo ' '
-
-HouseHeatingFloor2.hex: $(EEP)
-	@echo 'Create Flash image (ihex format)'
-	"C:\eclipse\arduinoPlugin\tools\arduino\avr-gcc\4.8.1-arduino5/bin/avr-objcopy" -O ihex -R .eeprom  "D:/src/ArduinoMega/HouseHeatingFloor2/Release/HouseHeatingFloor2.elf" "D:/src/ArduinoMega/HouseHeatingFloor2/Release/HouseHeatingFloor2.hex"
+	${A.RECIPE.OBJCOPY.EEP.PATTERN}
+	${A.RECIPE.OBJCOPY.HEX.PATTERN}
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C_UPPER_DEPS)$(PDE_DEPS)$(C_DEPS)$(AR)$(EEP)$(FLASH_IMAGE)$(CC_DEPS)$(AR_OBJ)$(C++_DEPS)$(LINK_OBJ)$(CXX_DEPS)$(ASM_DEPS)$(INO_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(ELF)$(CPP_DEPS) HouseHeatingFloor2
+	-$(RM) $(C_UPPER_DEPS)$(PDE_DEPS)$(C_DEPS)$(AR)$(CC_DEPS)$(AR_OBJ)$(C++_DEPS)$(LINK_OBJ)$(CXX_DEPS)$(ASM_DEPS)$(HEX)$(INO_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(ELF)$(CPP_DEPS)
 	-@echo ' '
 
 .PHONY: all clean dependents
 .SECONDARY:
 
--include ../makefile.targets
+-include ..\makefile.targets
