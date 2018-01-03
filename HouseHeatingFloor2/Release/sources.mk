@@ -36,6 +36,7 @@ CPP_DEPS :=
 SUBDIRS := \
 . \
 Model \
+Room \
 core/core \
 libraries/DHT \
 libraries/DallasTemperature \

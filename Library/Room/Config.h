@@ -17,6 +17,9 @@
 //MQTT initializa
 #define MQTT_SERVER {192,168,254,30}
 #define MQTT_CLIENT_NAME "HeatingControl-FL2"   // CHANGE THIS ! ! !
+#define MQTT_USER "user"
+#define MQTT_PASSWORD "mqttPass"
+
 
 // Aliases
 #define ON true						// boolean alias for ON

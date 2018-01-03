@@ -19,7 +19,9 @@ public:
 	virtual ~Manager();
 
 	virtual Room* createRoom(RoomId id, bool DEBUG) = 0;
-	virtual void sensorsUpdate(const char* sensor, float value) = 0;
+	virtual void sensorUpdate(const char* sensor, float value) = 0;
+	void mqttReceive(const char* topic, const char* strPayload);
+	void mqttSubscribe();
 	Room* getRoom(RoomId id);
 
 	// Getters and setters

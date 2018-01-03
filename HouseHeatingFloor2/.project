@@ -32,6 +32,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Room</name>
+			<type>2</type>
+			<location>D:/src/ArduinoMega/Library/Room</location>
+		</link>
+		<link>
 			<name>core/core</name>
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/packages/arduino/hardware/avr/1.6.20/cores/arduino</locationURI>
@@ -65,6 +70,11 @@
 			<name>libraries/PubSubClient</name>
 			<type>2</type>
 			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/PubSubClient/2.6.0</locationURI>
+		</link>
+		<link>
+			<name>libraries/Room</name>
+			<type>2</type>
+			<location>D:/src/ArduinoMega/Library/Room</location>
 		</link>
 		<link>
 			<name>libraries/Timer</name>

@@ -17,6 +17,22 @@ Manager::Manager(PubSubClient* mqttClient) {
 	}
 }
 
+void Manager::mqttSubscribe() {
+	for (int i = 0; i < count; i++) {
+		if (rooms[i]) {
+			rooms[i]->subscribeMqttTopics(mqttClient);
+		}
+	}
+}
+
+void Manager::mqttReceive(const char* topic, const char* payload) {
+	for (int i = 0; i < count; i++) {
+		if (rooms[i] != NULL && rooms[i]->containsTopic(topic)) {
+			rooms[i]->mqttReceive(topic, payload);
+		}
+	}
+}
+
 Room* Manager::getRoom(RoomId id) {
 	return rooms[id];
 }

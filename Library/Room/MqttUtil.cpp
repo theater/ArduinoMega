@@ -5,28 +5,25 @@
  *      Author: theater
  */
 
-#include "MqttUtil.h"
-
-#include <Arduino.h>
+#include <Config.h>
+#include <Manager.h>
+#include <MqttUtil.h>
 #include <PubSubClient.h>
-#include <stdbool.h>
+#include <stddef.h>
 #include <WString.h>
 
-#include "Adapter.h"
-#include "Config.h"
+Manager* manager;
 
-Adapter* adapter;
-
-bool MqttUtil::mqttConnect(PubSubClient* const mqttClient, Adapter* const inputAdapter) {
-	if (adapter != inputAdapter) {
-		adapter = inputAdapter;
+bool MqttUtil::mqttConnect(PubSubClient* const mqttClient, Manager* const roomManager) {
+	if (manager != roomManager) {
+		manager = roomManager;
 	}
 	if (!mqttClient->connected()) {
 		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD)) {
 			String str = MQTT_CLIENT_NAME;
 			mqttClient->publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
-			if (inputAdapter != NULL) {
-				mqttSubscribe(inputAdapter);
+			if (manager != NULL) {
+				manager->mqttSubscribe();
 			}
 			return true;
 		} else {
@@ -34,10 +31,6 @@ bool MqttUtil::mqttConnect(PubSubClient* const mqttClient, Adapter* const inputA
 		}
 	} else
 		return true;
-}
-
-void MqttUtil::mqttSubscribe(Adapter* const inputAdapter) {
-	inputAdapter->mqttSubscribe();
 }
 
 void MqttUtil::mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value) {
@@ -54,5 +47,5 @@ void MqttUtil::mqttCallback(char* topic, byte* payload, unsigned int length) {
 }
 
 void MqttUtil::mqttSendUpdatedData(char* topic, char* payload) {
-	adapter->mqttReceive(topic, payload);
+	manager->mqttReceive(topic, payload);
 }

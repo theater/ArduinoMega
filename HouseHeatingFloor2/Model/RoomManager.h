@@ -24,7 +24,7 @@ public:
 	virtual ~RoomManager();
 
 	Room* createRoom(RoomId id, bool DEBUG=false);
-	void sensorsUpdate(const char* sensor, float value);
+	void sensorUpdate(const char* sensor, float value);
 	static RoomManager* getInstance(PubSubClient* mqttClient);
 	static RoomManager* manager;
 
