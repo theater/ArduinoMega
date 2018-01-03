@@ -18,8 +18,8 @@ RM := del
 -include libraries\DallasTemperature\subdir.mk
 -include libraries\DHT\subdir.mk
 -include core\core\subdir.mk
--include Room\subdir.mk
 -include Model\subdir.mk
+-include Library\Room\subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
