@@ -31,26 +31,26 @@ RoomManager::~RoomManager() {
 	}
 }
 
-Room* RoomManager::createRoom(RoomId id, bool DEBUG) {
+Room* RoomManager::createRoom(RoomId id) {
 	if (rooms[id] == NULL) {
 		switch (id) {
 		case KIDS_BEDROOM:
-			rooms[id] = new BedRoomKids(mqttClient, DEBUG);
+			rooms[id] = new BedRoomKids(mqttClient);
 			break;
 		case CORRIDOR:
-			rooms[id] = new Corridor(mqttClient, DEBUG);
+			rooms[id] = new Corridor(mqttClient);
 			break;
 		case BIG_BATHROOM:
-			rooms[id] = new BigBathroom(mqttClient, DEBUG);
+			rooms[id] = new BigBathroom(mqttClient);
 			break;
 		case MASTER_BEDROOM:
-			rooms[id] = new MasterBedroom(mqttClient, DEBUG);
+			rooms[id] = new MasterBedroom(mqttClient);
 			break;
 		case WARDROBE:
-			rooms[id] = new Wardrobe(mqttClient, DEBUG);
+			rooms[id] = new Wardrobe(mqttClient);
 			break;
 		case BEDROOM_BATH:
-			rooms[id] = new BedroomBath(mqttClient, DEBUG);
+			rooms[id] = new BedroomBath(mqttClient);
 			break;
 		default:
 			break;

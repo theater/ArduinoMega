@@ -7,9 +7,8 @@
 
 #include "BedroomBath.h"
 
-BedroomBath::BedroomBath(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
-	setDebug(DEBUG);
-		if(Debug()) {
+BedroomBath::BedroomBath(PubSubClient* mqttClient) : Room(id, mqttClient){
+		if(DEBUG) {
 			mqttClient->publish("DEBUG","BigBathroom::BigBathroom");
 		}
 

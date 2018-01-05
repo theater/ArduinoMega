@@ -23,7 +23,7 @@ private:
 									DESIRED_TEMP_MASTER_BEDROOM_01,
 									MODE_MASTER_BEDROOM };
 public:
-	MasterBedroom(PubSubClient* mqttClient, bool DEBUG = false);
+	MasterBedroom(PubSubClient* mqttClient);
 	virtual ~MasterBedroom();
 	void updateOutputControllers();
 	void mqttReceive(const char* strTopic, const char* strPayload);

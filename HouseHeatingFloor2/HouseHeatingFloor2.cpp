@@ -88,11 +88,16 @@ void sensorsUpdate() {
 //The setup function is called once at startup of the sketch
 void setup()
 {
-	Serial.begin(115200);
+	Serial.begin(BAUD_RATE);
+	logDebug("Beginning setup()...");
+
+	logDebug("Ethernet.begin...");
 	Ethernet.begin(macAddress, ipAddress);
 
+	logDebug("mqttConnect...");
 	MqttUtil::mqttConnect(mqttClient, roomManager);
 
+	logDebug("Create rooms...");
 	roomManager->createRoom(KIDS_BEDROOM);
 	roomManager->createRoom(CORRIDOR);
 	roomManager->createRoom(BIG_BATHROOM);
@@ -100,15 +105,21 @@ void setup()
 	roomManager->createRoom(WARDROBE);
 	roomManager->createRoom(BEDROOM_BATH);
 
-	roomManager->mqttSubscribe();
+//	logDebug("One wire begin...");
+//	owSensors.begin();
+//
+//	logDebug("DHT sensors begin...");
+//	humBedroomBath.begin();
+//	humBigBath.begin();
 
-	owSensors.begin();
-	humBedroomBath.begin();
-	humBigBath.begin();
 
-
+	logDebug("Create timer for sensor reoccurrence...");
 	trigger.every(REOCCURRENCE,&sensorsUpdate);
+
+	logDebug("Update sensors...");
 	sensorsUpdate();
+
+	logInfo("Finishing setup()...");
 }
 
 // The loop function is called in an endless loop
@@ -119,3 +130,4 @@ void loop()
 	}
 	trigger.update();
 }
+

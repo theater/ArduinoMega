@@ -8,9 +8,8 @@
 #include "MasterBedroom.h"
 
 
-MasterBedroom::MasterBedroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
-	setDebug(DEBUG);
-		if(Debug()) {
+MasterBedroom::MasterBedroom(PubSubClient* mqttClient) : Room(id, mqttClient){
+		if(DEBUG) {
 			mqttClient->publish("DEBUG","Corridor::Corridor");
 		}
 

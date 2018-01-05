@@ -23,7 +23,7 @@ class RoomManager : public Manager {
 public:
 	virtual ~RoomManager();
 
-	Room* createRoom(RoomId id, bool DEBUG=false);
+	Room* createRoom(RoomId id);
 	void sensorUpdate(const char* sensor, float value);
 	static RoomManager* getInstance(PubSubClient* mqttClient);
 	static RoomManager* manager;

@@ -29,7 +29,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/Room}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.1571942204" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
@@ -47,7 +46,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/Room}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.269997682" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>

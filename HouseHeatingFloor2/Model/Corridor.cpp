@@ -7,9 +7,8 @@
 
 #include "Corridor.h"
 
-Corridor::Corridor(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
-	setDebug(DEBUG);
-		if(Debug()) {
+Corridor::Corridor(PubSubClient* mqttClient) : Room(id, mqttClient){
+		if(DEBUG) {
 			mqttClient->publish("DEBUG","Corridor::Corridor");
 		}
 

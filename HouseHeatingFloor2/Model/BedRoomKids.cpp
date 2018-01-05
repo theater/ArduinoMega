@@ -11,9 +11,8 @@
 #include <stdbool.h>
 #include <WString.h>
 
-BedRoomKids::BedRoomKids(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
-	setDebug(DEBUG);
-	if(Debug()) {
+BedRoomKids::BedRoomKids(PubSubClient* mqttClient) : Room(id, mqttClient){
+	if(DEBUG) {
 		mqttClient->publish("DEBUG","BedRoomKids::BedRoomKids");
 	}
 

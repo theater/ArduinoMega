@@ -8,12 +8,12 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-// DEBUG
-const bool DEBUG = false;
+// SERIAL SETTINGS
+#define BAUD_RATE 115200
 
 // NETWORK SETTINGS
 // MQTT stuff
-#define MQTT_SERVER {192,168,254,30}
+#define MQTT_SERVER {192,168,254,40}
 #define MQTT_CLIENT_NAME "HeatingControl-FL2"
 
 // Ethernet settings

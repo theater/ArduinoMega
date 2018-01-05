@@ -7,9 +7,8 @@
 
 #include "Wardrobe.h"
 
-Wardrobe::Wardrobe(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient) {
-	setDebug(DEBUG);
-			if(Debug()) {
+Wardrobe::Wardrobe(PubSubClient* mqttClient) : Room(id, mqttClient) {
+			if(DEBUG) {
 				mqttClient->publish("DEBUG","Wardrobe::Wardrobe()");
 			}
 

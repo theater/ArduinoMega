@@ -8,9 +8,8 @@
 #include "BigBathroom.h"
 
 
-BigBathroom::BigBathroom(PubSubClient* mqttClient, bool DEBUG) : Room(id, mqttClient){
-	setDebug(DEBUG);
-		if(Debug()) {
+BigBathroom::BigBathroom(PubSubClient* mqttClient) : Room(id, mqttClient){
+		if(DEBUG) {
 			mqttClient->publish("DEBUG","BigBathroom::BigBathroom");
 		}
 

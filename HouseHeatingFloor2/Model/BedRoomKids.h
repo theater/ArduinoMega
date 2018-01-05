@@ -31,7 +31,7 @@ class BedRoomKids: public Room {
 									};
 
 	public:
-		BedRoomKids(PubSubClient* mqttClient, bool DEBUG=false);
+		BedRoomKids(PubSubClient* mqttClient);
 		virtual ~BedRoomKids();
 		void updateOutputControllers();
 		void mqttReceive(const char* strTopic, const char* strPayload);
