@@ -8,7 +8,7 @@
 #ifndef SENSOR_H_
 #define SENSOR_H_
 
-#include "Util.h"
+#include <Util.h>
 #include <PubSubClient.h>
 
 class Sensor {
@@ -22,7 +22,7 @@ class Sensor {
 		bool DEBUG;
 
 	public:
-		Sensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached, bool DEBUG=false);
+		Sensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached);
 		void sensorToMqttData(PubSubClient* mqttClient);
 		virtual ~Sensor();
 		void mqttToSensor(const char* topic, const char* value);

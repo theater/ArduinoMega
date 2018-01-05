@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include "PubSubClient.h"
 #include "Config.h"
+#include <Util.h>
 
 class OutputControl {
 	private:
@@ -18,10 +19,9 @@ class OutputControl {
 		bool pinStatus;
 		char * ocTopicCB;
 		PubSubClient* mqttClient;
-		bool DEBUG;
 	public:
 		OutputControl();
-		OutputControl(short pinId, bool pinStatus, char * ocTopicCB, PubSubClient* mqttClient, bool DEBUG=false);
+		OutputControl(short pinId, bool pinStatus, char * ocTopicCB, PubSubClient* mqttClient);
 		bool outputIsOn();
 		const char * getPinStatusToStr();
 		virtual ~OutputControl();

@@ -10,7 +10,7 @@
 #include <MqttUtil.h>
 #include <PubSubClient.h>
 #include <stddef.h>
-#include <WString.h>
+#include <Util.h>
 
 Manager* manager;
 
@@ -19,10 +19,12 @@ bool MqttUtil::mqttConnect(PubSubClient* const mqttClient, Manager* const roomMa
 		manager = roomManager;
 	}
 	if (!mqttClient->connected()) {
-		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD)) {
+		logDebug("MQTT not connected. Attempting to connect");
+		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD) && mqttClient->connected()) {
 			String str = MQTT_CLIENT_NAME;
 			mqttClient->publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
 			if (manager != NULL) {
+				logDebug("MQTT client initialized successfully. Starting subscribing to topics...");
 				manager->mqttSubscribe();
 			}
 			return true;

@@ -8,6 +8,12 @@
 #ifndef UTIL_H_
 #define UTIL_H_
 
+#include <Arduino.h>
+
+void log(String severity, String data);
+void logInfo(String data);
+void logDebug(String data);
+
 enum ControlType {
 	HUMIDITY,
 	TEMPERATURE,

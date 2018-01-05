@@ -10,13 +10,11 @@
 #include <string.h>
 #include <Sensor.h>
 
-Sensor::Sensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached, bool DEBUG) {
+Sensor::Sensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached) {
 	this->type = type;
 	this->mqttClient = mqttClient;
 	this->topic = topic;
 	this->directlyAttached = directlyAttached;
-
-	this->DEBUG = DEBUG;
 }
 
 
@@ -30,11 +28,13 @@ void Sensor::sensorToMqttData(PubSubClient* mqttClient) {
 		dtostrf(this->getValue(), 5, 2, sensorCharValue);
 		char* topic = this->getTopic();
 		mqttClient->publish(topic, sensorCharValue);
-		if (Debug()) {
+		logDebug("void TemperatureSensor::sensorToMqttData");
+		if (DEBUG) {
 			mqttClient->publish("DEBUG", "void TemperatureSensor::sensorToMqttData");
 		}
 	} else {
-		if (Debug()) {
+		logDebug("void TemperatureSensor::sensorToMqttData / Re-publish from remote sensor not allowed");
+		if (DEBUG) {
 			mqttClient->publish("DEBUG", "void TemperatureSensor::sensorToMqttData / Re-publish from remote sensor not allowed");
 		}
 	}
@@ -44,10 +44,12 @@ void Sensor::mqttToSensor(const char* topic, const char* value) {
 	if (!directlyAttached) {
 		if(!strcmp(this->topic , topic)) {
 			this->value = atof(value);
+			logDebug("MQTT Updating sensor value: " + String(value));
 			if(DEBUG) {
-				mqttClient->publish("DEBUG", strcpy("Sensor::mqttToSensora / Updating sensor value...", value));
+//				mqttClient->publish("DEBUG", ("MQTT Updating sensor value: " + String(value)));
 			}
 		} else {
+			logDebug("Sensor::mqttToSensora / No matching topic");
 			if(DEBUG) {
 				mqttClient->publish("DEBUG", "Sensor::mqttToSensora / No matching topic");
 			}

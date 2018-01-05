@@ -13,10 +13,9 @@
 #include "Config.h"
 #include "Util.h"
 
-Room::Room(RoomId id, PubSubClient* mqttClient, bool DEBUG) {
+Room::Room(RoomId id, PubSubClient* mqttClient) {
 	this->id = id;
 	this->mqttClient = mqttClient;
-	this->DEBUG = DEBUG;
 	setMode(AUTO);
 	desiredTemperature = DEFAULT_DESIRED_TEMP;
 	decisionHeat = false;
@@ -246,6 +245,7 @@ void Room::subscribeMqttTopics(PubSubClient* mqttClient) {
 
 void Room::mqttSubscribe(const char* const * topics, int len, PubSubClient* const mqttClient) {
 	for (int i = 0; i < len; i++) {
+		logDebug("MQTT Subscribing to topic: " + String(topics[i]));
 		mqttClient->subscribe(topics[i]);
 	}
 }
@@ -328,14 +328,6 @@ PubSubClient* Room::getMqttClient() const {
 
 void Room::setMqttClient(PubSubClient* mqttClient) {
 	this->mqttClient = mqttClient;
-}
-
-bool Room::Debug() {
-	return DEBUG;
-}
-
-void Room::setDebug(bool debug) {
-	DEBUG = debug;
 }
 
 HumiditySensor* Room::getHumSensor() {

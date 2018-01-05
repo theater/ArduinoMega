@@ -49,13 +49,12 @@ class Room {
 		const char ** mqttTopics;
 		int len;
 
-		bool DEBUG;
 		static const int FAN_HIGH_SPEED_TRESHOLD = 15;
 		static const double HEATER_TRESHOLD_DEVIATION = 0.5;
 		static const int FAN_DEVIATION_TRESHOLD = 3;
 
 	public:
-		Room(RoomId id, PubSubClient *  mqttClient, bool DEBUG = false);
+		Room(RoomId id, PubSubClient *  mqttClient);
 		virtual ~Room();
 		virtual void mqttReceive(const char* topic, const char* payload) = 0;
 		virtual void heatOutputs(bool state) = 0; 			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
