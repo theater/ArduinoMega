@@ -22,7 +22,7 @@ class Wardrobe: public Room {
 	DESIRED_TEMP_WARDROBE_01,
 	MODE_WARDROBE };
 public:
-	Wardrobe(PubSubClient* mqttClient);
+	Wardrobe();
 	virtual ~Wardrobe();
 	void updateOutputControllers();
 	void mqttReceive(const char* strTopic, const char* strPayload);

@@ -6,48 +6,65 @@
  */
 
 #include <Config.h>
-#include <Manager.h>
 #include <MqttUtil.h>
 #include <PubSubClient.h>
 #include <stddef.h>
 #include <Util.h>
 
-Manager* manager;
+//MQTT
+PubSubClient * MqttUtil::mqttClient = NULL;
 
-bool MqttUtil::mqttConnect(PubSubClient* const mqttClient, Manager* const roomManager) {
-	if (manager != roomManager) {
-		manager = roomManager;
-	}
+void MqttUtil::initializeMqttUtil(PubSubClient * client) {
+	MqttUtil::mqttClient = client;
+}
+
+bool MqttUtil::connect() {
 	if (!mqttClient->connected()) {
 		logDebug("MQTT not connected. Attempting to connect");
-		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD) && mqttClient->connected()) {
-			String str = MQTT_CLIENT_NAME;
-			mqttClient->publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
-			if (manager != NULL) {
-				logDebug("MQTT client initialized successfully. Starting subscribing to topics...");
-				manager->mqttSubscribe();
+		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD)) {
+			delay(3000);
+			logDebug("Initial mqtt connect attempt SUCCESS !");
+			if(isConnected()) {
+				publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
+				return true;
 			}
-			return true;
 		} else {
+			logDebug("Initial mqtt connect attempt FAILED !");
 			return false;
 		}
-	} else
+	} else {
 		return true;
-}
-
-void MqttUtil::mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value) {
-	mqttClient->publish(topic, value);
-}
-
-void MqttUtil::mqttCallback(char* topic, byte* payload, unsigned int length) {
-	char cPayload[10];
-	for (int i = 0; i <= length; i++) {
-		cPayload[i] = (char) payload[i];
 	}
-	cPayload[length] = '\0';
-	mqttSendUpdatedData(topic, cPayload);
 }
 
-void MqttUtil::mqttSendUpdatedData(char* topic, char* payload) {
-	manager->mqttReceive(topic, payload);
+void MqttUtil::publish(const char* topic, const char* value) {
+	if(isConnected()) {
+		logDebug("Publishing on topic: " + String(topic) + ", value: " + String(value));
+		mqttClient->publish(topic, value);
+	} else {
+		logDebug("Not connected. Unable to publish on topic " + String(topic));
+	}
+
+}
+
+
+
+void MqttUtil::subscribe(const char* topic) {
+	if(isConnected()) {
+		logDebug("Subscribing to topic: " + String(topic));
+		mqttClient->subscribe(topic);
+	} else {
+		logDebug("Not connected. Unable to subscribe for topic: " + String(topic));
+	}
+}
+
+bool MqttUtil::isConnected() {
+	if(mqttClient != NULL) {
+		return mqttClient->connected();
+	}
+	return false;
+}
+
+void MqttUtil::loop() {
+	mqttClient->loop();
 }

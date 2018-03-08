@@ -8,23 +8,23 @@
 #include "MasterBedroom.h"
 
 
-MasterBedroom::MasterBedroom(PubSubClient* mqttClient) : Room(id, mqttClient){
+MasterBedroom::MasterBedroom() : Room(id){
 		if(DEBUG) {
-			mqttClient->publish("DEBUG","Corridor::Corridor");
+			MqttUtil::publish("DEBUG","Corridor::Corridor");
 		}
 
 		// initialize and create Output controllers
-		radiatorOne = new OutputControl(MASTER_BEDROOM_RAD, OFF, RAD_MASTER_BEDROOM_CB, mqttClient);
+		radiatorOne = new OutputControl(MASTER_BEDROOM_RAD, OFF, RAD_MASTER_BEDROOM_CB);
 		setHasHeatingControl(true);
 		// initialize and create sensors
-		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_MASTER_BEDROOM_01, true);
+		Sensor* tempSensor = createSensor(TEMPERATURE, SENSOR_MASTER_BEDROOM_01, true);
 		setTempSensor((TemperatureSensor*)tempSensor);
 
 		// Set MQTT topics to listen to...
 		setMqttTopics(topics);
 		setLen(length);
 
-		subscribeMqttTopics(mqttClient);
+		subscribeMqttTopics();
 }
 
 MasterBedroom::~MasterBedroom() {
@@ -47,6 +47,6 @@ void MasterBedroom::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(RAD_MASTER_BEDROOM)) {
 		mqttUpdateOutputControl(radiatorOne, payload);
 	} else {
-		getMqttClient()->publish("DEBUG", "No matching rules found");
+		MqttUtil::publish("DEBUG", "No matching rules found");
 	}
 }

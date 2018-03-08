@@ -11,25 +11,25 @@
 #include <stdbool.h>
 #include <WString.h>
 
-BedRoomKids::BedRoomKids(PubSubClient* mqttClient) : Room(id, mqttClient){
+BedRoomKids::BedRoomKids() : Room(id){
 	if(DEBUG) {
-		mqttClient->publish("DEBUG","BedRoomKids::BedRoomKids");
+		MqttUtil::publish("DEBUG","BedRoomKids::BedRoomKids");
 	}
 
 	// initialize and create Output controllers
-	radiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, OFF, RAD_KIDS_01_CB, mqttClient);
-	radiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, OFF, RAD_KIDS_02_CB, mqttClient);
+	radiatorOne = new OutputControl(KIDS_BEDROOM_RAD_ONE, OFF, RAD_KIDS_01_CB);
+	radiatorTwo = new OutputControl(KIDS_BEDROOM_RAD_TWO, OFF, RAD_KIDS_02_CB);
 	setHasHeatingControl(true);
 
 	// initialize and create sensors
-	Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_KIDS_01, true);
+	Sensor* tempSensor = createSensor(TEMPERATURE, SENSOR_KIDS_01, true);
 	setTempSensor((TemperatureSensor*)tempSensor);
 
 	// Set MQTT topics to listen to...
 	setMqttTopics(topics);
 	setLen(length);
 
-	subscribeMqttTopics(mqttClient);
+	subscribeMqttTopics();
 }
 
 BedRoomKids::~BedRoomKids() {
@@ -56,6 +56,6 @@ void BedRoomKids::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(RAD_KIDS_02)) {
 		mqttUpdateOutputControl(radiatorTwo, payload);
 	} else {
-		getMqttClient()->publish("DEBUG", "No matching rules found");
+		MqttUtil::publish("DEBUG", "No matching rules found");
 	}
 }

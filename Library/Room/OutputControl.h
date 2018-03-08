@@ -18,10 +18,9 @@ class OutputControl {
 		short pinId;
 		bool pinStatus;
 		char * ocTopicCB;
-		PubSubClient* mqttClient;
 	public:
 		OutputControl();
-		OutputControl(short pinId, bool pinStatus, char * ocTopicCB, PubSubClient* mqttClient);
+		OutputControl(short pinId, bool pinStatus, char * ocTopicCB);
 		bool outputIsOn();
 		const char * getPinStatusToStr();
 		virtual ~OutputControl();

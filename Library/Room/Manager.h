@@ -8,34 +8,28 @@
 #ifndef ROOM_MANAGER_H_
 #define ROOM_MANAGER_H_
 
+#include "Util.h"
 #include "Room.h"
-#include <Util.h>
-#include <PubSubClient.h>
-
 
 class Manager {
 public:
-	Manager(PubSubClient* mqttClient);
+	Manager(int count);
 	virtual ~Manager();
 
-	virtual Room* createRoom(RoomId id) = 0;
-	virtual void sensorUpdate(const char* sensor, float value) = 0;
+	virtual Room* addRoom(Room * room) = 0;
+	virtual void mqttUpdate(const char* sensor, float value) = 0;
 	void mqttReceive(const char* topic, const char* strPayload);
+	static void mqttCallback(const char* topic, uint8_t* payload, unsigned int length);
 	void mqttSubscribe();
 	Room* getRoom(RoomId id);
 
 	// Getters and setters
-	PubSubClient* getMqttClient();
-	void setMqttClient(PubSubClient* mqttClient);
 	Room** getRooms();
-	const int getCount();
+	int getCount();
 
 protected:
-	static const int count = 10;
-	Room* rooms[count];
-
-private:
-	PubSubClient* mqttClient;
+	int count;
+	Room** rooms;
 
 };
 

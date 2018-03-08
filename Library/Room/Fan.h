@@ -19,10 +19,8 @@ class PubSubClient;
 class Fan {
 public:
 	Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB,
-			 	 	 	 	 	short fanSpeedPinId, bool fanSpeedPinStatus, char * fanSpeedTopicCB,
-								PubSubClient* mqttClient, bool DEBUG=false);
-	Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB,
-									PubSubClient* mqttClient, bool DEBUG=false);
+			 	 	 	 	 	short fanSpeedPinId, bool fanSpeedPinStatus, char * fanSpeedTopicCB);
+	Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB);
 	virtual ~Fan();
 	void fanControl(bool state, bool speed);
 

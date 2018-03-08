@@ -13,31 +13,24 @@
 
 class Sensor {
 	private:
-		PubSubClient* mqttClient;
 		char * topic;
 		float value;
 		ControlType type;
 		bool directlyAttached;
 
-		bool DEBUG;
-
 	public:
-		Sensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached);
-		void sensorToMqttData(PubSubClient* mqttClient);
+		Sensor(ControlType type, char* topic, bool directlyAttached);
+		void sensorToMqttData();
 		virtual ~Sensor();
 		void mqttToSensor(const char* topic, const char* value);
 
 		//getters/setters
-		void setMqttClient(PubSubClient* const mqttClient);
-		PubSubClient* getMqttClient() const;
 		ControlType getType() const;
 		void setType(ControlType type);
 		float getValue() const;
 		void setValue(float value);
 		char* getTopic() const;
 		void setTopic(char* topic);
-		bool Debug() const;
-		void setDebug(bool debug);
 };
 
 #endif /* SENSOR_H_ */

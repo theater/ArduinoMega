@@ -8,6 +8,8 @@
 #define _HouseHeatingFloor2_H_
 #include "Arduino.h"
 #include "MqttUtil.h"
+#include <Manager.h>
+
 //add your includes for the project HouseHeatingFloor2 here
 
 
@@ -15,8 +17,7 @@
 
 
 //add your function definitions for the project HouseHeatingFloor2 here
-
-
+void reconnect();
 
 
 //Do not add code below this line

@@ -12,7 +12,7 @@
 #include "PubSubClient.h"
 class TemperatureSensor : public Sensor {
 	public:
-		TemperatureSensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached);
+		TemperatureSensor(ControlType type, char* topic, bool directlyAttached);
 		virtual ~TemperatureSensor();
 };
 

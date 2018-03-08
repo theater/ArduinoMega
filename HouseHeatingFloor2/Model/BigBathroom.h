@@ -33,7 +33,7 @@ public:
 										SENSOR_BIGBATH_01,
 										SENSOR_BIGBATH_02};
 public:
-	BigBathroom(PubSubClient* mqttClient);
+	BigBathroom();
 	virtual ~BigBathroom();
 	void updateOutputControllers();
 	void mqttReceive(const char* strTopic, const char* strPayload);

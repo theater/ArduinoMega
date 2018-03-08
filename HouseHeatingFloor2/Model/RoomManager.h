@@ -23,19 +23,14 @@ class RoomManager : public Manager {
 public:
 	virtual ~RoomManager();
 
-	Room* createRoom(RoomId id);
-	void sensorUpdate(const char* sensor, float value);
-	static RoomManager* getInstance(PubSubClient* mqttClient);
+	void createRooms();
+	Room* addRoom(Room * room);
+	void mqttUpdate(const char* sensorTopic, float value);
+	static RoomManager* getInstance();
 	static RoomManager* manager;
 
-	// Getters/setters
-	PubSubClient* getMqttClient();
-	void setMqttClient(PubSubClient* mqttClient);
-
 private:
-	RoomManager(PubSubClient* mqttClient);
-	PubSubClient* mqttClient;
-	Room** room;
+	RoomManager();
 };
 
 #endif /* MODEL_ROOMMANAGER_H_ */

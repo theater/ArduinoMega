@@ -13,12 +13,12 @@
 
 // NETWORK SETTINGS
 // MQTT stuff
-#define MQTT_SERVER {192,168,254,40}
-#define MQTT_CLIENT_NAME "HeatingControl-FL2"
+//#define MQTT_SERVER {192,168,254,40}
+//#define MQTT_CLIENT_NAME "HeatingControl-FL2"
 
 // Ethernet settings
-#define MAC_ADDRESS {0x00,0x01,0x02,0x03,0x04,0x37}
-#define IP_ADDRESS 192,168,254,37
+//#define MAC_ADDRESS {0x00,0x01,0x02,0x03,0x04,0x37}
+//#define IP_ADDRESS 192,168,254,37
 
 // DEFAULT VALUES
 #define DEFAULT_DESIRED_TEMP 			25

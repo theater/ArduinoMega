@@ -8,7 +8,7 @@
 #include <ethernet_comp.h>
 #include <HardwareSerial.h>
 #include <IPAddress.h>
-#include <MqttUtil.h>
+#include "MqttUtil.h"
 #include <OneWire.h>
 #include <PubSubClient.h>
 #include <stddef.h>
@@ -26,10 +26,6 @@ uint8_t macAddress[6] = MAC_ADDRESS;
 IPAddress ipAddress(IP_ADDRESS);
 EthernetClient ethClient;
 
-//MQTT
-byte mqttServerAddress[] = MQTT_SERVER;
-PubSubClient *mqttClient = new PubSubClient(mqttServerAddress, 1883, MqttUtil::mqttCallback, ethClient);
-
 //EMON
 //EnergyMonitor energyMon;
 
@@ -44,10 +40,13 @@ DHT humBedroomBath(DHT_BEDROOM_BATH, DHT22);
 
 // Initialize manager
 RoomManager* RoomManager::manager = NULL;
-RoomManager* roomManager = RoomManager::getInstance(mqttClient);
+RoomManager* roomManager = RoomManager::getInstance();
 
+Timer mqttReconnectTimer;
+int8_t mqttReconnectTimerEventId;
+bool mqttDisconnectFound = false;
+Timer sensorsUpdateTrigger;
 
-Timer trigger;
 void sensorsUpdate() {
 	owSensors.requestTemperatures();
 //	float bedroomBathTemp = humBedroomBath.readTemperature();
@@ -57,53 +56,55 @@ void sensorsUpdate() {
 //	float bigBathHum = humBigBath.readHumidity();
 
 	short tempSensorKids = random(15, 35);
-	roomManager->sensorUpdate(SENSOR_KIDS_01, tempSensorKids);
+	roomManager->mqttUpdate(SENSOR_KIDS_01, tempSensorKids);
 
 	short tempSensorCorridor = random(15, 35);
-	roomManager->sensorUpdate(SENSOR_CORRIDOR_01, tempSensorCorridor);
+	roomManager->mqttUpdate(SENSOR_CORRIDOR_01, tempSensorCorridor);
 
 	short tempSensorBigBath = random(15, 35);
-	roomManager->sensorUpdate(SENSOR_BIGBATH_01, tempSensorBigBath);
+	roomManager->mqttUpdate(SENSOR_BIGBATH_01, tempSensorBigBath);
 	short humSensorBigBath = random(45, 100);
-	roomManager->sensorUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
-
+	roomManager->mqttUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
+//
 //	short tempSensorMasterBedroom = random(15, 35);
-	float tempSensorMasterBedroom = owSensors.getTempCByIndex(0);
-	if(tempSensorMasterBedroom > -20) {
-		roomManager->sensorUpdate(SENSOR_MASTER_BEDROOM_01, tempSensorMasterBedroom);
-	}
+//	float tempSensorMasterBedroom = owSensors.getTempCByIndex(0);
+//	if(tempSensorMasterBedroom > -20) {
+//		roomManager->sensorUpdate(SENSOR_MASTER_BEDROOM_01, tempSensorMasterBedroom);
+//	}
 
 //	short tempSensorWardrobe = random(15, 35);
-	float tempSensorWardrobe = owSensors.getTempCByIndex(1);
-	if(tempSensorWardrobe > -20) {
-		roomManager->sensorUpdate(SENSOR_WARDROBE_01, tempSensorWardrobe);
-	}
+//	float tempSensorWardrobe = owSensors.getTempCByIndex(1);
+//	if(tempSensorWardrobe > -20) {
+//		roomManager->sensorUpdate(SENSOR_WARDROBE_01, tempSensorWardrobe);
+//	}
 
 	short tempSensorBedroomBath = random(15, 35);
-	roomManager->sensorUpdate(SENSOR_BEDROOM_BATH_01, tempSensorBedroomBath);
+	roomManager->mqttUpdate(SENSOR_BEDROOM_BATH_01, tempSensorBedroomBath);
 	short humSensorBedroomBath = random(45, 100);
-	roomManager->sensorUpdate(SENSOR_BEDROOM_BATH_02, humSensorBedroomBath);
+	roomManager->mqttUpdate(SENSOR_BEDROOM_BATH_02, humSensorBedroomBath);
+}
+
+void mqttCallback(const char* topic, uint8_t* payload, unsigned int length) {
+
 }
 
 //The setup function is called once at startup of the sketch
-void setup()
-{
+void setup() {
 	Serial.begin(BAUD_RATE);
 	logDebug("Beginning setup()...");
 
 	logDebug("Ethernet.begin...");
 	Ethernet.begin(macAddress, ipAddress);
 
-	logDebug("mqttConnect...");
-	MqttUtil::mqttConnect(mqttClient, roomManager);
+	logDebug("Initializing MQTT...");
+	IPAddress mqttServerAddress(MQTT_SERVER);
+	MqttUtil::initializeMqttUtil(new PubSubClient(mqttServerAddress, 1883, roomManager->mqttCallback, ethClient));
+
 
 	logDebug("Create rooms...");
-	roomManager->createRoom(KIDS_BEDROOM);
-	roomManager->createRoom(CORRIDOR);
-	roomManager->createRoom(BIG_BATHROOM);
-	roomManager->createRoom(MASTER_BEDROOM);
-	roomManager->createRoom(WARDROBE);
-	roomManager->createRoom(BEDROOM_BATH);
+
+	roomManager->createRooms();
+	roomManager->mqttSubscribe();
 
 //	logDebug("One wire begin...");
 //	owSensors.begin();
@@ -112,9 +113,8 @@ void setup()
 //	humBedroomBath.begin();
 //	humBigBath.begin();
 
-
 	logDebug("Create timer for sensor reoccurrence...");
-	trigger.every(REOCCURRENCE,&sensorsUpdate);
+	sensorsUpdateTrigger.every(REOCCURRENCE,&sensorsUpdate);
 
 	logDebug("Update sensors...");
 	sensorsUpdate();
@@ -123,11 +123,25 @@ void setup()
 }
 
 // The loop function is called in an endless loop
-void loop()
-{
-	if (MqttUtil::mqttConnect(mqttClient, roomManager)) {
-		mqttClient->loop();
+void loop() {
+	if (MqttUtil::isConnected()) {
+		MqttUtil::loop();
+	} else if (!mqttDisconnectFound) {
+		mqttDisconnectFound = true;
+		logError("MQTT Not connected. Another attempt in a while...");
+		mqttReconnectTimerEventId = mqttReconnectTimer.every(REOCCURRENCE, &reconnect);
 	}
-	trigger.update();
+	mqttReconnectTimer.update();
+	sensorsUpdateTrigger.update();
 }
 
+void reconnect() {
+	MqttUtil::connect();
+	if (MqttUtil::isConnected()) {
+		logInfo("MQTT connected successfully.");
+		mqttDisconnectFound = false;
+		mqttReconnectTimer.stop(mqttReconnectTimerEventId);
+		logInfo("Room manager subscribing to topics.");
+		roomManager->mqttSubscribe();
+	}
+}

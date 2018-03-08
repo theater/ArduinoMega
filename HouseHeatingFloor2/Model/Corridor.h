@@ -25,7 +25,7 @@ private:
 									DESIRED_TEMP_CORRIDOR_01,
 									MODE_CORRIDOR };
 public:
-	Corridor(PubSubClient* mqttClient);
+	Corridor();
 	virtual ~Corridor();
 	void updateOutputControllers();
 	void mqttReceive(const char* strTopic, const char* strPayload);

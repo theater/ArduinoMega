@@ -8,30 +8,30 @@
 #include "BigBathroom.h"
 
 
-BigBathroom::BigBathroom(PubSubClient* mqttClient) : Room(id, mqttClient){
+BigBathroom::BigBathroom() : Room(id){
 		if(DEBUG) {
-			mqttClient->publish("DEBUG","BigBathroom::BigBathroom");
+			MqttUtil::publish("DEBUG","BigBathroom::BigBathroom");
 		}
 
 		// initialize and create Output controllers
-		radiatorOne = new OutputControl(BIG_BATH_RAD_ONE, OFF, RAD_BIGBATH_01_CB, mqttClient);
-		radiatorTwo = new OutputControl(BIG_BATH_RAD_TWO, OFF, RAD_BIGBATH_02_CB, mqttClient);
+		radiatorOne = new OutputControl(BIG_BATH_RAD_ONE, OFF, RAD_BIGBATH_01_CB);
+		radiatorTwo = new OutputControl(BIG_BATH_RAD_TWO, OFF, RAD_BIGBATH_02_CB);
 		setHasHeatingControl(true);
 		fan = new Fan(DUAL_SPEED, BIG_BATH_FAN_SWITCH, OFF, FAN_SWITCH_BIGBATH_CB,
-					  	  	  	  BIG_BATH_FAN_SPEED, SLOW, FAN_SPEED_BIGBATH_CB, mqttClient);
+					  	  	  	  BIG_BATH_FAN_SPEED, SLOW, FAN_SPEED_BIGBATH_CB);
 		setHasFanControl(DUAL_SPEED);
 
 		// initialize and create sensors
-		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BIGBATH_01, true);
+		Sensor* tempSensor = createSensor(TEMPERATURE, SENSOR_BIGBATH_01, true);
 		setTempSensor((TemperatureSensor*)tempSensor);
-		Sensor* humSensor = createSensor(HUMIDITY, mqttClient, SENSOR_BIGBATH_02, true);
+		Sensor* humSensor = createSensor(HUMIDITY, SENSOR_BIGBATH_02, true);
 		setHumSensor((HumiditySensor*)humSensor);
 
 		// Set MQTT topics to listen to...
 		setMqttTopics(topics);
 		setLen(length);
 
-		subscribeMqttTopics(mqttClient);
+		subscribeMqttTopics();
 }
 
 BigBathroom::~BigBathroom() {
@@ -72,6 +72,6 @@ void BigBathroom::mqttReceive(const char* topic, const char* payload) {
 	}else if (strTopic.equals(SENSOR_BIGBATH_01) || strTopic.equals(SENSOR_BIGBATH_02)) {
 		mqttUpdateSensors(topic, payload);
 	} else {
-		getMqttClient()->publish("DEBUG", "No matching rules found");
+		MqttUtil::publish("DEBUG", "No matching rules found");
 	}
 }

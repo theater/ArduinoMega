@@ -7,7 +7,7 @@
 
 #include "HumiditySensor.h"
 
-HumiditySensor::HumiditySensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached) : Sensor(HUMIDITY, mqttClient, topic, directlyAttached) {
+HumiditySensor::HumiditySensor(ControlType type, char* topic, bool directlyAttached) : Sensor(HUMIDITY, topic, directlyAttached) {
 }
 
 HumiditySensor::~HumiditySensor() {

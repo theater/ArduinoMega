@@ -8,17 +8,15 @@
 #include <Fan.h>
 
 Fan::Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB,
-	 	 	short fanSpeedPinId, bool fanSpeedPinStatus, char * fanSpeedTopicCB,
-		PubSubClient* mqttClient, bool DEBUG) {
+	 	 	short fanSpeedPinId, bool fanSpeedPinStatus, char * fanSpeedTopicCB) {
 	this->fanType = fanType;
-	fanSwitch = new OutputControl(fanSwitchPinId, fanSwitchPinStatus, fanSwitchTopicCB, mqttClient);
-	fanSpeedControl = new OutputControl(fanSpeedPinStatus, fanSpeedPinStatus, fanSpeedTopicCB, mqttClient);
+	fanSwitch = new OutputControl(fanSwitchPinId, fanSwitchPinStatus, fanSwitchTopicCB);
+	fanSpeedControl = new OutputControl(fanSpeedPinStatus, fanSpeedPinStatus, fanSpeedTopicCB);
 }
 
-Fan::Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB,
-		PubSubClient* mqttClient, bool DEBUG) {
+Fan::Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB) {
 	this->fanType = fanType;
-	fanSwitch = new OutputControl(fanSwitchPinId, fanSwitchPinStatus, fanSwitchTopicCB, mqttClient);
+	fanSwitch = new OutputControl(fanSwitchPinId, fanSwitchPinStatus, fanSwitchTopicCB);
 }
 
 void Fan::fanControl(bool state, bool speed) {

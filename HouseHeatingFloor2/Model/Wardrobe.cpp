@@ -7,23 +7,23 @@
 
 #include "Wardrobe.h"
 
-Wardrobe::Wardrobe(PubSubClient* mqttClient) : Room(id, mqttClient) {
+Wardrobe::Wardrobe() : Room(id) {
 			if(DEBUG) {
-				mqttClient->publish("DEBUG","Wardrobe::Wardrobe()");
+				MqttUtil::publish("DEBUG","Wardrobe::Wardrobe()");
 			}
 
 			// initialize and create Output controllers
-			radiatorOne = new OutputControl(WARDROBE_RAD, OFF, RAD_WARDROBE_CB, mqttClient);
+			radiatorOne = new OutputControl(WARDROBE_RAD, OFF, RAD_WARDROBE_CB);
 			setHasHeatingControl(true);
 			// initialize and create sensors
-			Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_WARDROBE_01, true);
+			Sensor* tempSensor = createSensor(TEMPERATURE, SENSOR_WARDROBE_01, true);
 			setTempSensor((TemperatureSensor*)tempSensor);
 
 			// Set MQTT topics to listen to...
 			setMqttTopics(topics);
 			setLen(length);
 
-			subscribeMqttTopics(mqttClient);
+			subscribeMqttTopics();
 }
 
 Wardrobe::~Wardrobe() {
@@ -46,6 +46,6 @@ void Wardrobe::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(RAD_WARDROBE)) {
 		mqttUpdateOutputControl(radiatorOne, payload);
 	} else {
-		getMqttClient()->publish("DEBUG", "No matching rules found");
+		MqttUtil::publish("DEBUG", "No matching rules found");
 	}
 }

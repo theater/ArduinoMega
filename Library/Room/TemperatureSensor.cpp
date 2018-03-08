@@ -7,7 +7,7 @@
 
 #include "TemperatureSensor.h"
 
-TemperatureSensor::TemperatureSensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached) : Sensor(TEMPERATURE, mqttClient, topic, directlyAttached) {
+TemperatureSensor::TemperatureSensor(ControlType type, char* topic, bool directlyAttached) : Sensor(TEMPERATURE, topic, directlyAttached) {
 }
 
 TemperatureSensor::~TemperatureSensor() {

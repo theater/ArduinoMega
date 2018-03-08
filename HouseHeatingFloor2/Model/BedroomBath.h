@@ -29,7 +29,7 @@ public:
 										DESIRED_HUM_BEDROOM_BATH_01,
 										MODE_BEDROOM_BATH };
 public:
-	BedroomBath(PubSubClient* mqttClient);
+	BedroomBath();
 	virtual ~BedroomBath();
 	void updateOutputControllers();
 	void mqttReceive(const char* strTopic, const char* strPayload);

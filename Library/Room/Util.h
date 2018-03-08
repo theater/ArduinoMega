@@ -13,6 +13,7 @@
 void log(String severity, String data);
 void logInfo(String data);
 void logDebug(String data);
+void logError(String data);
 
 enum ControlType {
 	HUMIDITY,
@@ -29,6 +30,7 @@ enum Mode {
 };
 
 enum RoomId {
+	LIVING_ROOM,
 	KIDS_BEDROOM,
 	MASTER_BEDROOM,
 	BEDROOM_BATH,

@@ -7,24 +7,24 @@
 
 #include "Corridor.h"
 
-Corridor::Corridor(PubSubClient* mqttClient) : Room(id, mqttClient){
+Corridor::Corridor() : Room(id){
 		if(DEBUG) {
-			mqttClient->publish("DEBUG","Corridor::Corridor");
+			MqttUtil::publish("DEBUG","Corridor::Corridor");
 		}
 
 		// initialize and create Output controllers
-		radiatorOne = new OutputControl(CORRIDOR_RAD_ONE, OFF, RAD_CORRIDOR_01_CB, mqttClient);
-		radiatorTwo = new OutputControl(CORRIDOR_RAD_TWO, OFF, RAD_CORRIDOR_02_CB, mqttClient);
+		radiatorOne = new OutputControl(CORRIDOR_RAD_ONE, OFF, RAD_CORRIDOR_01_CB);
+		radiatorTwo = new OutputControl(CORRIDOR_RAD_TWO, OFF, RAD_CORRIDOR_02_CB);
 		setHasHeatingControl(true);
 		// initialize and create sensors
-		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_CORRIDOR_01, true);
+		Sensor* tempSensor = createSensor(TEMPERATURE, SENSOR_CORRIDOR_01, true);
 		setTempSensor((TemperatureSensor*)tempSensor);
 
 		// Set MQTT topics to listen to...
 		setMqttTopics(topics);
 		setLen(length);
 
-		subscribeMqttTopics(mqttClient);
+		subscribeMqttTopics();
 }
 
 Corridor::~Corridor() {
@@ -51,6 +51,6 @@ void Corridor::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(RAD_CORRIDOR_02)) {
 		mqttUpdateOutputControl(radiatorTwo, payload);
 	} else {
-		getMqttClient()->publish("DEBUG", "No matching rules found");
+		MqttUtil::publish("DEBUG", "No matching rules found");
 	}
 }

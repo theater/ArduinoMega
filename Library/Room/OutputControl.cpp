@@ -7,9 +7,9 @@
 
 #include "OutputControl.h"
 #include "Config.h"
+#include "MqttUtil.h"
 
-OutputControl::OutputControl(short pinId, bool pinStatus, char * ocTopicCB, PubSubClient* mqttClient) {
-	this->mqttClient = mqttClient;
+OutputControl::OutputControl(short pinId, bool pinStatus, char * ocTopicCB) {
 	this->pinId = pinId;
 	this->pinStatus = pinStatus;
 	this->ocTopicCB = ocTopicCB;
@@ -47,7 +47,7 @@ void OutputControl::setPin(bool pinStatus) {
 	if (digitalRead(pinId) != pinStatus) {
 		digitalWrite(pinId, pinStatus);
 	}
-	mqttClient->publish(ocTopicCB, getPinStatusToStr());
+	MqttUtil::publish(ocTopicCB, getPinStatusToStr());
 
 	logDebug("Pin has been set to status: " + String(getPinStatusToStr()));
 }

@@ -16,17 +16,17 @@
 #include "TemperatureSensor.h"
 #include "MotionSensor.h"
 #include "OutputControl.h"
-class String;
-
-class PubSubClient;
+#include "MqttUtil.h"
 
 // Abstract base class for all rooms
 class Room {
-	private:
+
+	protected:
+		Sensor* sensors[];
 		RoomId id;
-		PubSubClient* mqttClient;
 		Mode mode;
 
+	private:
 		TemperatureSensor* tempSensor;
 		float desiredTemperature;
 		bool decisionHeat;
@@ -54,12 +54,12 @@ class Room {
 		static const int FAN_DEVIATION_TRESHOLD = 3;
 
 	public:
-		Room(RoomId id, PubSubClient *  mqttClient);
+		Room(RoomId id);
 		virtual ~Room();
 		virtual void mqttReceive(const char* topic, const char* payload) = 0;
-		virtual void heatOutputs(bool state) = 0; 			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
-		virtual void chillOutputs(bool state) = 0;			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
-		virtual void humidityControl(bool state, bool fanSpeed) = 0;		// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
+//		void heatOutputs(bool state) = 0; 			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
+//		void chillOutputs(bool state) = 0;			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
+//		void humidityControl(bool state, bool fanSpeed) = 0;		// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
 
 		void updateTempSensor(float tempSensorValue);
 		void updateHumSensor(short humSensorValue);
@@ -67,11 +67,10 @@ class Room {
 		void updateSensors(short tempSensorValue,short humSensorValue);
 		void updateDesiredValues(short desiredTemperature,short desiredHumidity);
 		void updateMode(const char* mode);
-		Sensor* createSensor(ControlType type, PubSubClient* mqttClient, char* topic, boolean directlyAttached=true);
+		Sensor* createSensor(ControlType type, char* topic, boolean directlyAttached=true);
 		bool containsTopic(const char * topic);
-		void subscribeMqttTopics(PubSubClient* mqttClient);
+		void subscribeMqttTopics();
 		void mqttUpdateSensors(const char* topic, const char* value);
-		void mqttSubscribe(const char* const* topics, int len, PubSubClient* const mqttClient);
 		void mqttUpdateOutputControl(OutputControl* outputControl, const char* payload);
 		void updateOutputControllers();
 		void updateDecisionMakers();
@@ -84,8 +83,6 @@ class Room {
 		void setHasLightControl(bool hasLightControl);
 		bool getHasMotionControl() const;
 		void setHasMotionControl(bool hasMotionControl);
-		PubSubClient* getMqttClient() const;
-		void setMqttClient(PubSubClient* mqttClient);
 		void updateDesiredTemperature(float desiredTemperature);
 		void updateDesiredHumidity(short desiredHumidity);
 		void setDebug(bool debug);
@@ -125,7 +122,7 @@ class Room {
 		bool heatingDecisionMaker();
 		bool coolingDecisionMaker();
 		void sensorToMqttData();
-		void sensorToMqttData(Sensor* sensor, PubSubClient* mqttClient);
+		void sensorToMqttData(Sensor* sensor);
 };
 
 #endif /* MODEL_ROOM_H_ */

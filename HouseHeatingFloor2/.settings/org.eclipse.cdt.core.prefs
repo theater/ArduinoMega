@@ -163,10 +163,10 @@ environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.DTS/value=0
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.LOCAL/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.LOCAL/operation=replace
-environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.LOCAL/value=1515171288
+environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.LOCAL/value=1517670741
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.UTC/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.UTC/operation=replace
-environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.UTC/value=1515164088
+environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.UTC/value=1517663541
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.ZONE/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.ZONE/operation=replace
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/A.EXTRA.TIME.ZONE/value=7200
@@ -496,7 +496,7 @@ environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.BUILD_VARIANT/value=mega
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.COM_PORT/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.COM_PORT/operation=replace
-environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.COM_PORT/value=COM3
+environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.COM_PORT/value=COM5
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.ECLIPSE_LOCATION/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.ECLIPSE_LOCATION/operation=replace
 environment/project/it.baeyens.arduino.core.toolChain.release.1299034578/JANTJE.ECLIPSE_LOCATION/value=

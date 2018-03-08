@@ -4,15 +4,19 @@
  *  Created on: 26.06.2016 ã.
  *      Author: theater
  */
-#include "Manager.h"
+#include <Manager.h>
 
 Manager::~Manager() {
-	// TODO Auto-generated destructor stub
+	delete this->rooms;
+	for (int i = 0; i < count; i++) {
+		delete rooms[i];
+	}
 }
 
-Manager::Manager(PubSubClient* mqttClient) {
-	this->mqttClient = mqttClient;
-	for(int i=0; i<10; i++) {
+Manager::Manager(int count) {
+	this->count = count;
+	this->rooms = new Room*[count];
+	for (int i = 0; i < count; i++) {
 		rooms[i] = NULL;
 	}
 }
@@ -20,9 +24,18 @@ Manager::Manager(PubSubClient* mqttClient) {
 void Manager::mqttSubscribe() {
 	for (int i = 0; i < count; i++) {
 		if (rooms[i]) {
-			rooms[i]->subscribeMqttTopics(mqttClient);
+			rooms[i]->subscribeMqttTopics();
 		}
 	}
+}
+
+void Manager::mqttCallback(const char* topic, uint8_t* payload, unsigned int length) {
+	char cPayload[10];
+	for (int i = 0; i <= length; i++) {
+		cPayload[i] = (char) payload[i];
+	}
+	cPayload[length] = '\0';
+//	mqttReceive(topic, cPayload);
 }
 
 void Manager::mqttReceive(const char* topic, const char* payload) {
@@ -37,18 +50,10 @@ Room* Manager::getRoom(RoomId id) {
 	return rooms[id];
 }
 
-PubSubClient* Manager::getMqttClient() {
-	return mqttClient;
-}
-
-void Manager::setMqttClient(PubSubClient* mqttClient) {
-	this->mqttClient = mqttClient;
-}
-
-Room** Manager::getRooms(){
+Room** Manager::getRooms() {
 	return rooms;
 }
 
-const int Manager::getCount() {
+int Manager::getCount() {
 	return count;
 }

@@ -7,38 +7,31 @@
 
 #include "BedroomBath.h"
 
-BedroomBath::BedroomBath(PubSubClient* mqttClient) : Room(id, mqttClient){
+BedroomBath::BedroomBath() : Room(id){
 		if(DEBUG) {
-			mqttClient->publish("DEBUG","BigBathroom::BigBathroom");
+			MqttUtil::publish("DEBUG","BigBathroom::BigBathroom");
 		}
 
 		// initialize and create Output controllers
-		radiatorOne = new OutputControl(BEDROOM_BATH_RAD, OFF, RAD_BEDROOM_BATH_CB, mqttClient);
+		radiatorOne = new OutputControl(BEDROOM_BATH_RAD, OFF, RAD_BEDROOM_BATH_CB);
 		setHasHeatingControl(true);
 
 //		fan = new OutputControl(BEDROOM_FAN_SWITCH, OFF, FAN_BEDROOM_BATH_CB, mqttClient);
 		fan = new Fan(DUAL_SPEED, BEDROOM_FAN_SWITCH, OFF, FAN_SWITCH_BEDROOM_BATH_CB,
-					  BEDROOM_FAN_SPEED, OFF, FAN_SPEED_BEDROOM_BATH_CB, mqttClient);
+					  BEDROOM_FAN_SPEED, OFF, FAN_SPEED_BEDROOM_BATH_CB);
 		setHasFanControl(DUAL_SPEED);
 
 		// initialize and create sensors
-		Sensor* tempSensor = createSensor(TEMPERATURE, mqttClient, SENSOR_BEDROOM_BATH_01, true);
-		setTempSensor((TemperatureSensor*)tempSensor);
-		Sensor* humSensor = createSensor(HUMIDITY, mqttClient, SENSOR_BEDROOM_BATH_02, true);
-		setHumSensor((HumiditySensor*)humSensor);
+		Sensor* tempSensor = createSensor(TEMPERATURE, SENSOR_BEDROOM_BATH_01, true);
+		sensors[0] = tempSensor;
+		Sensor* humSensor = createSensor(HUMIDITY, SENSOR_BEDROOM_BATH_02, true);
+		sensors[1] = humSensor;
 
 		// Set MQTT topics to listen to...
 		setMqttTopics(topics);
 		setLen(length);
 
-		subscribeMqttTopics(mqttClient);
-}
-
-BedroomBath::~BedroomBath() {
-	delete radiatorOne;
-	delete fan;
-	delete getTempSensor();
-	delete getHumSensor();
+		subscribeMqttTopics();
 }
 
 // Virtual functions - defined here the outputs associated with specific services (heat, chill, humidity)
@@ -51,6 +44,7 @@ void BedroomBath::humidityControl(bool state, bool fanSpeed) {
 }
 
 void BedroomBath::mqttReceive(const char* topic, const char* payload) {
+	logInfo("Received message on topic:" + String(topic) + ", payload:" + String(payload));
 	String strTopic = String(topic);
 	String strPayload = String(payload);
 	if (strTopic.equals(MODE_BEDROOM_BATH)) {
@@ -66,6 +60,14 @@ void BedroomBath::mqttReceive(const char* topic, const char* payload) {
 	} else if (strTopic.equals(FAN_SPEED_BEDROOM_BATH)) {
 		mqttUpdateOutputControl(fan->getFanSpeedControl(), payload);
 	} else {
-		getMqttClient()->publish("DEBUG", "No matching rules found");
+		MqttUtil::publish("DEBUG", "No matching rules found");
 	}
+}
+
+
+BedroomBath::~BedroomBath() {
+	delete radiatorOne;
+	delete fan;
+	delete getTempSensor();
+	delete getHumSensor();
 }

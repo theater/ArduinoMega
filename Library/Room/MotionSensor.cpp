@@ -7,7 +7,7 @@
 
 #include "MotionSensor.h"
 
-MotionSensor::MotionSensor(ControlType type, PubSubClient* mqttClient, char* topic, bool directlyAttached) : Sensor(MOTION, mqttClient, topic, directlyAttached) {
+MotionSensor::MotionSensor(ControlType type, char* topic, bool directlyAttached) : Sensor(MOTION, topic, directlyAttached) {
 
 }
 

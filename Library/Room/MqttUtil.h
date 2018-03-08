@@ -9,17 +9,25 @@
 #define UTIL_MQTT_H_
 
 #include <Arduino.h>
-
-class Manager;
-class PubSubClient;
-
+#include <Config.h>
+#include <PubSubClient.h>
+#include <UIPClient.h>
+#include <UIPEthernet.h>
 
 class MqttUtil {
 public:
-	static bool mqttConnect(PubSubClient* const mqttClient, Manager* const inputAdapter);
-	static void mqttPublish(PubSubClient* mqttClient, const char* topic, const char* value);
-	static void mqttCallback(char* topic, byte* payload, unsigned int length);
-	static void mqttSendUpdatedData(char* topic, char* payload);
+	static bool connect();
+	static bool isConnected();
+	static void publish(const char* topic, const char* value);
+	static void subscribe(const char* topic);
+	static void initializeMqttUtil(PubSubClient * client);
+	static void loop();
+
+
+
+private:
+	static PubSubClient *mqttClient;
+	static void (*callback)(const char*, uint8_t*, unsigned int);
 };
 
 #endif /* UTIL_MQTT_H_ */
