@@ -3,8 +3,6 @@
 #include "HouseHeatingFloor2.h"
 
 #include <Arduino.h>
-#include <DallasTemperature.h>
-#include <DHT.h>
 #include <ethernet_comp.h>
 #include <HardwareSerial.h>
 #include <IPAddress.h>

@@ -16,6 +16,7 @@ PubSubClient * MqttUtil::mqttClient = NULL;
 
 void MqttUtil::initializeMqttUtil(PubSubClient * client) {
 	MqttUtil::mqttClient = client;
+	connect();
 }
 
 bool MqttUtil::connect() {
@@ -23,13 +24,13 @@ bool MqttUtil::connect() {
 		logDebug("MQTT not connected. Attempting to connect");
 		if (mqttClient->connect(MQTT_CLIENT_NAME, MQTT_USER, MQTT_PASSWORD)) {
 			delay(3000);
-			logDebug("Initial mqtt connect attempt SUCCESS !");
 			if(isConnected()) {
+			logDebug("MQTT connect attempt SUCCESS !");
 				publish(MQTT_CLIENT_NAME, MQTT_CLIENT_NAME);
 				return true;
 			}
 		} else {
-			logDebug("Initial mqtt connect attempt FAILED !");
+			logDebug("MQTT connect attempt FAILED !");
 			return false;
 		}
 	} else {
@@ -68,3 +69,4 @@ bool MqttUtil::isConnected() {
 void MqttUtil::loop() {
 	mqttClient->loop();
 }
+

@@ -141,7 +141,7 @@ void Room::updateSensors(short tempSensorValue, short humSensorValue) {
 
 void Room::updateTempSensor(float tempSensorValue) {
 	if (tempSensor != NULL) {
-		tempSensor->setValue(tempSensorValue);
+//		tempSensor->setValue(tempSensorValue);
 		heatingDecisionMaker();
 		coolingDecisionMaker();
 
@@ -157,7 +157,7 @@ void Room::updateTempSensor(float tempSensorValue) {
 
 void Room::updateHumSensor(short humSensorValue) {
 	if (humSensor != NULL) {
-		humSensor->setValue(humSensorValue);
+//		humSensor->setValue(humSensorValue);
 		ventDecisionMaker();
 
 		humSensor->sensorToMqttData();

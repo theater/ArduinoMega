@@ -79,7 +79,7 @@
 		<link>
 			<name>libraries/Timer</name>
 			<type>2</type>
-			<location>D:/HomeAutomation/ArduinoLibs/Timer</location>
+			<location>D:/src/ArduinoLibs/Timer</location>
 		</link>
 		<link>
 			<name>libraries/UIPEthernet</name>

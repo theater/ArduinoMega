@@ -24,13 +24,7 @@ Sensor::~Sensor() {
 
 void Sensor::sensorToMqttData() {
 	if (directlyAttached) {
-		char sensorCharValue[10];
-		dtostrf(this->getValue(), 5, 2, sensorCharValue);
-		MqttUtil::publish(this->getTopic(), sensorCharValue);
-		logDebug("void TemperatureSensor::sensorToMqttData");
-		if (DEBUG) {
-			MqttUtil::publish("DEBUG", "void TemperatureSensor::sensorToMqttData");
-		}
+
 	} else {
 		logDebug("void TemperatureSensor::sensorToMqttData / Re-publish from remote sensor not allowed");
 		if (DEBUG) {
@@ -40,12 +34,17 @@ void Sensor::sensorToMqttData() {
 }
 
 void Sensor::mqttToSensor(const char* topic, const char* value) {
-	if (!directlyAttached) {
+	if (directlyAttached) {
+
+		char sensorCharValue[10];
+		dtostrf(this->getValue(), 5, 2, sensorCharValue);
+		MqttUtil::publish(this->getTopic(), sensorCharValue);
+		logDebug("void TemperatureSensor::sensorToMqttData");
+	} else {
 		if(!strcmp(this->topic , topic)) {
 			this->value = atof(value);
 			logDebug("MQTT Updating sensor value: " + String(value));
 //			if(DEBUG) {
-//				MqttUtil::publish("DEBUG", ("MQTT Updating sensor value: " + String(value)));
 //			}
 		} else {
 			logDebug("Sensor::mqttToSensora / No matching topic");
@@ -69,8 +68,14 @@ float Sensor::getValue() const {
 	return value;
 }
 
-void Sensor::setValue(float value) {
-	this->value = value;
+void Sensor::setValue(const char* topic, float value) {
+	if (value > -30 && strcmp(topic, this->getTopic()) == 0) {
+		this->value = value;
+		char sensorCharValue[10];
+		dtostrf(this->getValue(), 5, 2, sensorCharValue);
+		MqttUtil::publish(this->getTopic(), sensorCharValue);
+	}
+	logDebug("void TemperatureSensor::sensorToMqttData");
 }
 
 char* Sensor::getTopic() const {

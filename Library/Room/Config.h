@@ -9,7 +9,7 @@
 #define ROOM_CONFIG_H_
 
 // DEBUG
-const bool DEBUG = false;
+const bool DEBUG = true;
 
 // DEFAULT VALUES
 #define DEFAULT_DESIRED_TEMP 		25
@@ -17,13 +17,9 @@ const bool DEBUG = false;
 
 //MQTT initialization
 #define MQTT_SERVER 192,168,254,40
-#define MQTT_CLIENT_NAME "HeatingControl-FL2"
+#define MQTT_CLIENT_NAME "HeatingControl-FL1"
 #define MQTT_USER "user"
 #define MQTT_PASSWORD "mqttPass"
-
-// Ethernet settings
-#define MAC_ADDRESS {0x00,0x01,0x02,0x03,0x04,0x37}
-#define IP_ADDRESS 192,168,254,37
 
 
 // Aliases

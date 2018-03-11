@@ -21,7 +21,7 @@ public:
 	Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB,
 			 	 	 	 	 	short fanSpeedPinId, bool fanSpeedPinStatus, char * fanSpeedTopicCB);
 	Fan(FanControlType fanType, short fanSwitchPinId, bool fanSwitchPinStatus, char * fanSwitchTopicCB);
-	virtual ~Fan();
+	~Fan();
 	void fanControl(bool state, bool speed);
 
 private:

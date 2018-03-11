@@ -23,14 +23,14 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Timer}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.1571942204" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -39,15 +39,14 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Timer}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.269997682" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -56,15 +55,14 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Timer}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.1330808851" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>
@@ -98,15 +96,14 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Timer}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.2013932752" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -115,15 +112,14 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/Timer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/UIPEthernet/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/DallasTemperature}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/OneWire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/PubSubClient/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoLibraries/ArduinoLibs/DHT}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Room}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseHeatingFloor2/libraries/Timer}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.81069736" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>
