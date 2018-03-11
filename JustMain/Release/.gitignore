@@ -3,3 +3,8 @@
 /objects.mk
 /sources.mk
 /subdir.mk
+/JustMain.cpp.d
+/JustMain.cpp.o
+/JustMain.eep
+/JustMain.elf
+/JustMain.hex
