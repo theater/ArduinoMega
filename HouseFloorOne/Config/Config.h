@@ -39,6 +39,9 @@
 
 #define DESIRED_TEMP_KIDS_01			"home/floor2/kids/desired/temperature/1"
 
+const DS18B20ConfigDefinition oneWireSensors[] = {
+		{ {0x28, 0xff, 0x98, 0x69, 0x4c, 0x4, 0x0, 0x73}, SENSOR_LR_01 }
+};
 
 // Aliases
 #define ON true						// boolean alias for ON
@@ -48,6 +51,4 @@
 #define SLOW false					// boolean alias for fan speed pin - slow
 
 #endif /* CONFIG_H_ */
-
-
 

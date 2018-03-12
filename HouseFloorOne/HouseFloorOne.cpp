@@ -41,18 +41,21 @@ void setup() {
 	logDebug("Ethernet.begin...");
 	Ethernet.begin(macAddress, ipAddress);
 
-	logDebug("Initializing MQTT...");
-	IPAddress mqttServerAddress(MQTT_SERVER);
-	MqttUtil::initializeMqttUtil(new PubSubClient(mqttServerAddress, 1883, mqttCallback, ethClient));
 
 	logDebug("Create timer for sensor reoccurrence...");
 	sensorsUpdateTrigger.every(REOCCURRENCE, &sensorsUpdate);
 
 	livingRoom01 = new Sensor(TEMPERATURE, SENSOR_LR_01, true);
 
+	owSensors.begin();
+	printOneWireAddresses(&owSensors);
+
 	logDebug("Update sensors...");
 	sensorsUpdate();
 
+	logDebug("Initializing MQTT...");
+	IPAddress mqttServerAddress(MQTT_SERVER);
+	MqttUtil::initializeMqttUtil(new PubSubClient(mqttServerAddress, 1883, mqttCallback, ethClient));
 }
 
 // The loop function is called in an endless loop
@@ -95,10 +98,12 @@ void sensorsUpdate() {
 //		roomManager->mqttUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
 	//
 	//	short tempSensorMasterBedroom = random(15, 35);
-	float tempSensor0 = owSensors.getTempCByIndex(0);
-	Serial.print("Sensor temperature: ");
-	Serial.print(tempSensor0);
-	Serial.println("C");
+	float tempSensor0 = owSensors.getTempC(oneWireSensors[0].address);
+	if(DEBUG) {
+		Serial.print("Sensor temperature: ");
+		Serial.print(tempSensor0);
+		Serial.println("C");
+	}
 
 	livingRoom01->setValue(SENSOR_LR_01, tempSensor0);
 	//	if(tempSensorMasterBedroom > -20) {
@@ -120,9 +125,6 @@ void reconnect() {
 		mqttDisconnectFound = false;
 		mqttReconnectTimer.stop(mqttReconnectTimerEventId);
 		reconnectAttempts = 0;
-
-//		logInfo("Room manager subscribing to topics.");
-//		roomManager->mqttSubscribe();
 	} else {
 		reconnectAttempts++;
 		logInfo("Reconnect not possible. Attempt:" + String(reconnectAttempts));

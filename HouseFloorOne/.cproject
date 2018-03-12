@@ -19,8 +19,6 @@
 							<builder buildPath="${workspace_loc:/HouseFloorOne}/Release" id="io.sloeber.sketch.builder.2115200093" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Arduino sketch builder" superClass="io.sloeber.sketch.builder"/>
 							<tool id="io.sloeber.tool.sketch.compiler.cpp.1628699968" name="Arduino C++ Compiler" superClass="io.sloeber.tool.sketch.compiler.cpp">
 								<option id="io.sloeber.compiler.cpp.sketch.option.incpath.1351290405" name="Include Paths (-I)" superClass="io.sloeber.compiler.cpp.sketch.option.incpath" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/StdCpp}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/core/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/DallasTemperature}&quot;"/>
@@ -31,14 +29,14 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/UIPEthernet/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Room}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Sensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Sensor/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.1393001043" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
 							<tool id="io.sloeber.tool.compiler.c.384645252" name="Arduino C Compiler" superClass="io.sloeber.tool.compiler.c">
 								<option id="io.sloeber.compiler.c.sketch.option.incpath.602413894" name="Include Paths (-I)" superClass="io.sloeber.compiler.c.sketch.option.incpath" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/core/core}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/StdCpp}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ArduinoMega/Library/Room}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/core/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/DallasTemperature}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/OneWire}&quot;"/>
@@ -48,6 +46,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/UIPEthernet/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Room}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Sensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Sensor/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.803108541" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -63,6 +63,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/UIPEthernet/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Room}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Sensor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/HouseFloorOne/libraries/Sensor/src}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.1217088606" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>

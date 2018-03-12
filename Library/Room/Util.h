@@ -8,12 +8,14 @@
 #ifndef UTIL_H_
 #define UTIL_H_
 
-#include <Arduino.h>
+#include <DallasTemperature.h>
+#include <WString.h>
 
 void log(String severity, String data);
 void logInfo(String data);
 void logDebug(String data);
 void logError(String data);
+void printOneWireAddresses(DallasTemperature* owSensors);
 
 enum ControlType {
 	HUMIDITY,
@@ -60,5 +62,11 @@ namespace Util {
 		}
 	}
 }
+
+struct DS18B20ConfigDefinition
+{
+    const DeviceAddress address;
+    const String mqttTopic;
+};
 
 #endif /* UTIL_H_ */

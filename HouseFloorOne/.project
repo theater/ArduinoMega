@@ -64,12 +64,17 @@
 		<link>
 			<name>libraries/Room</name>
 			<type>2</type>
-			<location>D:/src/ArduinoMega/Library/Room</location>
+			<location>C:/src/ArduinoMega/Library/Room</location>
+		</link>
+		<link>
+			<name>libraries/Sensor</name>
+			<type>2</type>
+			<locationURI>ECLIPSE_HOME/arduinoPlugin/libraries/Sensor/0.1.0</locationURI>
 		</link>
 		<link>
 			<name>libraries/Timer</name>
 			<type>2</type>
-			<location>D:/src/ArduinoLibs/Timer</location>
+			<location>C:/src/ArduinoLibs/Timer</location>
 		</link>
 		<link>
 			<name>libraries/UIPEthernet</name>
