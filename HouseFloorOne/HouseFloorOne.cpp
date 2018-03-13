@@ -105,7 +105,7 @@ void sensorsUpdate() {
 		Serial.println("C");
 	}
 
-	livingRoom01->setValue(SENSOR_LR_01, tempSensor0);
+	livingRoom01->setValue(oneWireSensors[0].mqttTopic, tempSensor0);
 	//	if(tempSensorMasterBedroom > -20) {
 	//		roomManager->sensorUpdate(SENSOR_MASTER_BEDROOM_01, tempSensorMasterBedroom);
 	//	}

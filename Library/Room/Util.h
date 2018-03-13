@@ -66,7 +66,7 @@ namespace Util {
 struct DS18B20ConfigDefinition
 {
     const DeviceAddress address;
-    const String mqttTopic;
+    const char* mqttTopic;
 };
 
 #endif /* UTIL_H_ */
