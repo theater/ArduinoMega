@@ -5,8 +5,13 @@
  *      Author: theater
  */
 
+#include <HardwareSerial.h>
+#include <Print.h>
 #include <Util.h>
-#include <Config.h>
+
+#include "Config.h"
+#include "MqttUtil.h"
+
 
 void log(String severity, String data) {
 	Serial.println(severity +": " + data);
@@ -28,16 +33,19 @@ void logError(String data) {
 
 void printOneWireAddresses(DallasTemperature* owSensors) {
 	int count = owSensors->getDeviceCount();
-	Serial.println("Found " + String(count) + (count == 1 ? " device" : " devices"));
+	logDebug("Found " + String(count) + (count == 1 ? " device" : " devices"));
 	for (int i = 0; i < count; i++) {
 		DeviceAddress deviceAddress;
 		bool found = owSensors->getAddress(deviceAddress, i);
 		if (found) {
-			Serial.print("Found device with address: ");
+			String strAddress = String(i) +": ";
 			for (int j = 0; j < 8; j++) {
-				Serial.print("0x"+String(deviceAddress[j], HEX)+", ");
+				strAddress += "0x" + String(deviceAddress[j], HEX) + ", ";
 			}
-			Serial.println();
+			logDebug("Found device with address: " + strAddress);
+
+			const char * address = strAddress.c_str();
+			MqttUtil::publish(ONE_WIRE_ADDRESSES_TOPIC, address);
 		}
 	}
 }

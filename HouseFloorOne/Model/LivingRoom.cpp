@@ -6,10 +6,10 @@
  */
 
 #include "LivingRoom.h"
-#include <Room.h>
+
+#include <Util.h>
 
 LivingRoom::LivingRoom(RoomId id) : Room(id) {
-
 }
 
 LivingRoom::~LivingRoom() {

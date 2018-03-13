@@ -41,6 +41,12 @@ void setup() {
 	logDebug("Ethernet.begin...");
 	Ethernet.begin(macAddress, ipAddress);
 
+	logDebug("Waiting 5000 ms...");
+	delay(5000);
+
+	logDebug("Initializing MQTT...");
+	IPAddress mqttServerAddress(MQTT_SERVER);
+	MqttUtil::initializeMqttUtil(new PubSubClient(mqttServerAddress, 1883, mqttCallback, ethClient));
 
 	logDebug("Create timer for sensor reoccurrence...");
 	sensorsUpdateTrigger.every(REOCCURRENCE, &sensorsUpdate);
@@ -52,10 +58,6 @@ void setup() {
 
 	logDebug("Update sensors...");
 	sensorsUpdate();
-
-	logDebug("Initializing MQTT...");
-	IPAddress mqttServerAddress(MQTT_SERVER);
-	MqttUtil::initializeMqttUtil(new PubSubClient(mqttServerAddress, 1883, mqttCallback, ethClient));
 }
 
 // The loop function is called in an endless loop
@@ -79,42 +81,13 @@ void mqttCallback(const char* topic, uint8_t* payload, unsigned int length) {
 }
 
 void sensorsUpdate() {
+	int count = owSensors.getDeviceCount();
 	owSensors.requestTemperatures();
-	//	float bedroomBathTemp = humBedroomBath.readTemperature();
-	//	float bedroomBathHum = humBedroomBath.readHumidity();
-	//
-	//	float bigBathTemp = humBigBath.readTemperature();
-	//	float bigBathHum = humBigBath.readHumidity();
-
-//		short tempSensorKids = random(15, 35);
-//		roomManager->mqttUpdate(SENSOR_KIDS_01, tempSensorKids);
-//
-//		short tempSensorCorridor = random(15, 35);
-//		roomManager->mqttUpdate(SENSOR_CORRIDOR_01, tempSensorCorridor);
-//
-//		short tempSensorBigBath = random(15, 35);
-//		roomManager->mqttUpdate(SENSOR_BIGBATH_01, tempSensorBigBath);
-//		short humSensorBigBath = random(45, 100);
-//		roomManager->mqttUpdate(SENSOR_BIGBATH_02, humSensorBigBath);
-	//
-	//	short tempSensorMasterBedroom = random(15, 35);
-	float tempSensor0 = owSensors.getTempC(oneWireSensors[0].address);
-	if(DEBUG) {
-		Serial.print("Sensor temperature: ");
-		Serial.print(tempSensor0);
-		Serial.println("C");
+	for (int i = 0; i < (sizeof(oneWireSensors) / sizeof(oneWireSensors[0])); i++) {
+		float tempSensor = owSensors.getTempC(oneWireSensors[i].address);
+		livingRoom01->setValue(oneWireSensors[i].mqttTopic, tempSensor);
+		logDebug("DS18B20 Sensor " + String(i) + " temperature: " + String(tempSensor) + "C");
 	}
-
-	livingRoom01->setValue(oneWireSensors[0].mqttTopic, tempSensor0);
-	//	if(tempSensorMasterBedroom > -20) {
-	//		roomManager->sensorUpdate(SENSOR_MASTER_BEDROOM_01, tempSensorMasterBedroom);
-	//	}
-
-	//	short tempSensorWardrobe = random(15, 35);
-	//	float tempSensorWardrobe = owSensors.getTempCByIndex(1);
-	//	if(tempSensorWardrobe > -20) {
-	//		roomManager->sensorUpdate(SENSOR_WARDROBE_01, tempSensorWardrobe);
-	//	}
 }
 
 void reconnect() {

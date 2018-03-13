@@ -64,7 +64,7 @@
 		<link>
 			<name>libraries/Room</name>
 			<type>2</type>
-			<location>C:/src/ArduinoMega/Library/Room</location>
+			<location>D:/src/ArduinoMega/Library/Room</location>
 		</link>
 		<link>
 			<name>libraries/Sensor</name>
@@ -74,7 +74,7 @@
 		<link>
 			<name>libraries/Timer</name>
 			<type>2</type>
-			<location>C:/src/ArduinoLibs/Timer</location>
+			<location>D:/src/ArduinoLibs/Timer</location>
 		</link>
 		<link>
 			<name>libraries/UIPEthernet</name>

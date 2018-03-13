@@ -21,7 +21,7 @@ const bool DEBUG = true;
 #define MQTT_USER "user"
 #define MQTT_PASSWORD "mqttPass"
 
-
+#define ONE_WIRE_ADDRESSES_TOPIC "oneWireAddresses"
 // Aliases
 #define ON true						// boolean alias for ON
 #define OFF false  					// boolean alias for OFF

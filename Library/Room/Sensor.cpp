@@ -44,10 +44,13 @@ void Sensor::setValue(const char* id, float value) {
 
 	if (strcmp(id, this->getId()) == 0) {
 		this->value = value;
-		char sensorCharValue[10];
-		dtostrf(this->getValue(), 5, 2, sensorCharValue);
-		MqttUtil::publish(this->getId(), sensorCharValue);
 		logDebug("Updated sensor " + stringId + " data to value: " + String(value));
+
+		if(directlyAttached) {
+			char sensorCharValue[10];
+			dtostrf(this->getValue(), 5, 2, sensorCharValue);
+			MqttUtil::publish(this->getId(), sensorCharValue);
+		}
 	}
 }
 

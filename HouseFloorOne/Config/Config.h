@@ -36,11 +36,13 @@
 
 // Temperature sensors
 #define SENSOR_LR_01					"home/floor1/livingRoom/temperature/1"
+#define SENSOR_LR_02					"home/floor1/livingRoom/temperature/2"
 
 #define DESIRED_TEMP_KIDS_01			"home/floor2/kids/desired/temperature/1"
 
 const DS18B20ConfigDefinition oneWireSensors[] = {
-		{ {0x28, 0xff, 0x3e, 0x53, 0x4e, 0x4, 0x0, 0xc0}, SENSOR_LR_01 }
+		{ {0x28, 0xff, 0x3e, 0x53, 0x4e, 0x4, 0x0, 0xc0}, SENSOR_LR_01 },
+		{ {0x28, 0xff, 0x98, 0x69, 0x4c, 0x4, 0x0, 0x73}, SENSOR_LR_02 }
 };
 
 // Aliases
