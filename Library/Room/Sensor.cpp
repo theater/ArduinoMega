@@ -35,7 +35,7 @@ float Sensor::getValue() const {
 	return value;
 }
 
-void Sensor::setValue(const char* id, float value) {
+void Sensor::setValue(const char* id, const char* value) {
 	String stringId = String(id);
 	if(value <= -30) {
 		logDebug("Sensor " + stringId + " temperature out of range");
@@ -43,7 +43,7 @@ void Sensor::setValue(const char* id, float value) {
 	}
 
 	if (strcmp(id, this->getId()) == 0) {
-		this->value = value;
+		this->value = atof(value);
 		logDebug("Updated sensor " + stringId + " data to value: " + String(value));
 
 		if(directlyAttached) {

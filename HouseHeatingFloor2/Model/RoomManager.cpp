@@ -24,7 +24,7 @@ RoomManager* RoomManager::getInstance() {
 }
 
 RoomManager::~RoomManager() {
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < roomCount; i++) {
 		Room** room = getRooms();
 		delete room[i];
 	}

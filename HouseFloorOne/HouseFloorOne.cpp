@@ -5,10 +5,12 @@
 #include <Config.h>
 #include <DallasTemperature.h>
 #include <Enc28J60Network.h>
+#include <Manager.h>
 #include <Sensor.h>
 #include <Timer.h>
+#include <WString.h>
 
-#include "Model/RoomManager.h"
+#include "Model/LivingRoom.h"
 
 // Ethernet client
 uint8_t macAddress[6] = MAC_ADDRESS;
@@ -21,7 +23,7 @@ EthernetClient ethClient;
 //DS18B20
 OneWire oneWire(ONE_WIRE_PIN_01);
 DallasTemperature owSensors(&oneWire);
-RoomManager* manager = RoomManager::getInstance();
+Manager* manager = new Manager();
 
 // Sensors update trigger timer
 Timer sensorsUpdateTrigger;
@@ -51,7 +53,8 @@ void setup() {
 	logDebug("Create timer for sensor reoccurrence...");
 	sensorsUpdateTrigger.every(REOCCURRENCE, &sensorsUpdate);
 
-	livingRoom01 = new Sensor(TEMPERATURE, SENSOR_LR_01, true);
+	Room* livingRoom = manager->addRoom(new Room(LIVING_ROOM));
+	livingRoom01 = livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_01, true));
 
 	owSensors.begin();
 	printOneWireAddresses(&owSensors);
@@ -85,7 +88,9 @@ void sensorsUpdate() {
 	owSensors.requestTemperatures();
 	for (int i = 0; i < (sizeof(oneWireSensors) / sizeof(oneWireSensors[0])); i++) {
 		float tempSensor = owSensors.getTempC(oneWireSensors[i].address);
-		livingRoom01->setValue(oneWireSensors[i].mqttTopic, tempSensor);
+		char strValue[10];
+		sprintf(strValue, "%f", tempSensor);
+		manager->updateReceived(oneWireSensors[i].mqttTopic, strValue);
 		logDebug("DS18B20 Sensor " + String(i) + " temperature: " + String(tempSensor) + "C");
 	}
 }

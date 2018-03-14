@@ -38,7 +38,8 @@ enum RoomId {
 	BEDROOM_BATH,
 	CORRIDOR,
 	WARDROBE,
-	BIG_BATHROOM
+	BIG_BATHROOM,
+	ROOM_COUNT = BIG_BATHROOM
 };
 
 enum FanControlType {

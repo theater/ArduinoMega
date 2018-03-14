@@ -28,7 +28,7 @@ class Sensor {
 		ControlType getType() const;
 		void setType(ControlType type);
 		float getValue() const;
-		void setValue(const char* id, float value);
+		void setValue(const char* id, const char* value);
 		char* getId() const;
 		void setId(char* id);
 };

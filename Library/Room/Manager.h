@@ -13,12 +13,11 @@
 
 class Manager {
 public:
-	Manager(int count);
+	Manager();
 	virtual ~Manager();
 
-	virtual Room* addRoom(Room * room) = 0;
-	virtual void mqttUpdate(const char* sensor, float value) = 0;
-	void mqttReceive(const char* topic, const char* strPayload);
+	Room* addRoom(Room * room);
+	void updateReceived(const char* topic, const char* strPayload);
 	static void mqttCallback(const char* topic, uint8_t* payload, unsigned int length);
 	void mqttSubscribe();
 	Room* getRoom(RoomId id);
@@ -28,7 +27,7 @@ public:
 	int getCount();
 
 protected:
-	int count;
+	int roomCount;
 	Room** rooms;
 
 };

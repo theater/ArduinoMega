@@ -12,6 +12,17 @@
 
 Room::Room(RoomId id) {
 	this->id = id;
+
+	// TODO UGLY creation of arrays - think of better approach later !
+	this->sensors = new Sensor*[3];
+	for (int i = 0; i < 3; i++) {
+		sensors[i] = NULL;
+	}
+	this->outputs = new OutputControl*[3];
+	for (int i = 0; i < 3; i++) {
+		sensors[i] = NULL;
+	}
+
 	setMode(AUTO);
 	desiredTemperature = DEFAULT_DESIRED_TEMP;
 	decisionHeat = false;
@@ -29,6 +40,31 @@ Room::Room(RoomId id) {
 }
 
 Room::~Room() {
+
+}
+
+Sensor* Room::addSensor(Sensor* sensor) {
+	for (int i = 0; i < (sizeof(sensors) / sizeof(sensors[0])); i++) {
+		if(sensors[i] == NULL) {
+			sensors[i] = sensor;
+			return sensor;
+		}
+	}
+	return NULL;
+}
+
+void Room::updateItems(const char* id, const char* value) {
+	for (int i = 0; i < (sizeof(sensors) / sizeof(sensors[0])); i++) {
+		if (sensors[i] != NULL) {
+			sensors[i]->setValue(id, value);
+		}
+	}
+
+	for (int i = 0; i < (sizeof(outputs) / sizeof(outputs[0])); i++) {
+		if (outputs[i] != NULL) {
+			outputs[i]->setValue(id, value);
+		}
+	}
 }
 
 Sensor* Room::createSensor(ControlType type, char* topic, boolean directlyAttached) {

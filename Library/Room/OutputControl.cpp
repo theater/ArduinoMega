@@ -52,6 +52,10 @@ void OutputControl::setPin(bool pinStatus) {
 	logDebug("Pin has been set to status: " + String(getPinStatusToStr()));
 }
 
+void OutputControl::setValue(const char* id, const char* value)  {
+
+}
+
 OutputControl::~OutputControl() {
 	// TODO Auto-generated destructor stub
 }

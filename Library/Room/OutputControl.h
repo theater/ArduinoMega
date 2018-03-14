@@ -21,6 +21,9 @@ class OutputControl {
 	public:
 		OutputControl();
 		OutputControl(short pinId, bool pinStatus, char * ocTopicCB);
+		void OutputControl::setValue(const char* id, const char* value);
+
+
 		bool outputIsOn();
 		const char * getPinStatusToStr();
 		virtual ~OutputControl();

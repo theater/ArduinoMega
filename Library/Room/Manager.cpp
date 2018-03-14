@@ -4,25 +4,35 @@
  *  Created on: 26.06.2016 ã.
  *      Author: theater
  */
+
 #include <Manager.h>
+#include <stddef.h>
+#include <stdint.h>
 
-Manager::~Manager() {
-	delete this->rooms;
-	for (int i = 0; i < count; i++) {
-		delete rooms[i];
-	}
-}
-
-Manager::Manager(int count) {
-	this->count = count;
-	this->rooms = new Room*[count];
-	for (int i = 0; i < count; i++) {
+Manager::Manager() {
+	this->roomCount = ROOM_COUNT + 1;
+	this->rooms = new Room*[roomCount];
+	for (int i = 0; i < roomCount; i++) {
 		rooms[i] = NULL;
 	}
 }
 
+Manager::~Manager() {
+	for (int i = 0; i < roomCount; i++) {
+		Room** room = getRooms();
+		delete room[i];
+	}
+	delete this->rooms;
+}
+
+Room* Manager::addRoom(Room * room) {
+	RoomId id = room->getId();
+	rooms[id] = room;
+	return room;
+}
+
 void Manager::mqttSubscribe() {
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < roomCount; i++) {
 		if (rooms[i]) {
 			rooms[i]->subscribeMqttTopics();
 		}
@@ -38,10 +48,10 @@ void Manager::mqttCallback(const char* topic, uint8_t* payload, unsigned int len
 //	mqttReceive(topic, cPayload);
 }
 
-void Manager::mqttReceive(const char* topic, const char* payload) {
-	for (int i = 0; i < count; i++) {
-		if (rooms[i] != NULL && rooms[i]->containsTopic(topic)) {
-			rooms[i]->mqttReceive(topic, payload);
+void Manager::updateReceived(const char* id, const char* value) {
+	for(int i = 0 ; i < roomCount ; i++) {
+		if(rooms[i] != NULL) {
+			rooms[i]->updateItems(id, value);
 		}
 	}
 }
@@ -55,5 +65,5 @@ Room** Manager::getRooms() {
 }
 
 int Manager::getCount() {
-	return count;
+	return roomCount;
 }

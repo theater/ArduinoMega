@@ -22,7 +22,8 @@
 class Room {
 
 	protected:
-		Sensor* sensors[];
+		Sensor** sensors;
+		OutputControl** outputs;
 		RoomId id;
 		Mode mode;
 
@@ -56,10 +57,14 @@ class Room {
 	public:
 		Room(RoomId id);
 		virtual ~Room();
-		virtual void mqttReceive(const char* topic, const char* payload) = 0;
 //		void heatOutputs(bool state) = 0; 			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
 //		void chillOutputs(bool state) = 0;			// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
 //		void humidityControl(bool state, bool fanSpeed) = 0;		// OVERRIDE THESE IN DERRIVED CLASS TO ADD LOGIC.
+
+		Sensor* addSensor(Sensor* sensor);
+		void updateItems(const char* topic, const char* strPayload);
+
+
 
 		void updateTempSensor(float tempSensorValue);
 		void updateHumSensor(short humSensorValue);
