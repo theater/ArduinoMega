@@ -8,15 +8,12 @@
 #ifndef MODEL_ROOM_H_
 #define MODEL_ROOM_H_
 
-#include <stdbool.h>
+#include <Arduino.h>
+#include <Mode.h>
+#include <Util.h>
+#include <Sensor.h>
+#include <OutputControl.h>
 
-#include "Config.h"
-#include "Util.h"
-#include "HumiditySensor.h"
-#include "TemperatureSensor.h"
-#include "MotionSensor.h"
-#include "OutputControl.h"
-#include "MqttUtil.h"
 
 // Abstract base class for all rooms
 class Room {
@@ -25,20 +22,17 @@ class Room {
 		Sensor** sensors;
 		OutputControl** outputs;
 		RoomId id;
-		Mode mode;
+		Mode* mode;
 
 	private:
-		TemperatureSensor* tempSensor;
 		float desiredTemperature;
 		bool decisionHeat;
 		bool decisionCool;
 
-		HumiditySensor* humSensor;
 		short desiredHumidity;
 		bool decisionFan;
 		bool fanSpeed;
 
-		MotionSensor* motionSensor;
 		bool decisionMotion;
 
 		bool hasHeatingControl;
@@ -63,6 +57,8 @@ class Room {
 
 		Sensor* addSensor(Sensor* sensor);
 		void updateItems(const char* topic, const char* strPayload);
+		void updateSensors(const char* id, const char* value);
+		void updateMode(const char* id, const char* value);
 
 
 
@@ -91,12 +87,6 @@ class Room {
 		void updateDesiredTemperature(float desiredTemperature);
 		void updateDesiredHumidity(short desiredHumidity);
 		void setDebug(bool debug);
-		HumiditySensor* getHumSensor();
-		void setHumSensor(HumiditySensor* humSensor);
-		MotionSensor* getMotionSensor();
-		void setMotionSensor(MotionSensor* motionSensor);
-		TemperatureSensor* getTempSensor();
-		void setTempSensor(TemperatureSensor* tempSensor);
 		bool Debug();
 		bool getDecisionCool() const;
 		void setDecisionCool(bool decisionCool);
@@ -114,8 +104,9 @@ class Room {
 		void setMqttTopics(const char** mqttTopics);
 		int getLen() const;
 		void setLen(int len);
-		Mode getMode() const;
-		void setMode(Mode mode);
+		ModeType getMode() const;
+		void setMode(ModeType mode);
+		void createMode(Mode* mode);
 		RoomId getId() const;
 		void setId(RoomId id);
 		bool getFanSpeed();

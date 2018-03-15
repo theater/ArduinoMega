@@ -27,8 +27,7 @@
 
 // 	MQTT topics
 // Modes
-#define MODE_KIDS						"home/floor2/kids/mode/1"
-#define MODE_KIDS_CB					"home/floor2/kids/mode/1cb"
+#define MODE_LR							"home/floor1/livingRoom/mode/1"
 
 //	Radiators (outputs)
 #define RAD_KIDS_01						"home/floor2/kids/radiator/1"

@@ -10,6 +10,7 @@
 #include <string.h>
 #include <WString.h>
 
+
 Room::Room(RoomId id) {
 	this->id = id;
 
@@ -23,7 +24,7 @@ Room::Room(RoomId id) {
 		sensors[i] = NULL;
 	}
 
-	setMode(AUTO);
+	mode = new Mode(AUTO);
 	desiredTemperature = DEFAULT_DESIRED_TEMP;
 	decisionHeat = false;
 	decisionCool = false;
@@ -54,33 +55,24 @@ Sensor* Room::addSensor(Sensor* sensor) {
 }
 
 void Room::updateItems(const char* id, const char* value) {
-	for (int i = 0; i < (sizeof(sensors) / sizeof(sensors[0])); i++) {
-		if (sensors[i] != NULL) {
-			sensors[i]->setValue(id, value);
-		}
-	}
+	updateSensors(id, value);
 
-	for (int i = 0; i < (sizeof(outputs) / sizeof(outputs[0])); i++) {
+
+	for (unsigned int i = 0; i < (sizeof(outputs) / sizeof(outputs[0])); i++) {
 		if (outputs[i] != NULL) {
 			outputs[i]->setValue(id, value);
 		}
 	}
 }
 
-Sensor* Room::createSensor(ControlType type, char* topic, boolean directlyAttached) {
-	switch (type) {
-		case TEMPERATURE: {
-			return new TemperatureSensor(type, topic, directlyAttached);
+void Room::updateSensors(const char* id, const char* value) {
+	for (unsigned int i = 0; i < (sizeof(sensors) / sizeof(sensors[0])); i++) {
+			if (sensors[i] != NULL) {
+				sensors[i]->updateValue(id, value);
+			}
 		}
-		case HUMIDITY: {
-			return new HumiditySensor(type, topic, directlyAttached);
-		}
-		case MOTION: {
-			return new MotionSensor(type, topic, directlyAttached);
-		}
-	}
-	return NULL;
 }
+
 void Room::updateDecisionMakers() {
 	ventDecisionMaker();
 	heatingDecisionMaker();
@@ -95,28 +87,28 @@ bool Room::ventDecisionMaker() {
 		setDecisionVent(false);
 		return false;
 	}
-	if (humSensor != NULL) {
-		float sensorValue = this->humSensor->getValue();
-		if (desiredHumidity + FAN_HIGH_SPEED_TRESHOLD <= sensorValue) {
-			setDecisionVent(ON);
-			setFanSpeed(FAST);
-		} else if (desiredHumidity <= sensorValue - FAN_DEVIATION_TRESHOLD) {
-			setDecisionVent(ON);
-			setFanSpeed(SLOW);
-		} else if (desiredHumidity >= sensorValue + FAN_DEVIATION_TRESHOLD) {
-			setDecisionVent(OFF);
-			setFanSpeed(SLOW);
-		}
-		if (DEBUG) {
-			MqttUtil::publish("DEBUG", "Room::humDecisionMaker()");
-			if (decisionFan) {
-				MqttUtil::publish("DEBUG", "Decision vent = TRUE");
-			} else {
-				MqttUtil::publish("DEBUG", "Decision vent = FALSE");
-			}
-		}
-		return this->decisionFan;
-	}
+//	if (humSensor != NULL) {
+//		float sensorValue = this->humSensor->getValue();
+//		if (desiredHumidity + FAN_HIGH_SPEED_TRESHOLD <= sensorValue) {
+//			setDecisionVent(ON);
+//			setFanSpeed(FAST);
+//		} else if (desiredHumidity <= sensorValue - FAN_DEVIATION_TRESHOLD) {
+//			setDecisionVent(ON);
+//			setFanSpeed(SLOW);
+//		} else if (desiredHumidity >= sensorValue + FAN_DEVIATION_TRESHOLD) {
+//			setDecisionVent(OFF);
+//			setFanSpeed(SLOW);
+//		}
+//		if (DEBUG) {
+//			MqttUtil::publish("DEBUG", "Room::humDecisionMaker()");
+//			if (decisionFan) {
+//				MqttUtil::publish("DEBUG", "Decision vent = TRUE");
+//			} else {
+//				MqttUtil::publish("DEBUG", "Decision vent = FALSE");
+//			}
+//		}
+//		return this->decisionFan;
+//	}
 	return false;
 }
 
@@ -126,15 +118,15 @@ bool Room::heatingDecisionMaker() {
 		setDecisionHeat(false);
 		return false;
 	}
-	if (tempSensor != NULL) {
-		float sensorValue = tempSensor->getValue();
-		if (hasHeatingControl) {
-			if (desiredTemperature >= sensorValue + HEATER_TRESHOLD_DEVIATION) {
-				setDecisionHeat(true);
-			} else if (desiredTemperature <= sensorValue - HEATER_TRESHOLD_DEVIATION) {
-				setDecisionHeat(false);
-			}
-		}
+//	if (tempSensor != NULL) {
+//		float sensorValue = tempSensor->getValue();
+//		if (hasHeatingControl) {
+//			if (desiredTemperature >= sensorValue + HEATER_TRESHOLD_DEVIATION) {
+//				setDecisionHeat(true);
+//			} else if (desiredTemperature <= sensorValue - HEATER_TRESHOLD_DEVIATION) {
+//				setDecisionHeat(false);
+//			}
+//		}
 //		if (DEBUG) {
 //			MqttUtil::publish("DEBUG", "Room::tempDecisionMaker()");
 //			if(decisionHeat) {
@@ -143,81 +135,11 @@ bool Room::heatingDecisionMaker() {
 //				MqttUtil::publish("DEBUG", "Decision heat = FALSE");
 //			}
 //		}
-		return decisionHeat;
-	}
+//		return decisionHeat;
+//	}
 	return false;
 }
 
-bool Room::coolingDecisionMaker() {
-	if (getMode() == ALL_OFF) {
-		setDecisionCool(false);
-		return false;
-	}
-	if (tempSensor != NULL) {
-		float sensorValue = tempSensor->getValue();
-		if (hasCoolingControl) {
-			if (desiredTemperature <= sensorValue - HEATER_TRESHOLD_DEVIATION) {
-				setDecisionCool(true);
-			} else if (desiredTemperature >= sensorValue + HEATER_TRESHOLD_DEVIATION) {
-				setDecisionCool(false);
-			}
-		}
-		if (DEBUG) {
-			MqttUtil::publish("DEBUG", "Room::coolingDecisionMaker()");
-		}
-		return decisionCool;
-	}
-	return false;
-}
-
-void Room::updateSensors(short tempSensorValue, short humSensorValue) {
-	updateTempSensor(tempSensorValue);
-	updateHumSensor(humSensorValue);
-}
-
-void Room::updateTempSensor(float tempSensorValue) {
-	if (tempSensor != NULL) {
-//		tempSensor->setValue(tempSensorValue);
-		heatingDecisionMaker();
-		coolingDecisionMaker();
-
-		tempSensor->sensorToMqttData();
-
-	} else {
-		MqttUtil::publish("DEBUG", "TempSensor = NULL");
-	}
-	if (getMode() != MANUAL) {
-		updateOutputControllers();
-	}
-}
-
-void Room::updateHumSensor(short humSensorValue) {
-	if (humSensor != NULL) {
-//		humSensor->setValue(humSensorValue);
-		ventDecisionMaker();
-
-		humSensor->sensorToMqttData();
-
-		if (DEBUG) {
-			MqttUtil::publish("DEBUG", "void Room::updateHumSensor");
-		}
-	} else {
-		MqttUtil::publish("DEBUG", "HumSensor = NULL");
-	}
-	if (getMode() != MANUAL) {
-		updateOutputControllers();
-	}
-}
-
-void Room::updateMotionSensor(bool motionSensorValue) {
-	if (motionSensor != NULL) {
-		motionSensor->setValue(motionSensorValue);
-		motionSensor->sensorToMqttData();
-	}
-	if(getMode() != MANUAL) {
-		updateOutputControllers();
-	}
-}
 
 void Room::updateDesiredValues(short desiredTemperature, short desiredHumidity) {
 	updateDesiredTemperature(desiredTemperature);
@@ -279,19 +201,6 @@ void Room::subscribeMqttTopics() {
 	}
 }
 
-void Room::mqttUpdateSensors(const char* topic, const char* value) {
-	if(tempSensor != NULL) {
-		tempSensor->mqttToSensor(topic, value);
-	}
-	if(humSensor != NULL) {
-		humSensor->mqttToSensor(topic, value);
-	}
-	if(motionSensor != NULL) {
-		motionSensor->mqttToSensor(topic, value);
-	}
-	updateDecisionMakers();
-}
-
 void Room::mqttUpdateOutputControl(OutputControl* outputControl, const char* payload) {
 	if (!strcmp(payload, "ON")) {
 		outputControl->setPin(ON);
@@ -349,30 +258,6 @@ bool Room::getHasMotionControl() const {
 
 void Room::setHasMotionControl(bool hasMotionControl) {
 	this->hasMotionControl = hasMotionControl;
-}
-
-HumiditySensor* Room::getHumSensor() {
-	return humSensor;
-}
-
-void Room::setHumSensor(HumiditySensor* humSensor) {
-	this->humSensor = humSensor;
-}
-
-MotionSensor* Room::getMotionSensor() {
-	return motionSensor;
-}
-
-void Room::setMotionSensor(MotionSensor* motionSensor) {
-	this->motionSensor = motionSensor;
-}
-
-TemperatureSensor* Room::getTempSensor() {
-	return tempSensor;
-}
-
-void Room::setTempSensor(TemperatureSensor* tempSensor) {
-	this->tempSensor = tempSensor;
 }
 
 bool Room::getDecisionCool() const {
@@ -439,14 +324,6 @@ void Room::setLen(int len) {
 	this->len = len;
 }
 
-Mode Room::getMode() const {
-	return mode;
-}
-
-void Room::setMode(Mode mode) {
-	this->mode = mode;
-}
-
 RoomId Room::getId() const {
 	return id;
 }
@@ -461,5 +338,17 @@ bool Room::getFanSpeed() {
 
 void Room::setFanSpeed(bool fanSpeed) {
 	this->fanSpeed = fanSpeed;
+}
+
+ModeType Room::getMode() const {
+	return mode->getMode();
+}
+
+void Room::setMode(ModeType modeType) {
+	this->mode->setMode(modeType);
+}
+
+void Room::createMode(Mode* mode) {
+	this->mode = mode;
 }
 

@@ -9,7 +9,7 @@
 #define SENSOR_H_
 
 #include <Util.h>
-#include <PubSubClient.h>
+#include <MqttUtil.h>
 
 class Sensor {
 	private:
@@ -20,17 +20,13 @@ class Sensor {
 
 	public:
 		Sensor(ControlType type, char* id, bool directlyAttached);
-		void sensorToMqttData();
 		virtual ~Sensor();
-		void mqttToSensor(const char* id, const char* value);
 
 		//getters/setters
 		ControlType getType() const;
-		void setType(ControlType type);
 		float getValue() const;
-		void setValue(const char* id, const char* value);
 		char* getId() const;
-		void setId(char* id);
+		void updateValue(const char* id, const char* value);
 };
 
 #endif /* SENSOR_H_ */

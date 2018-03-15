@@ -5,11 +5,8 @@
  *      Author: theater
  */
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
+#include <WString.h>
 #include <Sensor.h>
-#include <MqttUtil.h>
 
 Sensor::Sensor(ControlType type, char* topic, bool directlyAttached) {
 	this->type = type;
@@ -27,29 +24,24 @@ ControlType Sensor::getType() const {
 	return type;
 }
 
-void Sensor::setType(ControlType type) {
-	this->type = type;
-}
-
 float Sensor::getValue() const {
 	return value;
 }
 
-void Sensor::setValue(const char* id, const char* value) {
+void Sensor::updateValue(const char* id, const char* value) {
 	String stringId = String(id);
-	if(value <= -30) {
+	float sensorValue = atof(value);
+	if (sensorValue <= -30) {
 		logDebug("Sensor " + stringId + " temperature out of range");
 		return;
 	}
 
 	if (strcmp(id, this->getId()) == 0) {
-		this->value = atof(value);
+		this->value = sensorValue;
 		logDebug("Updated sensor " + stringId + " data to value: " + String(value));
 
-		if(directlyAttached) {
-			char sensorCharValue[10];
-			dtostrf(this->getValue(), 5, 2, sensorCharValue);
-			MqttUtil::publish(this->getId(), sensorCharValue);
+		if (directlyAttached) {
+			MqttUtil::publish(this->getId(), value);
 		}
 	}
 }
@@ -57,8 +49,3 @@ void Sensor::setValue(const char* id, const char* value) {
 char* Sensor::getId() const {
 	return id;
 }
-
-void Sensor::setId(char* topic) {
-	this->id = topic;
-}
-

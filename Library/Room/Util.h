@@ -25,7 +25,7 @@ enum ControlType {
 
 #define SensorType ControlType
 
-enum Mode {
+enum ModeType {
 	ALL_OFF,
 	MANUAL,
 	AUTO
