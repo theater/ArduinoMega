@@ -18,13 +18,15 @@ UpdateHandler::~UpdateHandler() {
 	// TODO Auto-generated destructor stub
 }
 
-bool UpdateHandler::updateValue(const char* id, const char* value) {
-	String stringId = String(id);
-	float sensorValue = atof(value);
-	if(isSensorValueValid(value)) {
-		if (!strcmp(id, this->getId())) {
+bool UpdateHandler::updateValue(const char* id, const char* value, bool publishMqtt) {
+	if (!strcmp(id, this->getId())) {
+		if (isSensorValueValid(value)) {
+			float sensorValue = atof(value);
 			this->value = sensorValue;
-			logDebug("Updated sensor " + stringId + " data to value: " + String(value));
+			logDebug("Updated sensor " + String(id) + " data to value: " + String(value));
+			if(publishMqtt) {
+				MqttUtil::publish(id, value);
+			}
 			return true;
 		}
 	}

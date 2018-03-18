@@ -19,7 +19,7 @@ class UpdateHandler {
 		UpdateHandler(char* id);
 		virtual ~UpdateHandler();
 
-		bool updateValue(const char* id, const char* value);
+		bool updateValue(const char* id, const char* value, bool publishMqtt = false);
 		bool virtual isSensorValueValid(const char* value);
 
 		float getValue() const;

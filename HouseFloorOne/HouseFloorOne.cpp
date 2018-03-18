@@ -4,8 +4,11 @@
 
 #include <Config.h>
 #include <DallasTemperature.h>
+#include <DesiredSensorValue.h>
 #include <Enc28J60Network.h>
 #include <Manager.h>
+#include <Mode.h>
+#include <Room.h>
 #include <Sensor.h>
 #include <Timer.h>
 #include <WString.h>
@@ -90,13 +93,15 @@ void mqttCallback(const char* topic, uint8_t* payload, unsigned int length) {
 }
 
 void sensorsUpdate() {
+	int count = owSensors.getDeviceCount();
 	owSensors.requestTemperatures();
 	for (int i = 0; i < (sizeof(oneWireSensors) / sizeof(oneWireSensors[0])); i++) {
 		float tempSensor = owSensors.getTempC(oneWireSensors[i].address);
-		char charValue[10];
-		sprintf(charValue, "%f", tempSensor);
-		manager->updateReceived(oneWireSensors[i].mqttTopic, charValue);
 		logDebug("DS18B20 Sensor " + String(i) + " temperature: " + String(tempSensor) + "C");
+
+		char strValue[10];
+		dtostrf(tempSensor, 3, 2, strValue);
+		manager->updateReceived(oneWireSensors[i].mqttTopic, strValue);
 	}
 }
 
