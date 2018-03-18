@@ -59,12 +59,7 @@ void Room::updateItems(const char* id, const char* value) {
 	updateSensors(id, value);
 	updateDesiredValues(id, value);
 	updateMode(id, value);
-
-	for (unsigned int i = 0; i < (sizeof(outputs) / sizeof(outputs[0])); i++) {
-		if (outputs[i] != NULL) {
-			outputs[i]->setValue(id, value);
-		}
-	}
+	updateDecisionMakers();
 }
 
 // TODO think how to generalize these
@@ -85,6 +80,7 @@ void Room::updateDesiredValues(const char* id, const char* value) {
 }
 
 void Room::updateDecisionMakers() {
+
 	ventDecisionMaker();
 	heatingDecisionMaker();
 
@@ -154,15 +150,6 @@ bool Room::heatingDecisionMaker() {
 void Room::updateMode(const char* id, const char* value) {
 	mode->updateValue(id, value);
 	updateDecisionMakers();
-}
-
-bool Room::containsTopic(const char * topic) {
-	for (int i = 0; i < len; i++) {
-		if (!strcmp(mqttTopics[i], topic)) {
-			return true;
-		}
-	}
-	return false;
 }
 
 RoomId Room::getId() const {

@@ -18,37 +18,12 @@
 
 // Abstract base class for all rooms
 class Room {
-
 	protected:
 		Sensor** sensors;
 		OutputControl** outputs;
 		DesiredSensorValue** desiredValues;
 		RoomId id;
 		Mode* mode;
-
-	private:
-		float desiredTemperature;
-		bool decisionHeat;
-		bool decisionCool;
-
-		short desiredHumidity;
-		bool decisionFan;
-		bool fanSpeed;
-
-		bool decisionMotion;
-
-		bool hasHeatingControl;
-		bool hasVentControl;
-		bool hasMotionControl;
-		bool hasLightControl;
-		bool hasCoolingControl;
-
-		const char ** mqttTopics;
-		int len;
-
-		static const int FAN_HIGH_SPEED_TRESHOLD = 15;
-		static const double HEATER_TRESHOLD_DEVIATION = 0.5;
-		static const int FAN_DEVIATION_TRESHOLD = 3;
 
 	public:
 		Room(RoomId id);
@@ -75,7 +50,6 @@ class Room {
 		ModeType getMode() const;
 		void setMode(ModeType mode);
 
-		bool containsTopic(const char * topic);
 		void subscribeMqttTopics();
 		void mqttUpdateSensors(const char* topic, const char* value);
 		void mqttUpdateOutputControl(OutputControl* outputControl, const char* payload);
