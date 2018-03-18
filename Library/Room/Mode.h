@@ -20,6 +20,7 @@ class Mode {
 		Mode(ModeType mode);
 		Mode(ModeType mode, char * id);
 		virtual ~Mode();
+		void updateValue(const char* id, const char* value);
 
 		char* getId();
 		ModeType getMode();

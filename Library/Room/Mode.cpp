@@ -6,6 +6,7 @@
  */
 
 #include <Mode.h>
+#include <MqttUtil.h>
 
 Mode::Mode(ModeType mode) : Mode(mode, NULL) {
 }
@@ -13,14 +14,21 @@ Mode::Mode(ModeType mode) : Mode(mode, NULL) {
 Mode::Mode(ModeType mode, char * id ) {
 	this->id = id;
 	this->mode = mode;
+	this->callbackTopic = createCallbackTopic(id);
+	MqttUtil::subscribe(id);
+}
 
-	// Construct callback topic by creating same string + cb at the end:
-	int size = strlen(id) + 4;
-	this->callbackTopic = new char[size];
-    strcpy(this->callbackTopic, id);
-	logDebug("Set topic to :" + String(id));
-	strcat(this->callbackTopic, "cb");
-	logDebug("Callback topic is :" + String(callbackTopic));
+void Mode::updateValue(const char* id, const char* value) {
+	if (!strcmp(id, this->id)) {
+		if (!strcmp(value, "ALL_OFF")) {
+			setMode(ALL_OFF);
+		} else if (!strcmp(value, "MANUAL")) {
+			setMode(MANUAL);
+		} else {
+			setMode(AUTO);
+		}
+		logDebug("Updated MODE " + String(id) + " to value: " + String(value));
+	}
 }
 
 Mode::~Mode() {

@@ -10,8 +10,6 @@
 #include <Timer.h>
 #include <WString.h>
 
-#include "Model/LivingRoom.h"
-
 // Ethernet client
 uint8_t macAddress[6] = MAC_ADDRESS;
 IPAddress ipAddress(IP_ADDRESS);
@@ -54,8 +52,9 @@ void setup() {
 	sensorsUpdateTrigger.every(REOCCURRENCE, &sensorsUpdate);
 
 	Room* livingRoom = manager->addRoom(new Room(LIVING_ROOM));
-	livingRoom01 = livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_01, true));
 	livingRoom->createMode(new Mode(AUTO, MODE_LR));
+	livingRoom01 = livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_01, true));
+	livingRoom->addDesiredValue(new DesiredSensorValue(TEMPERATURE, DESIRED_TEMP_LR_01, DEFAULT_DESIRED_TEMP));
 
 
 	owSensors.begin();

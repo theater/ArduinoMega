@@ -49,3 +49,14 @@ void printOneWireAddresses(DallasTemperature* owSensors) {
 		}
 	}
 }
+
+char* createCallbackTopic(char* topic) {
+	// Construct callback topic by creating same string + cb at the end:
+	int size = strlen(topic) + 4;
+	char* callbackTopic = new char[size];
+	strcpy(callbackTopic, topic);
+	logDebug("Set topic to :" + String(topic));
+	strcat(callbackTopic, "cb");
+	logDebug("Callback topic is :" + String(callbackTopic));
+	return callbackTopic;
+}

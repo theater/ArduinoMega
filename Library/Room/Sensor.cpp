@@ -5,12 +5,12 @@
  *      Author: theater
  */
 
-#include <WString.h>
+#include <stdlib.h>
 #include <Sensor.h>
+#include <WString.h>
 
-Sensor::Sensor(ControlType type, char* topic, bool directlyAttached) {
+Sensor::Sensor(ControlType type, char* topic, bool directlyAttached) : UpdateHandler(topic){
 	this->type = type;
-	this->id = topic;
 	this->directlyAttached = directlyAttached;
 }
 
@@ -24,28 +24,18 @@ ControlType Sensor::getType() const {
 	return type;
 }
 
-float Sensor::getValue() const {
-	return value;
-}
-
-void Sensor::updateValue(const char* id, const char* value) {
-	String stringId = String(id);
+bool Sensor::isSensorValueValid(const char* value) {
 	float sensorValue = atof(value);
 	if (sensorValue <= -30) {
-		logDebug("Sensor " + stringId + " temperature out of range");
-		return;
-	}
-
-	if (strcmp(id, this->getId()) == 0) {
-		this->value = sensorValue;
-		logDebug("Updated sensor " + stringId + " data to value: " + String(value));
-
-		if (directlyAttached) {
-			MqttUtil::publish(this->getId(), value);
-		}
+		logDebug("Sensor " + String(getId()) + " temperature out of range");
+		return false;
 	}
 }
 
-char* Sensor::getId() const {
-	return id;
+bool Sensor::updateValue(const char* id, const char* value) {
+	float sensorValue = atof(value);
+	UpdateHandler::updateValue(id, value);
+	if (directlyAttached) {
+		MqttUtil::publish(this->getId(), value);
+	}
 }

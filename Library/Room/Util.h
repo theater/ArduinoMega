@@ -16,6 +16,7 @@ void logInfo(String data);
 void logDebug(String data);
 void logError(String data);
 void printOneWireAddresses(DallasTemperature* owSensors);
+char* createCallbackTopic(char* topic);
 
 enum ControlType {
 	HUMIDITY,

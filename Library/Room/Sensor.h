@@ -8,25 +8,23 @@
 #ifndef SENSOR_H_
 #define SENSOR_H_
 
+#include <UpdateHandler.h>
 #include <Util.h>
 #include <MqttUtil.h>
 
-class Sensor {
+class Sensor : public UpdateHandler {
 	private:
-		char * id;
-		float value;
 		ControlType type;
 		bool directlyAttached;
 
 	public:
 		Sensor(ControlType type, char* id, bool directlyAttached);
 		virtual ~Sensor();
+		bool updateValue(const char* id, const char* value);
+		bool isSensorValueValid(const char* value);
 
 		//getters/setters
 		ControlType getType() const;
-		float getValue() const;
-		char* getId() const;
-		void updateValue(const char* id, const char* value);
 };
 
 #endif /* SENSOR_H_ */
