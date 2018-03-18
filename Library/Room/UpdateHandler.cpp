@@ -22,7 +22,7 @@ bool UpdateHandler::updateValue(const char* id, const char* value) {
 	String stringId = String(id);
 	float sensorValue = atof(value);
 	if(isSensorValueValid(value)) {
-		if (strcmp(id, this->getId()) == 0) {
+		if (!strcmp(id, this->getId())) {
 			this->value = sensorValue;
 			logDebug("Updated sensor " + stringId + " data to value: " + String(value));
 			return true;

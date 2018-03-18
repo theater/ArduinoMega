@@ -53,7 +53,7 @@ void setup() {
 
 	Room* livingRoom = manager->addRoom(new Room(LIVING_ROOM));
 	livingRoom->createMode(new Mode(AUTO, MODE_LR));
-	livingRoom01 = livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_01, true));
+	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_01, true));
 	livingRoom->addDesiredValue(new DesiredSensorValue(TEMPERATURE, DESIRED_TEMP_LR_01, DEFAULT_DESIRED_TEMP));
 
 
@@ -81,17 +81,21 @@ void loop() {
 }
 
 void mqttCallback(const char* topic, uint8_t* payload, unsigned int length) {
-
+	char cPayload[10];
+	for (int i = 0; i <= length; i++) {
+		cPayload[i] = (char) payload[i];
+	}
+	cPayload[length] = '\0';
+	manager->updateReceived(topic, cPayload);
 }
 
 void sensorsUpdate() {
-	int count = owSensors.getDeviceCount();
 	owSensors.requestTemperatures();
 	for (int i = 0; i < (sizeof(oneWireSensors) / sizeof(oneWireSensors[0])); i++) {
 		float tempSensor = owSensors.getTempC(oneWireSensors[i].address);
-		char strValue[10];
-		sprintf(strValue, "%f", tempSensor);
-		manager->updateReceived(oneWireSensors[i].mqttTopic, strValue);
+		char charValue[10];
+		sprintf(charValue, "%f", tempSensor);
+		manager->updateReceived(oneWireSensors[i].mqttTopic, charValue);
 		logDebug("DS18B20 Sensor " + String(i) + " temperature: " + String(tempSensor) + "C");
 	}
 }

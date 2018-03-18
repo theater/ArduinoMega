@@ -33,7 +33,6 @@ bool Sensor::isSensorValueValid(const char* value) {
 }
 
 bool Sensor::updateValue(const char* id, const char* value) {
-	float sensorValue = atof(value);
 	UpdateHandler::updateValue(id, value);
 	if (directlyAttached) {
 		MqttUtil::publish(this->getId(), value);
