@@ -15,21 +15,22 @@
 
 class OutputControl {
 	private:
+		ControlType type;
+		char * id;
+		char * callbackTopic;
 		short pinId;
-		bool pinStatus;
-		char * ocTopicCB;
 	public:
 		OutputControl();
-		OutputControl(short pinId, bool pinStatus, char * ocTopicCB);
-		void OutputControl::setValue(const char* id, const char* value);
+		OutputControl::OutputControl(ControlType type, char* id, short pinId, char* value);
 
-
-		bool outputIsOn();
-		const char * getPinStatusToStr();
-		virtual ~OutputControl();
+		bool updateValue(char* id, char* value);
+		short transformValue(char* value) const;
+		char* getCallbackTopic() const;
+		char* getId() const;
 		short getPinId() const;
-		void setPinId(short pinId);bool getPinStatus() const;
-		void setPin(bool pinStatus);
+		ControlType getType() const;
+		bool getPinStatus() const;
+		const char * getPinStatusToStr() const;
 };
 
 #endif /* MODEL_OUTPUTCONTROL_H_ */
