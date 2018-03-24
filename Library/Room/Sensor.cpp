@@ -26,7 +26,7 @@ ControlType Sensor::getType() const {
 
 bool Sensor::isSensorValueValid(const char* value) {
 	float sensorValue = atof(value);
-	if (sensorValue <= -30) {
+	if (sensorValue <= -30 && sensorValue != 85) {
 		logDebug("Sensor " + String(getId()) + " temperature out of range");
 		return false;
 	}

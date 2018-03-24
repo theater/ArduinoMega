@@ -38,10 +38,14 @@ Room::~Room() {
 }
 
 Sensor* Room::addSensor(Sensor* sensor) {
-	for (int i = 0; i < (sizeof(sensors) / sizeof(sensors[0])); i++) {
+	String sensorId = String(sensor->getId());
+	for (int i = 0; i < 3; i++) {
 		if(sensors[i] == NULL) {
 			sensors[i] = sensor;
+			logDebug("Added sensor with topic " + sensorId);
 			return sensor;
+		} else if (i == 2) {
+			logDebug("Not enough space in sensors array. Unable to add sensor " + sensorId);
 		}
 	}
 	return NULL;
@@ -64,7 +68,7 @@ void Room::updateItems(const char* id, const char* value) {
 
 // TODO think how to generalize these
 void Room::updateSensors(const char* id, const char* value) {
-	for (unsigned int i = 0; i < (sizeof(sensors) / sizeof(sensors[0])); i++) {
+	for (unsigned int i = 0; i < 3; i++) {
 			if (sensors[i] != NULL) {
 				sensors[i]->updateValue(id, value);
 			}

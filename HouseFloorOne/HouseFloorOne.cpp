@@ -57,9 +57,10 @@ void setup() {
 	Room* livingRoom = manager->addRoom(new Room(LIVING_ROOM));
 	livingRoom->createMode(new Mode(AUTO, MODE_LR));
 	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_01, true));
+	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_02, true));
 	livingRoom->addDesiredValue(new DesiredSensorValue(TEMPERATURE, DESIRED_TEMP_LR_01, DEFAULT_DESIRED_TEMP));
 
-
+	owSensors.setResolution(TEMP_12_BIT);
 	owSensors.begin();
 	printOneWireAddresses(&owSensors);
 

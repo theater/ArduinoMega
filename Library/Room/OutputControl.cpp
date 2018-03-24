@@ -71,15 +71,7 @@ const char * OutputControl::getPinStatusToStr() const {
 	}
 }
 
-short OutputControl::getPinId() const {
-	return pinId;
-}
-
 bool OutputControl::getPinStatus() const {
 	return digitalRead(pinId);
-}
-
-OutputControl::~OutputControl() {
-	// TODO Auto-generated destructor stub
 }
 

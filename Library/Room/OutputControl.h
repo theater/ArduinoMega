@@ -21,7 +21,7 @@ class OutputControl {
 		short pinId;
 	public:
 		OutputControl();
-		OutputControl::OutputControl(ControlType type, char* id, short pinId, char* value);
+		OutputControl(ControlType type, char* id, short pinId, char* value);
 
 		bool updateValue(char* id, char* value);
 		short transformValue(char* value) const;
