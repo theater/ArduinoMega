@@ -36,6 +36,19 @@ int8_t mqttReconnectTimerEventId;
 bool mqttDisconnectFound = false;
 int8_t reconnectAttempts = 0;
 
+void createRooms() {
+	Room* livingRoom = manager->addRoom(new Room(LIVING_ROOM));
+	livingRoom->createMode(new Mode(AUTO, MODE_LR));
+	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_01, true));
+	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_02, true));
+	livingRoom->addDesiredValue(new DesiredSensorValue(TEMPERATURE, DESIRED_TEMP_LR_01, DEFAULT_DESIRED_TEMP));
+
+	Room* techRoom = manager->addRoom(new Room(TECH_ROOM));
+	techRoom->createMode(new Mode(AUTO, MODE_TECH));
+	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_TECH_01, true));
+	livingRoom->addDesiredValue(new DesiredSensorValue(TEMPERATURE, DESIRED_TEMP_TECH_01, DEFAULT_DESIRED_TEMP));
+}
+
 //The setup function is called once at startup of the sketch
 void setup() {
 	Serial.begin(BAUD_RATE);
@@ -54,12 +67,7 @@ void setup() {
 	logDebug("Create timer for sensor reoccurrence...");
 	sensorsUpdateTrigger.every(REOCCURRENCE, &sensorsUpdate);
 
-	Room* livingRoom = manager->addRoom(new Room(LIVING_ROOM));
-	livingRoom->createMode(new Mode(AUTO, MODE_LR));
-	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_01, true));
-	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_LR_02, true));
-	livingRoom->addDesiredValue(new DesiredSensorValue(TEMPERATURE, DESIRED_TEMP_LR_01, DEFAULT_DESIRED_TEMP));
-
+	createRooms();
 	owSensors.setResolution(TEMP_12_BIT);
 	owSensors.begin();
 	printOneWireAddresses(&owSensors);

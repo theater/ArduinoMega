@@ -28,6 +28,7 @@
 // 	MQTT topics
 // Modes
 #define MODE_LR							"home/floor1/livingRoom/mode/1"
+#define MODE_TECH						"home/floor1/tech/mode/1"
 
 //	Radiators (outputs)
 #define RAD_KIDS_01						"home/floor2/kids/radiator/1"
@@ -36,11 +37,16 @@
 // Temperature sensors
 const char* SENSOR_LR_01 = "home/floor1/livingRoom/temperature/1";
 const char* SENSOR_LR_02 = "home/floor1/livingRoom/temperature/2";
+const char* SENSOR_TECH_01 = "home/floor1/tech/temperature/1";
 
 const char* DESIRED_TEMP_LR_01 = "home/floor1/livingRoom/desired/temperature/1";
+const char* DESIRED_TEMP_TECH_01 = "home/floor1/tech/desired/temperature/1";
 
-const DS18B20ConfigDefinition oneWireSensors[] = { { { 0x28, 0xff, 0x3e, 0x53, 0x4e, 0x4, 0x0, 0xc0 }, SENSOR_LR_01 }, { { 0x28, 0xff, 0x58,
-		0x19, 0x4a, 0x4, 0x0, 0x28 }, SENSOR_LR_02 } };
+const DS18B20ConfigDefinition oneWireSensors[] = {
+		{ { 0x28, 0x7, 0x0, 0x7, 0xE, 0x3E, 0x2, 0xA4 }, SENSOR_TECH_01 },
+		{ { 0x28, 0xff, 0x3e, 0x53, 0x4e, 0x4, 0x0, 0xc0 }, SENSOR_LR_01 },
+		{ { 0x28, 0xff, 0x58, 0x19, 0x4a, 0x4, 0x0, 0x28 }, SENSOR_LR_02 }
+};
 
 // Aliases
 #define ON true						// boolean alias for ON
