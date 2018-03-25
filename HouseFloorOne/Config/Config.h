@@ -34,15 +34,13 @@
 #define RAD_KIDS_01_CB					"home/floor2/kids/radiator/1cb"
 
 // Temperature sensors
-#define SENSOR_LR_01					"home/floor1/livingRoom/temperature/1"
-#define SENSOR_LR_02					"home/floor1/livingRoom/temperature/2"
+const char* SENSOR_LR_01 = "home/floor1/livingRoom/temperature/1";
+const char* SENSOR_LR_02 = "home/floor1/livingRoom/temperature/2";
 
-#define DESIRED_TEMP_LR_01			"home/floor1/livingRoom/desired/temperature/1"
+const char* DESIRED_TEMP_LR_01 = "home/floor1/livingRoom/desired/temperature/1";
 
-const DS18B20ConfigDefinition oneWireSensors[] = {
-		{ {0x28, 0xff, 0x3e, 0x53, 0x4e, 0x4, 0x0, 0xc0}, SENSOR_LR_01 },
-		{ {0x28, 0xff, 0x58, 0x19, 0x4a, 0x4, 0x0, 0x28}, SENSOR_LR_02 }
-};
+const DS18B20ConfigDefinition oneWireSensors[] = { { { 0x28, 0xff, 0x3e, 0x53, 0x4e, 0x4, 0x0, 0xc0 }, SENSOR_LR_01 }, { { 0x28, 0xff, 0x58,
+		0x19, 0x4a, 0x4, 0x0, 0x28 }, SENSOR_LR_02 } };
 
 // Aliases
 #define ON true						// boolean alias for ON
