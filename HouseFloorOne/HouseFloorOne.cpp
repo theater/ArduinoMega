@@ -68,6 +68,7 @@ void setup() {
 	sensorsUpdateTrigger.every(REOCCURRENCE, &sensorsUpdate);
 
 	createRooms();
+
 	owSensors.setResolution(TEMP_12_BIT);
 	owSensors.begin();
 	printOneWireAddresses(&owSensors);
@@ -102,7 +103,6 @@ void mqttCallback(const char* topic, uint8_t* payload, unsigned int length) {
 }
 
 void sensorsUpdate() {
-	int count = owSensors.getDeviceCount();
 	owSensors.requestTemperatures();
 	for (int i = 0; i < (sizeof(oneWireSensors) / sizeof(oneWireSensors[0])); i++) {
 		float tempSensor = owSensors.getTempC(oneWireSensors[i].address);
@@ -112,6 +112,7 @@ void sensorsUpdate() {
 		dtostrf(tempSensor, 3, 2, strValue);
 		manager->updateReceived(oneWireSensors[i].mqttTopic, strValue);
 	}
+
 }
 
 void reconnect() {
@@ -130,4 +131,11 @@ void reconnect() {
 			Enc28J60.init(macAddress);
 		}
 	}
+}
+
+void freeMemoryToMQTT() {
+	int freeMem = freeMemory();
+	char buffer[15];
+	itoa(freeMem, buffer, 10);
+	MqttUtil::publish(FREE_MEMORY, buffer);
 }

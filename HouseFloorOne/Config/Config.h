@@ -26,13 +26,17 @@
 #define ONE_WIRE_PIN_01 				7
 
 // 	MQTT topics
+// FreeMemory of Arduino
+const char* FREE_MEMORY = "home/floor1/memory";
+
+
 // Modes
-#define MODE_LR							"home/floor1/livingRoom/mode/1"
-#define MODE_TECH						"home/floor1/tech/mode/1"
+const char* MODE_LR = "home/floor1/livingRoom/mode/1";
+const char* MODE_TECH = "home/floor1/tech/mode/1";
 
 //	Radiators (outputs)
-#define RAD_KIDS_01						"home/floor2/kids/radiator/1"
-#define RAD_KIDS_01_CB					"home/floor2/kids/radiator/1cb"
+const char* RAD_KIDS_01 = "home/floor2/kids/radiator/1";
+const char* RAD_KIDS_01_CB = "home/floor2/kids/radiator/1cb";
 
 // Temperature sensors
 const char* SENSOR_LR_01 = "home/floor1/livingRoom/temperature/1";

@@ -30,7 +30,7 @@
 void mqttCallback(const char* topic, uint8_t* payload, unsigned int length);
 void sensorsUpdate();
 void reconnect();
-
+void freeMemoryToMQTT();
 
 //Do not add code below this line
 #endif /* _HouseFloorOne_H_ */

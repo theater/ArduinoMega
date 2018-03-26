@@ -14,19 +14,20 @@
 Room::Room(RoomId id) {
 	this->id = id;
 
-	// TODO UGLY creation of arrays - think of better approach later ! (maybe develop dynamic List or ArrayList)
-	this->sensors = new Sensor*[3];
-	for (int i = 0; i < 3; i++) {
+	// TODO UGLY creation of arrays - think of better approach later !
+	//	(maybe develop dynamic List or ArrayList) Memory fragmentation could be an issue though...
+	this->sensors = new Sensor*[arraySize];
+	for (int i = 0; i < arraySize; i++) {
 		sensors[i] = NULL;
 	}
 
-	this->desiredValues = new DesiredSensorValue*[3];
-	for (int i = 0; i < 3; i++) {
+	this->desiredValues = new DesiredSensorValue*[arraySize];
+	for (int i = 0; i < arraySize; i++) {
 		desiredValues[i] = NULL;
 	}
 
-	this->outputs = new OutputControl*[3];
-	for (int i = 0; i < 3; i++) {
+	this->outputs = new OutputControl*[arraySize];
+	for (int i = 0; i < arraySize; i++) {
 		sensors[i] = NULL;
 	}
 

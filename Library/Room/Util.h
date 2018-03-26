@@ -17,6 +17,7 @@ void logDebug(String data);
 void logError(String data);
 void printOneWireAddresses(DallasTemperature* owSensors);
 char* createCallbackTopic(char* topic);
+int freeMemory();
 
 enum ControlType {
 	HUMIDITY,
@@ -46,26 +47,17 @@ enum FanControlType {
 	DUAL_SPEED
 };
 
-namespace Util {
-
-	static const char* getSensorTypeToStr(ControlType type) {
-		switch (type) {
-		case HUMIDITY:
-			return "Humidity";
-		case TEMPERATURE:
-			return "Temperature";
-		case MOTION:
-			return "Motion";
-		default:
-			return "";
-		}
-	}
-}
-
 struct DS18B20ConfigDefinition
 {
     const DeviceAddress address;
     const char* mqttTopic;
 };
+
+#ifdef __arm__
+// should use uinstd.h to define sbrk but Due causes a conflict
+extern "C" char* sbrk(int incr);
+#else  // __ARM__
+extern char *__brkval;
+#endif  // __arm__
 
 #endif /* UTIL_H_ */

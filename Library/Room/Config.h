@@ -4,6 +4,7 @@
  *  Created on: 22.06.2016 ã.
  *      Author: theater
  */
+#include <Arduino.h>
 
 #ifndef ROOM_CONFIG_H_
 #define ROOM_CONFIG_H_
@@ -14,6 +15,8 @@ const bool DEBUG = true;
 // DEFAULT VALUES
 #define DEFAULT_DESIRED_TEMP 		25
 #define DEFAULT_DESIRED_HUMIDITY 	65
+
+const byte arraySize = 3;
 
 //MQTT initialization
 #define MQTT_SERVER 192,168,254,40
