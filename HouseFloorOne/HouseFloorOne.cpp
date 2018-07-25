@@ -45,8 +45,10 @@ void createRooms() {
 
 	Room* techRoom = manager->addRoom(new Room(TECH_ROOM));
 	techRoom->createMode(new Mode(AUTO, MODE_TECH));
-	livingRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_TECH_01, true));
-	livingRoom->addDesiredValue(new DesiredSensorValue(TEMPERATURE, DESIRED_TEMP_TECH_01, DEFAULT_DESIRED_TEMP));
+	techRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_TECH_01, true));
+	techRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_BOILER_01, true));
+	techRoom->addSensor(new Sensor(TEMPERATURE, SENSOR_BOILER_02, true));
+	techRoom->addDesiredValue(new DesiredSensorValue(TEMPERATURE, DESIRED_TEMP_TECH_01, DEFAULT_DESIRED_TEMP));
 }
 
 //The setup function is called once at startup of the sketch

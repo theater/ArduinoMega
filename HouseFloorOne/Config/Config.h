@@ -42,6 +42,8 @@ const char* RAD_KIDS_01_CB = "home/floor2/kids/radiator/1cb";
 const char* SENSOR_LR_01 = "home/floor1/livingRoom/temperature/1";
 const char* SENSOR_LR_02 = "home/floor1/livingRoom/temperature/2";
 const char* SENSOR_TECH_01 = "home/floor1/tech/temperature/1";
+const char* SENSOR_BOILER_01 = "home/floor1/boiler/temperature/1";
+const char* SENSOR_BOILER_02 = "home/floor1/boiler/temperature/2";
 
 const char* DESIRED_TEMP_LR_01 = "home/floor1/livingRoom/desired/temperature/1";
 const char* DESIRED_TEMP_TECH_01 = "home/floor1/tech/desired/temperature/1";
@@ -49,7 +51,9 @@ const char* DESIRED_TEMP_TECH_01 = "home/floor1/tech/desired/temperature/1";
 const DS18B20ConfigDefinition oneWireSensors[] = {
 		{ { 0x28, 0x7, 0x0, 0x7, 0xE, 0x3E, 0x2, 0xA4 }, SENSOR_TECH_01 },
 		{ { 0x28, 0xff, 0x3e, 0x53, 0x4e, 0x4, 0x0, 0xc0 }, SENSOR_LR_01 },
-		{ { 0x28, 0xff, 0x58, 0x19, 0x4a, 0x4, 0x0, 0x28 }, SENSOR_LR_02 }
+		{ { 0x28, 0xff, 0x58, 0x19, 0x4a, 0x4, 0x0, 0x28 }, SENSOR_LR_02 },
+		{ {  0x28, 0x2, 0x0, 0x7, 0x1D, 0x98, 0x1, 0x47 }, SENSOR_BOILER_01 },
+		{ {  0x28, 0xFF, 0x4E, 0x67, 0x4E, 0x4, 0x0, 0xEB }, SENSOR_BOILER_02 },
 };
 
 // Aliases
