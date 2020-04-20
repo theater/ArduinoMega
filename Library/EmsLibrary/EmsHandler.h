@@ -9,7 +9,8 @@
 #define EMSHANDLER_H_
 
 #include "EmsLibraryConstants.h"
-#include <Arduino.h>
+#include "Nefitserial/NefitSerial.h"
+
 
 class EmsHandler {
 private:

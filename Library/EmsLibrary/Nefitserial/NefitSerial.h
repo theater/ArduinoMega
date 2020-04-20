@@ -84,7 +84,7 @@ class NefitSerial : public Stream
 };
 
 #if defined(UBRRH) || defined(UBRR0H)
-  extern NefitSerial serial;
+  extern NefitSerial nefitSerial;
 #elif defined(USBCON)
   #include "USBAPI.h"
 //  extern NefitSerial Serial_;  

@@ -7,9 +7,11 @@
 
 #include "EmsHandler.h"
 
-#include "Nefitserial/NefitSerial.h"
+#include <avr/pgmspace.h>
+#include <Print.h>
 
 EmsHandler::EmsHandler() {
+	nefitSerial.begin(SERIAL_BAUD_RATE);
 	nefitSerial1.begin(9700);
 
 	for (char i = 0; i <= NEFIT_REG_MAX; i++) {
@@ -75,54 +77,54 @@ void EmsHandler::printDebugData() {
 	if (millis() - lastTime > INTERVAL) {
 			lastTime = millis();
 			for (int i = 0; i < NEFIT_REG_MAX; i++) {
-				serial.print("nefitRegister[");
-				serial.print(i);
-				serial.print("]: ");
-				serial.println(nefitRegister[i]);
+				nefitSerial.print("nefitRegister[");
+				nefitSerial.print(i);
+				nefitSerial.print("]: ");
+				nefitSerial.println(nefitRegister[i]);
 			}
-			serial.println("------------------------");
-			serial.println("NEFIT EMS bus:");
+			nefitSerial.println("------------------------");
+			nefitSerial.println("NEFIT EMS bus:");
 
-			serial.print("cv water uitgaand: ");
-			serial.println((float) nefitRegister[0] / 10, 1);
+			nefitSerial.print("cv water uitgaand: ");
+			nefitSerial.println((float) nefitRegister[0] / 10, 1);
 
-			serial.print("burner vermogen: ");
-			serial.println((float) nefitRegister[1], 1);
+			nefitSerial.print("burner vermogen: ");
+			nefitSerial.println((float) nefitRegister[1], 1);
 
-			serial.print("burner on/off: ");
-			serial.println((float) nefitRegister[2], DEC);   // burner
+			nefitSerial.print("burner on/off: ");
+			nefitSerial.println((float) nefitRegister[2], DEC);   // burner
 
-			serial.print("cv pump on/off: ");
-			serial.println((float) nefitRegister[3], DEC);   //cv pump
+			nefitSerial.print("cv pump on/off: ");
+			nefitSerial.println((float) nefitRegister[3], DEC);   //cv pump
 
-			serial.print("hot watervraag on/off: ");
-			serial.println((float) nefitRegister[4], DEC);
+			nefitSerial.print("hot watervraag on/off: ");
+			nefitSerial.println((float) nefitRegister[4], DEC);
 
-			serial.print("keteltemp: ");
-			serial.println((float) nefitRegister[5] / 10, 1);   //keteltemp
+			nefitSerial.print("keteltemp: ");
+			nefitSerial.println((float) nefitRegister[5] / 10, 1);   //keteltemp
 
-			serial.print("cv return temp: ");
-			serial.println((float) nefitRegister[6] / 10, 1); //waterterug temp
+			nefitSerial.print("cv return temp: ");
+			nefitSerial.println((float) nefitRegister[6] / 10, 1); //waterterug temp
 
-			serial.print("waterpressure: ");
-			serial.println((float) nefitRegister[7] / 10, 1); // waterpressure
+			nefitSerial.print("waterpressure: ");
+			nefitSerial.println((float) nefitRegister[7] / 10, 1); // waterpressure
 
-			serial.print("statuscode: ");
-			serial.print((char) nefitRegister[8]);
-			serial.println((char) nefitRegister[9]);
+			nefitSerial.print("statuscode: ");
+			nefitSerial.print((char) nefitRegister[8]);
+			nefitSerial.println((char) nefitRegister[9]);
 
-			serial.print("hotwater temp: ");
-			serial.println((float) nefitRegister[10] / 10, 1); //hotwatertemp
+			nefitSerial.print("hotwater temp: ");
+			nefitSerial.println((float) nefitRegister[10] / 10, 1); //hotwatertemp
 
-			serial.print("boiler verhoting on/off: ");
-			serial.println((float) nefitRegister[11], DEC);
+			nefitSerial.print("boiler verhoting on/off: ");
+			nefitSerial.println((float) nefitRegister[11], DEC);
 
-			//serial.print(",");
-			//serial.print(nefitRegister[14],DEC);           //thermostat 0=low, 1=manual, 2=auto
+			//nefitSerial.print(",");
+			//nefitSerial.print(nefitRegister[14],DEC);           //thermostat 0=low, 1=manual, 2=auto
 
-			serial.println("END");
-			serial.println("------------------------");
-			serial.println("------------------------");
+			nefitSerial.println("END");
+			nefitSerial.println("------------------------");
+			nefitSerial.println("------------------------");
 	}
 }
 
@@ -200,7 +202,7 @@ void EmsHandler::nefitFrame2register(char *buffer, int len) {
 				}
 			}
 		} else {
-			serial.println("Entering break");
+			nefitSerial.println("Entering break");
 			break;
 		}
 	}

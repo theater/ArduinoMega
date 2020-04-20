@@ -4,7 +4,7 @@
 
 #define DEBUG 0
 
-#define SERIAL_BAUD_RATE 115600
+#define SERIAL_BAUD_RATE 115200
 
 const long INTERVAL = 10000;
 

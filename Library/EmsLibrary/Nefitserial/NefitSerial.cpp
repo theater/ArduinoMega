@@ -25,7 +25,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
-#include "Arduino.h"
 #include "wiring_private.h"
 
 // this next line disables the entire NefitSerial.cpp, 
